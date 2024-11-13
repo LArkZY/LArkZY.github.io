@@ -20,22 +20,29 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"larkzy.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.21.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
 
-    <meta property="og:type" content="website">
-<meta property="og:title" content="Lac&#39;s blog">
-<meta property="og:url" content="http://larkzy.github.io/index.html">
+    <meta name="description" content="电机建模能用来干什么？ 电机建模获得的模型是暂态，当时间足够长之后，电机建模的公式就是电机学中稳态情况下的公式【电机学】 拿到电机的参数之后，可以把电机当作传递函数，进行相应的控制【电机控制】 将模型输入仿真软件，就可以仿真出电机运行时的各个物理量【仿真算法】  正方向在建模之前需要先规定正方向： 电磁物理量正方向电动机原则 磁链 $\Psi$ : 磁链的正方向是线圈轴线的正方向 电流 $i$ :">
+<meta property="og:type" content="article">
+<meta property="og:title" content="电机建模">
+<meta property="og:url" content="http://larkzy.github.io/2024/11/09/%E7%94%B5%E6%9C%BA%E5%BB%BA%E6%A8%A1/index.html">
 <meta property="og:site_name" content="Lac&#39;s blog">
+<meta property="og:description" content="电机建模能用来干什么？ 电机建模获得的模型是暂态，当时间足够长之后，电机建模的公式就是电机学中稳态情况下的公式【电机学】 拿到电机的参数之后，可以把电机当作传递函数，进行相应的控制【电机控制】 将模型输入仿真软件，就可以仿真出电机运行时的各个物理量【仿真算法】  正方向在建模之前需要先规定正方向： 电磁物理量正方向电动机原则 磁链 $\Psi$ : 磁链的正方向是线圈轴线的正方向 电流 $i$ :">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://larkzy.github.io/.io//1.jpg">
+<meta property="article:published_time" content="2024-11-09T12:42:37.000Z">
+<meta property="article:modified_time" content="2024-11-13T09:10:24.249Z">
 <meta property="article:author" content="Lark">
+<meta property="article:tag" content="Modeling">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://larkzy.github.io/.io//1.jpg">
 
 
-<link rel="canonical" href="http://larkzy.github.io/">
+<link rel="canonical" href="http://larkzy.github.io/2024/11/09/%E7%94%B5%E6%9C%BA%E5%BB%BA%E6%A8%A1/">
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":true,"isPost":false,"lang":"zh-CN","comments":"","permalink":"","path":"index.html","title":""}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://larkzy.github.io/2024/11/09/%E7%94%B5%E6%9C%BA%E5%BB%BA%E6%A8%A1/","path":"2024/11/09/电机建模/","title":"电机建模"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>Lac's blog</title>
+<title>电机建模 | Lac's blog</title>
   
 
 
@@ -72,7 +79,7 @@
 
     <a href="/" class="brand" rel="start">
       <i class="logo-line"></i>
-      <h1 class="site-title">Lac's blog</h1>
+      <p class="site-title">Lac's blog</p>
       <i class="logo-line"></i>
     </a>
   </div>
@@ -98,7 +105,7 @@
   
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -111,6 +118,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%B5%E6%9C%BA%E5%BB%BA%E6%A8%A1%E8%83%BD%E7%94%A8%E6%9D%A5%E5%B9%B2%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">1.</span> <span class="nav-text">电机建模能用来干什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AD%A3%E6%96%B9%E5%90%91"><span class="nav-number">2.</span> <span class="nav-text">正方向</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%B5%E7%A3%81%E7%89%A9%E7%90%86%E9%87%8F%E6%AD%A3%E6%96%B9%E5%90%91"><span class="nav-number">2.1.</span> <span class="nav-text">电磁物理量正方向</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%B5%E5%8A%A8%E6%9C%BA%E5%8E%9F%E5%88%99"><span class="nav-number">2.1.1.</span> <span class="nav-text">电动机原则</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%91%E7%94%B5%E6%9C%BA%E5%8E%9F%E5%88%99"><span class="nav-number">2.1.2.</span> <span class="nav-text">发电机原则</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%BA%E6%A2%B0%E7%89%A9%E7%90%86%E9%87%8F%E6%AD%A3%E6%96%B9%E5%90%91"><span class="nav-number">2.2.</span> <span class="nav-text">机械物理量正方向</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%B5%E5%8A%A8%E6%9C%BA%E5%8E%9F%E5%88%99-1"><span class="nav-number">2.2.1.</span> <span class="nav-text">电动机原则</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%91%E7%94%B5%E6%9C%BA%E5%8E%9F%E5%88%99-1"><span class="nav-number">2.2.2.</span> <span class="nav-text">发电机原则</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B9%E7%A8%8B"><span class="nav-number">3.</span> <span class="nav-text">方程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B5%B7%E6%B0%8F%E7%AE%97%E5%AD%90"><span class="nav-number">3.1.</span> <span class="nav-text">海氏算子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E6%84%9F%E3%80%81%E4%BA%92%E6%84%9F"><span class="nav-number">3.2.</span> <span class="nav-text">自感、互感</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%B5%E5%8A%A8%E6%9C%BA%E5%8E%9F%E5%88%99-2"><span class="nav-number">3.2.1.</span> <span class="nav-text">电动机原则</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%91%E7%94%B5%E6%9C%BA%E5%8E%9F%E5%88%99-2"><span class="nav-number">3.2.2.</span> <span class="nav-text">发电机原则</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%AA%E9%9D%99%E6%AD%A2%E7%BA%BF%E5%9C%88"><span class="nav-number">3.3.</span> <span class="nav-text">伪静止线圈</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E8%88%AC%E5%8C%96%E7%94%B5%E6%9C%BA"><span class="nav-number">4.</span> <span class="nav-text">一般化电机</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E5%81%87%E8%AE%BE"><span class="nav-number">4.1.</span> <span class="nav-text">基本假设</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%B5%E7%A3%81%E6%96%B9%E7%A8%8B"><span class="nav-number">4.2.</span> <span class="nav-text">电磁方程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%BA%E6%A2%B0%E6%96%B9%E7%A8%8B"><span class="nav-number">4.3.</span> <span class="nav-text">机械方程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%83%BD%E9%87%8F%E5%AE%88%E6%81%92%E5%AE%9A%E5%BE%8B%E6%8E%A8%E5%AF%BC-T-e"><span class="nav-number">4.3.1.</span> <span class="nav-text">能量守恒定律推导$T_e$</span></a></li></ol></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -155,16 +163,17 @@
 
     </div>
 
-    <div class="main-inner index posts-expand">
+    <div class="main-inner post posts-expand">
 
-    
+
+  
 
 
 <div class="post-block">
   
   
 
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://larkzy.github.io/2024/11/09/%E7%94%B5%E6%9C%BA%E5%BB%BA%E6%A8%A1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -178,13 +187,13 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Lac's blog">
+      <meta itemprop="name" content="电机建模 | Lac's blog">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/11/09/%E7%94%B5%E6%9C%BA%E5%BB%BA%E6%A8%A1/" class="post-title-link" itemprop="url">电机建模</a>
-        </h2>
+        <h1 class="post-title" itemprop="name headline">
+          电机建模
+        </h1>
 
         <div class="post-meta-container">
           <div class="post-meta">
@@ -222,8 +231,7 @@
     
     
     
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="电机建模能用来干什么？"><a href="#电机建模能用来干什么？" class="headerlink" title="电机建模能用来干什么？"></a>电机建模能用来干什么？</h2><ul>
+    <div class="post-body" itemprop="articleBody"><h2 id="电机建模能用来干什么？"><a href="#电机建模能用来干什么？" class="headerlink" title="电机建模能用来干什么？"></a>电机建模能用来干什么？</h2><ul>
 <li>电机建模获得的模型是暂态，当时间足够长之后，电机建模的公式就是电机学中稳态情况下的公式【电机学】</li>
 <li>拿到电机的参数之后，可以把电机当作传递函数，进行相应的控制【电机控制】</li>
 <li>将模型输入仿真软件，就可以仿真出电机运行时的各个物理量【仿真算法】</li>
@@ -341,7 +349,6 @@
 <p>拿到模型后，可以参考<a href="#%E7%94%B5%E6%9C%BA%E5%BB%BA%E6%A8%A1%E8%83%BD%E7%94%A8%E6%9D%A5%E5%B9%B2%E4%BB%80%E4%B9%88">电机建模能用来干什么</a></p>
 <p>本章当中仅仅涉及了一般化电机的内容，对于直流电机、异步电机、同步电机，实际上可以通过坐标变换进行转化，这将在【直流电机】、【异步电机】、【同步电机】中进行讨论</p>
 
-      
     </div>
 
     
@@ -349,137 +356,25 @@
     
 
     <footer class="post-footer">
-        <div class="post-eof"></div>
-      
+          <div class="post-tags">
+              <a href="/tags/Modeling/" rel="tag"># Modeling</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/11/08/%E4%B9%A6%E7%AD%BE/" rel="prev" title="书签">
+                  <i class="fa fa-angle-left"></i> 书签
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
     </footer>
   </article>
 </div>
 
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://larkzy.github.io/2024/11/08/%E4%B9%A6%E7%AD%BE/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Lark">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Lac's blog">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Lac's blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/11/08/%E4%B9%A6%E7%AD%BE/" class="post-title-link" itemprop="url">书签</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2024-11-08 10:05:53" itemprop="dateCreated datePublished" datetime="2024-11-08T10:05:53+08:00">2024-11-08</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-10 12:09:02" itemprop="dateModified" datetime="2024-11-10T12:09:02+08:00">2024-11-10</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Bookmarks/" itemprop="url" rel="index"><span itemprop="name">Bookmarks</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="ZJU"><a href="#ZJU" class="headerlink" title="ZJU"></a>ZJU</h2><ul>
-<li><a target="_blank" rel="noopener" href="https://courses.zju.edu.cn/user/index">学在浙大</a></li>
-<li><a target="_blank" rel="noopener" href="http://zdbk.zju.edu.cn/">教务网本</a></li>
-<li><a target="_blank" rel="noopener" href="http://ms.zju.edu.cn/">正版软件</a></li>
-<li><a target="_blank" rel="noopener" href="https://zjuers.com/rd?url=http://eta.zju.edu.cn/">ETA</a></li>
-<li><a target="_blank" rel="noopener" href="http://cwcx.zju.edu.cn/WFManager/login.jsp">计财处</a></li>
-<li><a target="_blank" rel="noopener" href="http://ee.office.zju.edu.cn/main.htm">浙大电院</a></li>
-</ul>
-<hr>
-<h2 id="学术"><a href="#学术" class="headerlink" title="学术"></a>学术</h2><ul>
-<li><a target="_blank" rel="noopener" href="https://scholar.google.com/">谷歌学术</a></li>
-<li><a target="_blank" rel="noopener" href="https://ieeexplore.ieee.org/Xplore/home.jsp">IEEE</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.webofscience.com/wos/alldb/basic-search">Web-of-Science</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.incopat.com/advancedSearch/simpleInit">专利检索</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.cnki.net/">知网</a></li>
-</ul>
-<hr>
-<h2 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h2><ul>
-<li><a target="_blank" rel="noopener" href="https://github.com/">Github</a></li>
-<li><a target="_blank" rel="noopener" href="https://chatgpt.com/">Chatgpt</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.zjuers.com/">ZJUer轻首页</a></li>
-<li><a target="_blank" rel="noopener" href="https://yingheapp.com/site/z-library/">Z-library</a></li>
-</ul>
-<hr>
-<h2 id="论坛"><a href="#论坛" class="headerlink" title="论坛"></a>论坛</h2><ul>
-<li><a target="_blank" rel="noopener" href="https://www.cc98.org/">CC98</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.1point3acres.com/">一亩三分地</a></li>
-</ul>
-<hr>
-<h2 id="镜像网站"><a href="#镜像网站" class="headerlink" title="镜像网站"></a>镜像网站</h2><ul>
-<li><a target="_blank" rel="noopener" href="https://mirrors.zju.edu.cn/">ZJU-Mirror</a></li>
-<li><a target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/">THU-Mirror</a></li>
-</ul>
-<hr>
-<h2 id="娱乐"><a href="#娱乐" class="headerlink" title="娱乐"></a>娱乐</h2><ul>
-<li><a target="_blank" rel="noopener" href="https://www.bilibili.com/">Bilibili</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.huya.com/">虎牙</a></li>
-</ul>
-<hr>
-<h2 id="TOEFL"><a href="#TOEFL" class="headerlink" title="TOEFL"></a>TOEFL</h2><ul>
-<li><a target="_blank" rel="noopener" href="https://top.zhan.com/toefl/listen/alltpo.html">小站</a></li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
 
 
 
