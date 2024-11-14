@@ -165,7 +165,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://larkzy.github.io/2024/11/09/%E7%94%B5%E6%9C%BA%E5%BB%BA%E6%A8%A1/">
+    <link itemprop="mainEntityOfPage" href="http://larkzy.github.io/2024/11/13/%E7%94%B5%E6%9C%BA%E5%BB%BA%E6%A8%A1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -183,7 +183,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/11/09/%E7%94%B5%E6%9C%BA%E5%BB%BA%E6%A8%A1/" class="post-title-link" itemprop="url">电机建模</a>
+          <a href="/2024/11/13/%E7%94%B5%E6%9C%BA%E5%BB%BA%E6%A8%A1/" class="post-title-link" itemprop="url">电机建模</a>
         </h2>
 
         <div class="post-meta-container">
@@ -194,14 +194,14 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2024-11-09 20:42:37" itemprop="dateCreated datePublished" datetime="2024-11-09T20:42:37+08:00">2024-11-09</time>
+      <time title="创建时间：2024-11-13 17:10:59" itemprop="dateCreated datePublished" datetime="2024-11-13T17:10:59+08:00">2024-11-13</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-11-13 19:21:42" itemprop="dateModified" datetime="2024-11-13T19:21:42+08:00">2024-11-13</time>
+      <time title="修改时间：2024-11-14 10:24:35" itemprop="dateModified" datetime="2024-11-14T10:24:35+08:00">2024-11-14</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -251,7 +251,8 @@
 <li>外施转矩 $T_{m}$ : 电磁转矩正方向为旋转方向</li>
 <li>电磁转矩 $T_{em}$ ， 阻尼转矩 $T_{B}$ ， 惯性转矩 $T_{J}$ : 与旋转方向相反</li>
 </ol>
-<img src="/images/电机建模/img1.jpg" alt="图片1" width=50% height=50%>
+<p>e.g.</p>
+<img src="/images/电机建模/img1.jpg" alt="img1" width=50% height=50%>
 
 <h2 id="方程"><a href="#方程" class="headerlink" title="方程"></a>方程</h2><p>方程主要分为电磁方程和机械方程,不同电机整体思路类似,但是细节上有所区分,在这里先介绍几个概念。</p>
 <h3 id="海氏算子"><a href="#海氏算子" class="headerlink" title="海氏算子"></a>海氏算子</h3><p>定义海氏算子<br>$$ p&#x3D;\frac{d}{dt}$$</p>
@@ -261,13 +262,17 @@
 <p>当引入多个线圈后，磁链方程中需要引入互感。方程可能因线圈轴线夹角，线圈正方向原则不同等原因，导致正负号变混乱。</p>
 <p>这里规定，当线圈轴线夹角为锐角时互感为正，夹角为钝角时互感为负。而磁链方程按照线圈所使用的原则照写。</p>
 <p>e.g.</p>
+<img src="/images/电机建模/img2.jpg" alt="img2" width=50% height=50%>
+
 <h3 id="伪静止线圈"><a href="#伪静止线圈" class="headerlink" title="伪静止线圈"></a>伪静止线圈</h3><p>等效后绕组的轴线与构成绕组的实际元件间存在相对运动，则称等效后的线圈为伪静止线圈</p>
 <p>如果一个线圈为伪静止线圈，写电磁方程时，需要加上旋转电动势</p>
 <h2 id="一般化电机"><a href="#一般化电机" class="headerlink" title="一般化电机"></a>一般化电机</h2><p>由于电机之间存在很多共性，有学者提出了一般化电机的概念，希望能够得到一个统一的电机模型。</p>
 <p>一般化电机的定子绕组由$fd$和$kq$两个线圈构成，转子d轴和q轴上分别有两对电刷，极对数p&#x3D;1.</p>
 <p>不管转子中的绕组是叠绕组、波绕组还是其他什么绕组，如果从d轴和q轴两个端口看，可以将转子绕组等效为$d$和$q$两个线圈。</p>
 <p>这是因为绕组的形式只是改变了绕组端部，而槽内的部分产生的反电动势不受影响。</p>
-<p>一般化电机示意图如下所示:</p>
+<p>一般化电机示意图如下所示</p>
+<img src="/images/电机建模/img3.jpg" alt="img3" width=50% height=50%>
+
 <h3 id="基本假设"><a href="#基本假设" class="headerlink" title="基本假设"></a>基本假设</h3><ol>
 <li>磁路不饱和</li>
 <li>不计剩磁、涡流、磁滞</li>
@@ -275,20 +280,24 @@
 <li>电枢漏磁不计</li>
 <li>正交解耦</li>
 </ol>
-<h3 id="电磁方程"><a href="#电磁方程" class="headerlink" title="电磁方程"></a>电磁方程</h3><p>假设$fd$和$kq$线圈的正方向按照电动机原则，$d$和$q$线圈按照发电机原则，则</p>
+<h3 id="电磁方程"><a href="#电磁方程" class="headerlink" title="电磁方程"></a>电磁方程</h3><p>假设$fd$和$kq$线圈的正方向按照电动机原则，$d$和$q$线圈按照发电机原则，线圈轴线方向如图所示，则</p>
+<img src="/images/电机建模/img4.jpg" alt="img4" width=50% height=50%>
+
 <p>$$<br>\begin{cases}<br>u_{kq}&#x3D;e_{kq}+R_{kq}i_{kq} \\<br>u_{fd}&#x3D;e_{fd}+R_{fd}i_{fd} \\<br>u_{q}&#x3D;e_q+R_{q}i_{q} \\<br>u_{d}&#x3D;e_d+R_{d}i_{d}<br>\end{cases}<br>$$</p>
 <p>由于u和i都是可以测量得到的量，就不需要继续化简了，接下来需要推导e的表达式</p>
-<p>由于$kq$和$fd$线圈没有经过复杂的等效，可以得到，$e_{kq}&#x3D;p\Psi_{kq},e_{fd}&#x3D;p\Psi_{fd}$</p>
+<p>由于$kq$和$fd$线圈没有经过复杂的等效，可以得到，$e_{kq}&#x3D;p\psi_{kq},e_{fd}&#x3D;p\psi_{fd}$</p>
 <p>$d$和$q$线圈的情况稍微需要推导一下，这里只推导$d$线圈的公式，$q$线圈的公式可以类似得到</p>
-<p>假设$d$和$q$线圈的轴线如图所示，由于q轴加不加电刷不影响从d轴电刷看进去的反电动势，故省略了q轴上的电刷</p>
+<p>由于q轴加不加电刷不影响从d轴电刷看进去的反电动势，故省略了q轴上的电刷</p>
+<img src="/images/电机建模/img5.jpg" alt="img5" width=50% height=50%>
+
 <p>由于之前假设了<a href="#%E5%9F%BA%E6%9C%AC%E5%81%87%E8%AE%BE">【气隙磁密按正弦规律分布】</a>，假设$B_d&#x3D;B_{md}\cos\theta,B_q&#x3D;B_{mq}\sin\theta$</p>
 <p>由于<a href="#%E5%9F%BA%E6%9C%AC%E5%81%87%E8%AE%BE">【磁路不饱和】</a>，磁场线性叠加，先分析d轴方向磁场的作用，q轴类似</p>
 <p>对于角度为$\theta_0$的线圈，由于流入此线圈的磁通和流出被此线圈分割后的右半圆的磁通相等，有</p>
-<p>$$<br>\Phi_0&#x3D;\int_{\theta_0-\pi}^{\theta_0} {B_dlr} {d\theta}&#x3D;2B_{md}lr\sin\theta_0<br>$$</p>
+<p>$$<br>\phi_0&#x3D;\int_{\theta_0-\pi}^{\theta_0} {B_dlr} {d\theta}&#x3D;2B_{md}lr\sin\theta_0<br>$$</p>
 <p>设单位弧度下导体数为$z$，则有</p>
-<p>$$<br>de&#x3D;z\frac{d\Phi_0}{dt}d\theta_0&#x3D;(2lr\sin\theta_0\frac{dB_{md}}{dt}+2lrB_{md}\cos\theta_0\frac{d\theta_0}{dt})<br>$$</p>
+<p>$$<br>de&#x3D;z\frac{d\phi_0}{dt}d\theta_0&#x3D;(2lr\sin\theta_0\frac{dB_{md}}{dt}+2lrB_{md}\cos\theta_0\frac{d\theta_0}{dt})<br>$$</p>
 <p>由于$\frac{d\theta_0}{dt}&#x3D;-\omega$，</p>
-<p>$$<br>de&#x3D;z\frac{d\Phi_0}{dt}d\theta_0&#x3D;(2lr\sin\theta_0\frac{dB_{md}}{dt}-2lrB_{md}\cos\theta_0\omega)zd\theta_0<br>$$</p>
+<p>$$<br>de&#x3D;z\frac{d\phi_0}{dt}d\theta_0&#x3D;(2lr\sin\theta_0\frac{dB_{md}}{dt}-2lrB_{md}\cos\theta_0\omega)zd\theta_0<br>$$</p>
 <p>由于cos是偶函数，当e从0积到$\pi$时，第二项应为0，故</p>
 <p>$$<br>e_{dt}’&#x3D;\int_0^\pi {de}&#x3D;4lrz\frac{dB_{md}}{dt}<br>$$</p>
 <p>考虑q轴磁场作用，类似的有</p>
@@ -301,6 +310,8 @@
 <p>于是，进一步有</p>
 <p>$$e_{dt}&#x3D;z\frac{d\phi_d}{dt}$$<br>$$e_{dr}&#x3D;-z\phi_q\omega$$</p>
 <p>若计算d轴和q轴的磁链，又可以发现，</p>
+<img src="/images/电机建模/img6.jpg" alt="img6" width=50% height=50%>
+
 <p>$$\psi_d&#x3D;\int_{0}^{\frac{\pi}{2}} {2zB_{dm}lr\sin\theta} {d\theta}&#x3D;z\phi_d$$<br>$$\psi_q&#x3D;\int_{0}^{\frac{\pi}{2}} {2zB_{qm}lr\cos\theta} {d\theta}&#x3D;z\phi_q$$</p>
 <p>所以，</p>
 <p>$$e_{dt}&#x3D;p\psi_d$$<br>$$e_{dr}&#x3D;-\psi_q\omega$$<br>$$e_d&#x3D;e_{dt}+e_{dr}&#x3D;p\psi_d-\psi_q\omega$$</p>
