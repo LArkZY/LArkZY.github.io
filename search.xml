@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>书签</title>
+    <url>/2024/11/08/%E4%B9%A6%E7%AD%BE/</url>
+    <content><![CDATA[<h2 id="ZJU"><a href="#ZJU" class="headerlink" title="ZJU"></a>ZJU</h2><ul>
+<li><a href="https://courses.zju.edu.cn/user/index">学在浙大</a></li>
+<li><a href="http://zdbk.zju.edu.cn/">教务网本</a></li>
+<li><a href="http://ms.zju.edu.cn/">正版软件</a></li>
+<li><a href="https://zjuers.com/rd?url=http://eta.zju.edu.cn/">ETA</a></li>
+<li><a href="http://cwcx.zju.edu.cn/WFManager/login.jsp">计财处</a></li>
+<li><a href="http://ee.office.zju.edu.cn/main.htm">浙大电院</a></li>
+</ul>
+<hr>
+<h2 id="学术"><a href="#学术" class="headerlink" title="学术"></a>学术</h2><ul>
+<li><a href="https://scholar.google.com/">谷歌学术</a></li>
+<li><a href="https://ieeexplore.ieee.org/Xplore/home.jsp">IEEE</a></li>
+<li><a href="https://www.webofscience.com/wos/alldb/basic-search">Web-of-Science</a></li>
+<li><a href="https://www.incopat.com/advancedSearch/simpleInit">专利检索</a></li>
+<li><a href="https://www.cnki.net/">知网</a></li>
+</ul>
+<hr>
+<h2 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h2><ul>
+<li><a href="https://github.com/">Github</a></li>
+<li><a href="https://chatgpt.com/">Chatgpt</a></li>
+<li><a href="https://www.zjuers.com/">ZJUer轻首页</a></li>
+<li><a href="https://yingheapp.com/site/z-library/">Z-library</a></li>
+</ul>
+<hr>
+<h2 id="论坛"><a href="#论坛" class="headerlink" title="论坛"></a>论坛</h2><ul>
+<li><a href="https://www.cc98.org/">CC98</a></li>
+<li><a href="https://www.1point3acres.com/">一亩三分地</a></li>
+</ul>
+<hr>
+<h2 id="镜像网站"><a href="#镜像网站" class="headerlink" title="镜像网站"></a>镜像网站</h2><ul>
+<li><a href="https://mirrors.zju.edu.cn/">ZJU-Mirror</a></li>
+<li><a href="https://mirrors.tuna.tsinghua.edu.cn/">THU-Mirror</a></li>
+</ul>
+<hr>
+<h2 id="娱乐"><a href="#娱乐" class="headerlink" title="娱乐"></a>娱乐</h2><ul>
+<li><a href="https://www.bilibili.com/">Bilibili</a></li>
+<li><a href="https://www.huya.com/">虎牙</a></li>
+</ul>
+<hr>
+<h2 id="TOEFL"><a href="#TOEFL" class="headerlink" title="TOEFL"></a>TOEFL</h2><ul>
+<li><a href="https://top.zhan.com/toefl/listen/alltpo.html">小站</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>Bookmarks</category>
+      </categories>
+      <tags>
+        <tag>Bookmarks</tag>
+        <tag>Resources</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>电机建模</title>
+    <url>/2024/11/13/%E7%94%B5%E6%9C%BA%E5%BB%BA%E6%A8%A1/</url>
+    <content><![CDATA[<h2 id="电机建模能用来干什么"><a href="#电机建模能用来干什么" class="headerlink" title="电机建模能用来干什么"></a>电机建模能用来干什么</h2><ul>
+<li>电机建模获得的模型是暂态，当时间足够长之后，电机建模的公式就是电机学中稳态情况下的公式【电机学】</li>
+<li>拿到电机的参数之后，可以把电机当作传递函数，进行相应的控制【电机控制】</li>
+<li>将模型输入仿真软件，就可以仿真出电机运行时的各个物理量【仿真算法】</li>
+</ul>
+<h2 id="正方向"><a href="#正方向" class="headerlink" title="正方向"></a>正方向</h2><p>在建模之前需要先规定正方向：</p>
+<h3 id="电磁物理量正方向"><a href="#电磁物理量正方向" class="headerlink" title="电磁物理量正方向"></a>电磁物理量正方向</h3><h4 id="电动机原则"><a href="#电动机原则" class="headerlink" title="电动机原则"></a>电动机原则</h4><ol>
+<li>磁链 $\psi$ : 磁链的正方向是线圈轴线的正方向</li>
+<li>电流 $i$ : 正电流产生正磁链</li>
+<li>电压 $u$ : 与电流为关联参考方向（负载的标法）</li>
+<li>反电动势 $e$ : 阻碍磁场变化，与电流相反</li>
+</ol>
+<h4 id="发电机原则"><a href="#发电机原则" class="headerlink" title="发电机原则"></a>发电机原则</h4><ol>
+<li>磁链 $\psi$ : 磁链的正方向是线圈轴线的正方向</li>
+<li>电流 $I$ : 正电流产生负磁链</li>
+<li>电压 $U$ : 与电流为非关联参考方向（电源的标法）</li>
+<li>反电动势 $e$ : 阻碍磁场变化，与电流相同</li>
+</ol>
+<h3 id="机械物理量正方向"><a href="#机械物理量正方向" class="headerlink" title="机械物理量正方向"></a>机械物理量正方向</h3><h4 id="电动机原则-1"><a href="#电动机原则-1" class="headerlink" title="电动机原则"></a>电动机原则</h4><ol>
+<li>电角速度 $\omega$ : 以电枢绕组为参考系，磁场的旋转方向为正方向</li>
+<li>电磁转矩 $T_{em}$ : 电磁转矩正方向为旋转方向</li>
+<li>负载转矩 $T_{L}$ ， 阻尼转矩 $T_{B}$ ， 惯性转矩 $T_{J}$ : 与旋转方向相反</li>
+</ol>
+<h4 id="发电机原则-1"><a href="#发电机原则-1" class="headerlink" title="发电机原则"></a>发电机原则</h4><ol>
+<li>电角速度 $\omega$ : 以电枢绕组为参考系，磁场的旋转方向为正方向</li>
+<li>外施转矩 $T_{m}$ : 电磁转矩正方向为旋转方向</li>
+<li>电磁转矩 $T_{em}$ ， 阻尼转矩 $T_{B}$ ， 惯性转矩 $T_{J}$ : 与旋转方向相反</li>
+</ol>
+<p>e.g.</p>
+<img src="/images/电机建模/img1.jpg" alt="img1" width=50% height=50%>
+
+<h2 id="方程"><a href="#方程" class="headerlink" title="方程"></a>方程</h2><p>方程主要分为电磁方程和机械方程,不同电机整体思路类似,但是细节上有所区分,在这里先介绍几个概念。</p>
+<h3 id="海氏算子"><a href="#海氏算子" class="headerlink" title="海氏算子"></a>海氏算子</h3><p>定义海氏算子<br>$$ p&#x3D;\frac{d}{dt}$$</p>
+<h3 id="自感、互感"><a href="#自感、互感" class="headerlink" title="自感、互感"></a>自感、互感</h3><p>对于单个线圈而言，方程如下</p>
+<h4 id="电动机原则-2"><a href="#电动机原则-2" class="headerlink" title="电动机原则"></a>电动机原则</h4><p>$$<br>\begin{cases}<br>u&#x3D;e+Ri \\<br>e&#x3D;p\psi \\<br>\psi&#x3D;Li<br>\end{cases}<br>$$</p>
+<h4 id="发电机原则-2"><a href="#发电机原则-2" class="headerlink" title="发电机原则"></a>发电机原则</h4><p>$$<br>\begin{cases}<br>u&#x3D;e-Ri \\<br>e&#x3D;p\psi \\<br>\psi&#x3D;-Li<br>\end{cases}<br>$$</p>
+<p>当引入多个线圈后，磁链方程中需要引入互感。方程可能因线圈轴线夹角，线圈正方向原则不同等原因，导致正负号变混乱。</p>
+<p>这里规定，当线圈轴线夹角为锐角时互感为正，夹角为钝角时互感为负。而磁链方程按照线圈所使用的原则照写。</p>
+<p>e.g.</p>
+<img src="/images/电机建模/img2.jpg" alt="img2" width=50% height=50%>
+
+<h3 id="伪静止线圈"><a href="#伪静止线圈" class="headerlink" title="伪静止线圈"></a>伪静止线圈</h3><p>等效后绕组的轴线与构成绕组的实际元件间存在相对运动，则称等效后的线圈为伪静止线圈</p>
+<p>如果一个线圈为伪静止线圈，写电磁方程时，需要加上旋转电动势</p>
+<h2 id="一般化电机"><a href="#一般化电机" class="headerlink" title="一般化电机"></a>一般化电机</h2><p>由于电机之间存在很多共性，有学者提出了一般化电机的概念，希望能够得到一个统一的电机模型。</p>
+<p>一般化电机的定子绕组由$fd$和$kq$两个线圈构成，转子d轴和q轴上分别有两对电刷，极对数p&#x3D;1.</p>
+<p>不管转子中的绕组是叠绕组、波绕组还是其他什么绕组，如果从d轴和q轴两个端口看，可以将转子绕组等效为$d$和$q$两个线圈。</p>
+<p>这是因为绕组的形式只是改变了绕组端部，而槽内的部分产生的反电动势不受影响。</p>
+<p>一般化电机示意图如下所示</p>
+<img src="/images/电机建模/img3.jpg" alt="img3" width=50% height=50%>
+
+<h3 id="基本假设"><a href="#基本假设" class="headerlink" title="基本假设"></a>基本假设</h3><ol>
+<li>磁路不饱和</li>
+<li>不计剩磁、涡流、磁滞</li>
+<li>气隙磁密按正弦规律分布</li>
+<li>电枢漏磁不计</li>
+<li>正交解耦</li>
+</ol>
+<h3 id="电磁方程"><a href="#电磁方程" class="headerlink" title="电磁方程"></a>电磁方程</h3><p>假设$fd$和$kq$线圈的正方向按照电动机原则，$d$和$q$线圈按照发电机原则，线圈轴线方向如图所示，则</p>
+<img src="/images/电机建模/img4.jpg" alt="img4" width=50% height=50%>
+
+<p>$$<br>\begin{cases}<br>u_{kq}&#x3D;e_{kq}+R_{kq}i_{kq} \\<br>u_{fd}&#x3D;e_{fd}+R_{fd}i_{fd} \\<br>u_{q}&#x3D;e_q+R_{q}i_{q} \\<br>u_{d}&#x3D;e_d+R_{d}i_{d}<br>\end{cases}<br>$$</p>
+<p>由于u和i都是可以测量得到的量，就不需要继续化简了，接下来需要推导e的表达式</p>
+<p>由于$kq$和$fd$线圈没有经过复杂的等效，可以得到，$e_{kq}&#x3D;p\psi_{kq},e_{fd}&#x3D;p\psi_{fd}$</p>
+<p>$d$和$q$线圈的情况稍微需要推导一下，这里只推导$d$线圈的公式，$q$线圈的公式可以类似得到</p>
+<p>由于q轴加不加电刷不影响从d轴电刷看进去的反电动势，故省略了q轴上的电刷</p>
+<img src="/images/电机建模/img5.jpg" alt="img5" width=50% height=50%>
+
+<p>由于之前假设了<a href="#%E5%9F%BA%E6%9C%AC%E5%81%87%E8%AE%BE">【气隙磁密按正弦规律分布】</a>，假设$B_d&#x3D;B_{md}\cos\theta,B_q&#x3D;B_{mq}\sin\theta$</p>
+<p>由于<a href="#%E5%9F%BA%E6%9C%AC%E5%81%87%E8%AE%BE">【磁路不饱和】</a>，磁场线性叠加，先分析d轴方向磁场的作用，q轴类似</p>
+<p>对于角度为$\theta_0$的线圈，由于流入此线圈的磁通和流出被此线圈分割后的右半圆的磁通相等，有</p>
+<p>$$<br>\phi_0&#x3D;\int_{\theta_0-\pi}^{\theta_0} {B_dlr} {d\theta}&#x3D;2B_{md}lr\sin\theta_0<br>$$</p>
+<p>设单位弧度下导体数为$z$，则有</p>
+<p>$$<br>de&#x3D;z\frac{d\phi_0}{dt}d\theta_0&#x3D;(2lr\sin\theta_0\frac{dB_{md}}{dt}+2lrB_{md}\cos\theta_0\frac{d\theta_0}{dt})<br>$$</p>
+<p>由于$\frac{d\theta_0}{dt}&#x3D;-\omega$，</p>
+<p>$$<br>de&#x3D;z\frac{d\phi_0}{dt}d\theta_0&#x3D;(2lr\sin\theta_0\frac{dB_{md}}{dt}-2lrB_{md}\cos\theta_0\omega)zd\theta_0<br>$$</p>
+<p>由于cos是偶函数，当e从0积到$\pi$时，第二项应为0，故</p>
+<p>$$<br>e_{dt}’&#x3D;\int_0^\pi {de}&#x3D;4lrz\frac{dB_{md}}{dt}<br>$$</p>
+<p>考虑q轴磁场作用，类似的有</p>
+<p>$$<br>e_{dr}’&#x3D;-4lrzB_{mq}\omega<br>$$</p>
+<p>这里t代表transformer，是变压器电势，也为感生电动势，r代表rotational，是旋转电动势。从这里可以看出，d轴磁场只产生感生电动势，q轴磁场只产生旋转电动势。</p>
+<p>由于并联支路数为2，所以从电刷往里看的反电动势应为上述的一半，故</p>
+<p>$$e_{dt}&#x3D;2lrz\frac{dB_{md}}{dt}$$<br>$$e_{dr}&#x3D;-2lrzB_{mq}\omega$$</p>
+<p>若计算d轴和q轴磁通，可以发现，</p>
+<p>$$\phi_d&#x3D;\int_{-\frac{\pi}{2}}^{\frac{\pi}{2}} {B_dlr} {d\theta}&#x3D;2B_{md}lr$$<br>$$\phi_q&#x3D;\int_0^\pi{B_qlr}{d\theta}&#x3D;2B_{mq}lr$$</p>
+<p>于是，进一步有</p>
+<p>$$e_{dt}&#x3D;z\frac{d\phi_d}{dt}$$<br>$$e_{dr}&#x3D;-z\phi_q\omega$$</p>
+<p>若计算d轴和q轴的磁链，又可以发现，</p>
+<img src="/images/电机建模/img6.jpg" alt="img6" width=50% height=50%>
+
+<p>$$\psi_d&#x3D;\int_{0}^{\frac{\pi}{2}} {2zB_{dm}lr\sin\theta} {d\theta}&#x3D;z\phi_d$$<br>$$\psi_q&#x3D;\int_{0}^{\frac{\pi}{2}} {2zB_{qm}lr\cos\theta} {d\theta}&#x3D;z\phi_q$$</p>
+<p>所以，</p>
+<p>$$e_{dt}&#x3D;p\psi_d$$<br>$$e_{dr}&#x3D;-\psi_q\omega$$<br>$$e_d&#x3D;e_{dt}+e_{dr}&#x3D;p\psi_d-\psi_q\omega$$</p>
+<p>对于$q$线圈，同样的方法，只需要更改一下积分上下限，就可以得到</p>
+<p>$$e_{qt}&#x3D;p\psi_q$$<br>$$e_{qr}&#x3D;\psi_d\omega$$<br>$$e_q&#x3D;e_{qt}+e_{qr}&#x3D;p\psi_q+\psi_d\omega$$</p>
+<p>总结一下方程有</p>
+<p>$$<br>\begin{cases}<br>u_d&#x3D;p\psi_d-\omega\psi_q-R_di_d \\<br>u_q&#x3D;p\psi_q+\omega\psi_d-R_qi_q \\<br>u_{fd}&#x3D;p\psi_{fd}+R_{fd}i_{fd} \\<br>u_{kq}&#x3D;p\psi_{kq}+R_{kq}i_{kq}<br>\end{cases}<br>$$</p>
+<p>但是这个时候的表达式中的$\Psi_d$和$\Psi_q$还不是端口能够测量得到的变量，因此还需要进一步变形</p>
+<p>由于<a href="#%E5%9F%BA%E6%9C%AC%E5%81%87%E8%AE%BE">【正交解耦】</a>，可得</p>
+<p>$$<br>\begin{cases}<br>\psi_d&#x3D;-L_di_d+M_{afd}i_{fd} \\<br>\psi_q&#x3D;-L_qi_q+M_{akq}i_{kq} \\<br>\psi_{fd}&#x3D;L_{fd}i_{fd}-M_{fad}i_d \\<br>\psi_{kq}&#x3D;L_{kq}i_{kq}-M_{kaq}i_q<br>\end{cases}<br>$$</p>
+<p>至此，电磁状态方程已经推导完毕，我们可以用矩阵的形式使其表达起来更加简洁，设</p>
+<p>$$<br>U&#x3D;<br>\begin{bmatrix}<br>u_d \\<br>u_q \\<br>u_{fd} \\<br>u_{kq}<br>\end{bmatrix},R&#x3D;<br>\begin{bmatrix}<br>-R_d &amp; 0 &amp; 0 &amp; 0 \\<br>0 &amp; -R_q &amp; 0 &amp; 0 \\<br>0 &amp; 0 &amp; R_{fd} &amp; 0 \\<br>0 &amp; 0 &amp; 0 &amp; R_{kq}<br>\end{bmatrix},I&#x3D;<br>\begin{bmatrix}<br>i_d \\<br>i_q \\<br>i_{fd} \\<br>i_{kq}<br>\end{bmatrix}<br>$$<br>$$<br>L&#x3D;<br>\begin{bmatrix}<br>-L_d &amp; 0 &amp; M_{afd} &amp; 0 \\<br>0 &amp; -L_q &amp; 0 &amp; M_{akq} \\<br>-M_{fad} &amp; 0 &amp; L_{fd} &amp; 0 \\<br>0 &amp; -M_{kaq} &amp; 0 &amp; L_{kq}<br>\end{bmatrix},G&#x3D;<br>\begin{bmatrix}<br>0 &amp; L_q &amp; 0 &amp; -M_{akq} \\<br>-L_d &amp; 0 &amp; M_{afd} &amp; 0 \\<br>0 &amp; 0 &amp; 0 &amp; 0 \\<br>0 &amp; 0 &amp; 0 &amp; 0<br>\end{bmatrix}<br>$$</p>
+<p>则有</p>
+<p>$$<br>U&#x3D;(R+Lp+\omega G)I<br>$$</p>
+<p>这里可以看到，等效的绕组线圈出现了旋转电动势这一项</p>
+<p>不失一般性的，当被等效的绕组为<a href="#%E4%BC%AA%E9%9D%99%E6%AD%A2%E7%BA%BF%E5%9C%88">【伪静止线圈】</a>时，会多出这一项</p>
+<h3 id="机械方程"><a href="#机械方程" class="headerlink" title="机械方程"></a>机械方程</h3><p>按照发电机原则规定正方向</p>
+<p>转矩方程$$T_m&#x3D;T_e+T_D+T_J$$</p>
+<p>在这条方程中，$T_m$是可以控制的外部变量，$T_D&#x3D;B\omega,T_J&#x3D;Jp\omega$，因此需要获得$T_e$的表达式</p>
+<p>为获得$T_e$可以使用能量守恒定律或者虚位移法等方法</p>
+<h4 id="能量守恒定律推导-T-e"><a href="#能量守恒定律推导-T-e" class="headerlink" title="能量守恒定律推导$T_e$"></a>能量守恒定律推导$T_e$</h4><p>能量守恒$$电磁输入功率P_{dq}+机械输入功率P_m&#x3D;电磁储能功率+机械储能功率+电磁损耗+机械损耗$$</p>
+<p>根据规定的正方向，$$P_{dq}&#x3D;-u_di_d-u_qi_q+u_{fd}i_{fd}+u{kq}i_{kq}$$</p>
+<p>设，</p>
+<p>$$<br>U’&#x3D;<br>\begin{bmatrix}<br>-u_d \\<br>-u_q \\<br>u_{fd} \\<br>u_{kq}<br>\end{bmatrix},R’&#x3D;<br>\begin{bmatrix}<br>R_d &amp; 0 &amp; 0 &amp; 0 \\<br>0 &amp; R_q &amp; 0 &amp; 0 \\<br>0 &amp; 0 &amp; R_{fd} &amp; 0 \\<br>0 &amp; 0 &amp; 0 &amp; R_{kq}<br>\end{bmatrix}<br>$$<br>$$<br>L’&#x3D;<br>\begin{bmatrix}<br>L_d &amp; 0 &amp; -M_{afd} &amp; 0 \\<br>0 &amp; L_q &amp; 0 &amp; -M_{akq} \\<br>-M_{fad} &amp; 0 &amp; L_{fd} &amp; 0 \\<br>0 &amp; -M_{kaq} &amp; 0 &amp; L_{kq}<br>\end{bmatrix},G’&#x3D;<br>\begin{bmatrix}<br>0 &amp; -L_q &amp; 0 &amp; M_{akq} \\<br>L_d &amp; 0 &amp; -M_{afd} &amp; 0 \\<br>0 &amp; 0 &amp; 0 &amp; 0 \\<br>0 &amp; 0 &amp; 0 &amp; 0<br>\end{bmatrix}<br>$$</p>
+<p>则有<br>$$<br>\begin{split}<br>P_{dq}&amp;&#x3D;U’^TI&#x3D;((R’+L’p+\omega G’)I)^TI \\<br>&amp;&#x3D; I^T(R’^T+L’^Tp+\omega G’^T)I \\<br>&amp;&#x3D;I^TRI+I^TL’^TpI+I^T\omega G’^TI<br>\end{split}<br>$$</p>
+<p>$$<br>P_m&#x3D;\omega T_m&#x3D;\omega(T_e+T_D+T_J)<br>$$</p>
+<p>而对于等式右边有</p>
+<p>$$电磁储能功率&#x3D;I^TL’pI$$</p>
+<p>$$机械储能功率&#x3D;\omega T_J$$</p>
+<p>$$电磁损耗&#x3D;I^TR’I$$</p>
+<p>$$机械损耗&#x3D;\omega T_D$$</p>
+<p>因此，</p>
+<p>$$\omega I^TG’I+\omega T_e&#x3D;0$$</p>
+<p>所以，</p>
+<p>$$<br>\begin{split}<br>T_e&amp;&#x3D;-I^TG’I \\<br>&amp;&#x3D;-<br>\begin{bmatrix}<br>i_d \\<br>i_q \\<br>i_{fd} \\<br>i_{kq} \\<br>\end{bmatrix}^T<br>\begin{bmatrix}<br>0 &amp; -L_q &amp; 0 &amp; -M_{akq} \\<br>L_d &amp; 0 &amp; -M_{afd} &amp; 0 \\<br>0 &amp; 0 &amp; 0 &amp; 0 \\<br>0 &amp; 0 &amp; 0 &amp; 0<br>\end{bmatrix}<br>\begin{bmatrix}<br>i_d \\<br>i_q \\<br>i_{fd} \\<br>i_{kq} \\<br>\end{bmatrix} \\<br>&amp;&#x3D;-<br>\begin{bmatrix}<br>i_d \\<br>i_q \\<br>i_{fd} \\<br>i_{kq} \\<br>\end{bmatrix}^T<br>\begin{bmatrix}<br>\psi_q \\<br>-\psi_d \\<br>0 \\<br>0<br>\end{bmatrix}&#x3D;\psi_d i_q-\psi_q i_d&#x3D;\frac{1}{\omega}(e_{qr}i_q+e_{dr}i_d)<br>\end{split}<br>$$</p>
+<p>综上，将电磁转矩的表达式代入转矩方程中，可得</p>
+<p>$$p\omega&#x3D;\frac{T_m-(\psi_d i_q-\psi_q i_d)-B\omega}{J}$$</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>这样一来，电磁方程和机械方程都有了，可以看到这两个方程当中互有另一个方程的状态变量，因此是耦合的</p>
+<p>拿到模型后，可以参考<a href="#%E7%94%B5%E6%9C%BA%E5%BB%BA%E6%A8%A1%E8%83%BD%E7%94%A8%E6%9D%A5%E5%B9%B2%E4%BB%80%E4%B9%88">电机建模能用来干什么</a></p>
+<p>本章当中仅仅涉及了一般化电机的内容，对于直流电机、异步电机、同步电机，实际上可以通过坐标变换进行转化，这将在【直流电机】、【异步电机】、【同步电机】中进行讨论</p>
+]]></content>
+      <categories>
+        <category>Electrical Machines</category>
+      </categories>
+      <tags>
+        <tag>Modeling</tag>
+      </tags>
+  </entry>
+</search>
