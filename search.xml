@@ -1,6 +1,173 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>SVPWM</title>
+    <url>/2025/02/26/SVPWM/</url>
+    <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>SVPWM(Space Vector Pulse Width Modulation)，即电压空间矢量调制，是一种PWM生成方法，其作用是在主电路中生成给定的电压信号，而不是电机控制方法，这里需要与电机矢量控制做一个区分。</p>
+<p>SVPWM给定的是目标电压矢量，输出的是六个PWM波，这六个PWM波控制IGBT的通断，在主电路中生成三相PWM，三相PWM的基波合成起来就是目标电压矢量。</p>
+<h2 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h2><p>以如下图所示的IGBT逆变器为例来进行说明</p>
+<img src="/images/SVPWM/img1.png" alt="img1" width=50% height=50%>
+
+<p>设$S_A&#x3D;1$代表A相上管通，$S_A&#x3D;0$代表A相下管通，$S_B,S_C$类似设定，则可以得到SVPWM的基本电压矢量为下图$u_0~u_7$所示</p>
+<img src="/images/SVPWM/img2.png" alt="img2" width=50% height=50%>
+
+<p>矢量的合成应该遵循相邻原则和平均值等效原则。设这六个区分别为$Ⅰ~Ⅵ$，假设现在目标电压矢量处在$Ⅰ$区，那么应该由基本电压矢量$u_1和u_2$合成。如果设开关周期时间为$T_0$，$u_1$作用时间为$t_1$，$u_2$作用时间为$t_2$，那么应该有</p>
+<p>$$<br>T_0u_s&#x3D;t_1u_1+t_2u_2<br>$$</p>
+<p>根据三角形的正弦定理和余弦定理，就可以算出$t_1,t_2$的大小</p>
+<p>如果$t_1+t_2&lt;T_0$，多出来的时间就是零矢量的作用时间，$t_0&#x3D;T_0-t_1-t_2$</p>
+<p>如果$t_1+t_2&gt;T_0$，则令$t_1’&#x3D;\frac{t_1}{t_1+t_2}T_0,t_2’&#x3D;\frac{t_2}{t_1+t_2}T_0$</p>
+<p>用上述$t_1’,t_2’$代替原有的导通时间</p>
+<p>但是$t_1,t_2,t_0$在$T_0$中的时间分配是自由的，一般来说，一方面希望尽量减少开关次数减少开关损耗，另一方面希望减少谐波成分</p>
+<p>一般而言有两种实现方式，分别是零矢量集中和零矢量分散方式</p>
+<p>以上图img2为例，集中和分散分别对应于img3和img4</p>
+<img src="/images/SVPWM/img3.png" alt="img3" width=50% height=50%>
+
+<img src="/images/SVPWM/img4.png" alt="img4" width=50% height=50%>
+
+<p>集中的优势在于开关损耗较小，但是由于零矢量单次停留时间过长，会导致谐波成分增加</p>
+<p>而分散的优劣势则恰恰与集中相反</p>
+<h2 id="Simulink实现"><a href="#Simulink实现" class="headerlink" title="Simulink实现"></a>Simulink实现</h2><p>总体的形状应该如img5所示，其中$u_\alpha,u_\beta$给定，也就是说，$u_s$给定，直流电压$U_d$和开关周期时间$T_0$已知</p>
+<img src="/images/SVPWM/img5.png" alt="img5" width=50% height=50%>
+
+<p>为了实现功能，可以粗略的将整个模块分为三部分：电压矢量区块检测模块、$T_1,T_2$计算模块和PWM波生成模块</p>
+<h3 id="电压矢量区块检测模块"><a href="#电压矢量区块检测模块" class="headerlink" title="电压矢量区块检测模块"></a>电压矢量区块检测模块</h3><p>可以用投影的方式确定电压矢量所在区块，如图img6所示，将电压矢量往$1~3$三个方向投影，则可以得到投影大小为</p>
+<img src="/images/SVPWM/img6.png" alt="img6" width=50% height=50%>
+
+<p>$$<br>\begin{cases}<br>u_{ref1}&#x3D;u_\beta \\<br>u_{ref2}&#x3D;\frac{\sqrt{3}}{2}u_\alpha-\frac{1}{2}u_\beta \\<br>u_{ref3}&#x3D;-\frac{\sqrt{3}}{2}u_\alpha-\frac{1}{2}u_\beta<br>\end{cases}<br>$$</p>
+<p>定义一个二进制数$N&#x3D;(CBA)<em>2$,如果$u{ref1}&gt;0$，则$A&#x3D;1$，否则$A&#x3D;0$。其余C对应$u</em>{ref3}$，B对应$u_{ref2}$，类似定义</p>
+<p>那么可以得出</p>
+<table>
+<thead>
+<tr>
+<th>N</th>
+<th>3</th>
+<th>1</th>
+<th>5</th>
+<th>4</th>
+<th>6</th>
+<th>2</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>扇区</td>
+<td>Ⅰ</td>
+<td>Ⅱ</td>
+<td>Ⅲ</td>
+<td>Ⅳ</td>
+<td>Ⅴ</td>
+<td>Ⅵ</td>
+</tr>
+</tbody></table>
+<p>在Simulink当中的实现如img7所示</p>
+<img src="/images/SVPWM/img7.png" alt="img7" width=50% height=50%>
+
+<h3 id="T-1-T-2-计算模块"><a href="#T-1-T-2-计算模块" class="headerlink" title="$T_1,T_2$计算模块"></a>$T_1,T_2$计算模块</h3><p>以第Ⅰ扇区为例，设$U_{dc}$为直流电压大小，则$\abs{u_1}&#x3D;\abs{u_2}&#x3D;…&#x3D;\abs{u_6}&#x3D;\frac{2}{3}U_{dc}$</p>
+<p>$$<br>\begin{cases}<br>u_\beta&#x3D;\frac{t_2}{T_0}u_2sin\frac{\pi}{3} \\<br>u_\alpha&#x3D;\frac{t_2}{T_0}u_2cos\frac{\pi}{3}+\frac{t_1}{T_0}u_1<br>\end{cases}<br>$$</p>
+<p>于是可得</p>
+<p>$$<br>\begin{cases}<br>t_1&#x3D;\frac{\sqrt{3}T_0}{U_{dc}}(\frac{\sqrt{3}}{2}u_\alpha-\frac{1}{2}u_\beta) \\<br>t_2&#x3D;\frac{\sqrt{3}T_0}{U_{dc}}u_\beta<br>\end{cases}<br>$$</p>
+<p>在其他区同理可以计算作用时间</p>
+<p>在这里可以对所有情况做一个归纳</p>
+<p>定义:</p>
+<p>$$<br>\begin{cases}<br>X&#x3D;\frac{\sqrt{3}T_0}{U_{dc}}u_\beta \\<br>Y&#x3D;\frac{\sqrt{3}T_0}{U_{dc}}(\frac{\sqrt{3}}{2}u_\alpha+\frac{1}{2}u_\beta) \\<br>Z&#x3D;\frac{\sqrt{3}T_0}{U_{dc}}(-\frac{\sqrt{3}}{2}u_\alpha+\frac{1}{2}u_\beta)<br>\end{cases}<br>$$</p>
+<p>这样不同N值对应的时间可以总结为下表</p>
+<table>
+<thead>
+<tr>
+<th>N</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>6</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>T_1</td>
+<td>Z</td>
+<td>Y</td>
+<td>-Z</td>
+<td>-X</td>
+<td>X</td>
+<td>-Y</td>
+</tr>
+<tr>
+<td>T_2</td>
+<td>Y</td>
+<td>-X</td>
+<td>X</td>
+<td>Z</td>
+<td>-Y</td>
+<td>-Z</td>
+</tr>
+</tbody></table>
+<p>在Simulink当中的实现如img8和img9所示</p>
+<img src="/images/SVPWM/img8.png" alt="img8" width=50% height=50%>
+
+<img src="/images/SVPWM/img9.png" alt="img9" width=50% height=50%>
+
+<h3 id="PWM波生成模块"><a href="#PWM波生成模块" class="headerlink" title="PWM波生成模块"></a>PWM波生成模块</h3><p>要生成PWM波需要确定$a,b,c$三管的开关时间，下面以第Ⅰ扇区，采用零矢量分散式为例</p>
+<img src="/images/SVPWM/img4.png" alt="img4" width=50% height=50%>
+
+<p>这里可以参考前面的img4，可以看到三个管的开启时间分别为</p>
+<p>$$<br>\begin{cases}<br>T_{a1}&#x3D;\frac{T_0-t_1-t_2}{4} \\<br>T_{b1}&#x3D;T_{a1}+\frac{1}{2}t_1 \\<br>T_{c1}&#x3D;T_{b1}+\frac{1}{2}t_2<br>\end{cases}<br>$$</p>
+<p>注：零矢量集中式则可以参考img3推得</p>
+<p>对于所有扇区的情况，如果定义$T_a,T_b,T_c$分别为三个管开启的时间，可以将开启时间总结为下表</p>
+<table>
+<thead>
+<tr>
+<th>N</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>6</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>T_A</td>
+<td>T_{b1}</td>
+<td>T_{a1}</td>
+<td>T_{a1}</td>
+<td>T_{c1}</td>
+<td>T_{c1}</td>
+<td>T_{b1}</td>
+</tr>
+<tr>
+<td>T_B</td>
+<td>T_{a1}</td>
+<td>T_{c1}</td>
+<td>T_{b1}</td>
+<td>T_{b1}</td>
+<td>T_{a1}</td>
+<td>T_{c1}</td>
+</tr>
+<tr>
+<td>T_C</td>
+<td>T_{c1}</td>
+<td>T_{b1}</td>
+<td>T_{c1}</td>
+<td>T_{a1}</td>
+<td>T_{b1}</td>
+<td>T_{a1}</td>
+</tr>
+</tbody></table>
+<p>在Simulink当中的实现如img10所示</p>
+<img src="/images/SVPWM/img10.png" alt="img10" width=50% height=50%>
+
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>将所有模块联合起来，SVPWM的内部结构就如img11所示</p>
+<img src="/images/SVPWM/img11.png" alt="img11" width=50% height=50%>
+]]></content>
+      <categories>
+        <category>Electrical Machines</category>
+      </categories>
+      <tags>
+        <tag>SVPWM</tag>
+        <tag>Simulink</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>书签</title>
     <url>/2024/11/08/%E4%B9%A6%E7%AD%BE/</url>
     <content><![CDATA[<h2 id="ZJU"><a href="#ZJU" class="headerlink" title="ZJU"></a>ZJU</h2><ul>
@@ -56,173 +223,6 @@
       <tags>
         <tag>Bookmarks</tag>
         <tag>Resources</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>SVPWM</title>
-    <url>/2025/02/26/SVPWM/</url>
-    <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>SVPWM(Space Vector Pulse Width Modulation)，即电压空间矢量调制，是一种PWM生成方法，其作用是在主电路中生成给定的电压信号，而不是电机控制方法，这里需要与电机矢量控制做一个区分。</p>
-<p>SVPWM给定的是目标电压矢量，输出的是六个PWM波，这六个PWM波控制IGBT的通断，在主电路中生成三相PWM，三相PWM的基波合成起来就是目标电压矢量。</p>
-<h2 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h2><p>以如下图所示的IGBT逆变器为例来进行说明</p>
-<img src="/images/SVPWM/img1.jpg" alt="img1" width=50% height=50%>
-
-<p>设$S_A&#x3D;1$代表A相上管通，$S_A&#x3D;0$代表A相下管通，$S_B,S_C$类似设定，则可以得到SVPWM的基本电压矢量为下图$u_0~u_7$所示</p>
-<img src="/images/SVPWM/img2.jpg" alt="img2" width=50% height=50%>
-
-<p>矢量的合成应该遵循相邻原则和平均值等效原则。设这六个区分别为$Ⅰ~Ⅵ$，假设现在目标电压矢量处在$Ⅰ$区，那么应该由基本电压矢量$u_1和u_2$合成。如果设开关周期时间为$T_0$，$u_1$作用时间为$t_1$，$u_2$作用时间为$t_2$，那么应该有</p>
-<p>$$<br>T_0u_s&#x3D;t_1u_1+t_2u_2<br>$$</p>
-<p>根据三角形的正弦定理和余弦定理，就可以算出$t_1,t_2$的大小</p>
-<p>如果$t_1+t_2&lt;T_0$，多出来的时间就是零矢量的作用时间，$t_0&#x3D;T_0-t_1-t_2$</p>
-<p>如果$t_1+t_2&gt;T_0$，则令$t_1^’&#x3D;\frac{t_1}{t_1+t_2}T_0,t_2^’&#x3D;\frac{t_2}{t_1+t_2}T_0$</p>
-<p>用上述$t_1^’,t_2^’$代替原有的导通时间</p>
-<p>但是$t_1,t_2,t_0$在$T_0$中的时间分配是自由的，一般来说，一方面希望尽量减少开关次数减少开关损耗，另一方面希望减少谐波成分</p>
-<p>一般而言有两种实现方式，分别是零矢量集中和零矢量分散方式</p>
-<p>以上图img2为例，集中和分散分别对应于img3和img4</p>
-<img src="/images/SVPWM/img3.jpg" alt="img3" width=50% height=50%>
-
-<img src="/images/SVPWM/img4.jpg" alt="img4" width=50% height=50%>
-
-<p>集中的优势在于开关损耗较小，但是由于零矢量单次停留时间过长，会导致谐波成分增加</p>
-<p>而分散的优劣势则恰恰与集中相反</p>
-<h2 id="Simulink实现"><a href="#Simulink实现" class="headerlink" title="Simulink实现"></a>Simulink实现</h2><p>总体的形状应该如img5所示，其中$u_\alpha,u_\beta$给定，也就是说，$u_s$给定，直流电压$U_d$和开关周期时间$T_0$已知</p>
-<img src="/images/SVPWM/img5.jpg" alt="img5" width=50% height=50%>
-
-<p>为了实现功能，可以粗略的将整个模块分为三部分：电压矢量区块检测模块、$T_1,T_2$计算模块和PWM波生成模块</p>
-<h3 id="电压矢量区块检测模块"><a href="#电压矢量区块检测模块" class="headerlink" title="电压矢量区块检测模块"></a>电压矢量区块检测模块</h3><p>可以用投影的方式确定电压矢量所在区块，如图img6所示，将电压矢量往$1~3$三个方向投影，则可以得到投影大小为</p>
-<img src="/images/SVPWM/img6.jpg" alt="img6" width=50% height=50%>
-
-<p>$$<br>\begin{cases}<br>u_{ref1}&#x3D;u_\beta \\<br>u_{ref2}&#x3D;\frac{\sqrt{3}}{2}u_\alpha-\frac{1}{2}u_\beta \\<br>u_{ref3}&#x3D;-\frac{\sqrt{3}}{2}u_\alpha-\frac{1}{2}u_\beta<br>\end{cases}<br>$$</p>
-<p>定义一个二进制数$N&#x3D;(CBA)<em>2$,如果$u{ref1}&gt;0$，则$A&#x3D;1$，否则$A&#x3D;0$。其余C对应$u</em>{ref3}$，B对应$u_{ref2}$，类似定义</p>
-<p>那么可以得出</p>
-<table>
-<thead>
-<tr>
-<th>N</th>
-<th>3</th>
-<th>1</th>
-<th>5</th>
-<th>4</th>
-<th>6</th>
-<th>2</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>扇区</td>
-<td>Ⅰ</td>
-<td>Ⅱ</td>
-<td>Ⅲ</td>
-<td>Ⅳ</td>
-<td>Ⅴ</td>
-<td>Ⅵ</td>
-</tr>
-</tbody></table>
-<p>在Simulink当中的实现如img7所示</p>
-<img src="/images/SVPWM/img7.jpg" alt="img7" width=50% height=50%>
-
-<h3 id="T-1-T-2-计算模块"><a href="#T-1-T-2-计算模块" class="headerlink" title="$T_1,T_2$计算模块"></a>$T_1,T_2$计算模块</h3><p>以第Ⅰ扇区为例，设$U_{dc}$为直流电压大小，则$\abs{u_1}&#x3D;\abs{u_2}&#x3D;…&#x3D;\abs{u_6}&#x3D;\frac{2}{3}U_{dc}$</p>
-<p>$$<br>\begin{cases}<br>u_\beta&#x3D;\frac{t_2}{T_0}u_2sin\frac{\pi}{3} \\<br>u_\alpha&#x3D;\frac{t_2}{T_0}u_2cos\frac{\pi}{3}+\frac{t_1}{T_0}u_1<br>\end{cases}<br>$$</p>
-<p>于是可得</p>
-<p>$$<br>\begin{cases}<br>t_1&#x3D;\frac{\sqrt{3}T_0}{U_{dc}}(\frac{\sqrt{3}}{2}u_\alpha-\frac{1}{2}u_\beta) \\<br>t_2&#x3D;\frac{\sqrt{3}T_0}{U_{dc}}u_\beta<br>\end{cases}<br>$$</p>
-<p>在其他区同理可以计算作用时间</p>
-<p>在这里可以对所有情况做一个归纳</p>
-<p>定义:</p>
-<p>$$<br>\begin{cases}<br>X&#x3D;\frac{\sqrt{3}T_0}{U_{dc}}u_\beta \\<br>Y&#x3D;\frac{\sqrt{3}T_0}{U_{dc}}(\frac{\sqrt{3}}{2}u_\alpha+\frac{1}{2}u_\beta) \\<br>Z&#x3D;\frac{\sqrt{3}T_0}{U_{dc}}(-\frac{\sqrt{3}}{2}u_\alpha+\frac{1}{2}u_\beta)<br>$$</p>
-<p>这样不同N值对应的时间可以总结为下表</p>
-<table>
-<thead>
-<tr>
-<th>N</th>
-<th>1</th>
-<th>2</th>
-<th>3</th>
-<th>4</th>
-<th>5</th>
-<th>6</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>T_1</td>
-<td>Z</td>
-<td>Y</td>
-<td>-Z</td>
-<td>-X</td>
-<td>X</td>
-<td>-Y</td>
-</tr>
-<tr>
-<td>T_2</td>
-<td>Y</td>
-<td>-X</td>
-<td>X</td>
-<td>Z</td>
-<td>-Y</td>
-<td>-Z</td>
-</tr>
-</tbody></table>
-<p>在Simulink当中的实现如img8和img9所示</p>
-<img src="/images/SVPWM/img8.jpg" alt="img8" width=50% height=50%>
-
-<img src="/images/SVPWM/img9.jpg" alt="img9" width=50% height=50%>
-
-<h3 id="PWM波生成模块"><a href="#PWM波生成模块" class="headerlink" title="PWM波生成模块"></a>PWM波生成模块</h3><p>要生成PWM波需要确定$a,b,c$三管的开关时间，下面以第Ⅰ扇区，采用零矢量分散式为例</p>
-<img src="/images/SVPWM/img4.jpg" alt="img4" width=50% height=50%>
-
-<p>这里可以参考前面的img4，可以看到三个管的开启时间分别为</p>
-<p>$$<br>\begin{cases}<br>T_{a1}&#x3D;\frac{T_0-t_1-t_2}{4} \\<br>T_{b1}&#x3D;T_{a1}+\frac{1}{2}t_1 \\<br>T_{c1}&#x3D;T_{b1}+\frac{1}{2}t_2<br>\end{cases}<br>$$</p>
-<p>注：零矢量集中式则可以参考img3推得</p>
-<p>对于所有扇区的情况，如果定义$T_a,T_b,T_c$分别为三个管开启的时间，可以将开启时间总结为下表</p>
-<table>
-<thead>
-<tr>
-<th>N</th>
-<th>1</th>
-<th>2</th>
-<th>3</th>
-<th>4</th>
-<th>5</th>
-<th>6</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>T_A</td>
-<td>T_{b1}</td>
-<td>T_{a1}</td>
-<td>T_{a1}</td>
-<td>T_{c1}</td>
-<td>T_{c1}</td>
-<td>T_{b1}</td>
-</tr>
-<tr>
-<td>T_B</td>
-<td>T_{a1}</td>
-<td>T_{c1}</td>
-<td>T_{b1}</td>
-<td>T_{b1}</td>
-<td>T_{a1}</td>
-<td>T_{c1}</td>
-</tr>
-<tr>
-<td>T_C</td>
-<td>T_{c1}</td>
-<td>T_{b1}</td>
-<td>T_{c1}</td>
-<td>T_{a1}</td>
-<td>T_{b1}</td>
-<td>T_{a1}</td>
-</tr>
-</tbody></table>
-<p>在Simulink当中的实现如img10所示</p>
-<img src="/images/SVPWM/img10.jpg" alt="img10" width=50% height=50%>
-
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>将所有模块联合起来，SVPWM的内部结构就如img11所示</p>
-<img src="/images/SVPWM/img11.jpg" alt="img11" width=50% height=50%>
-]]></content>
-      <categories>
-        <category>Electrical Machines</category>
-      </categories>
-      <tags>
-        <tag>SVPWM</tag>
-        <tag>Simulink</tag>
       </tags>
   </entry>
 </search>

@@ -221,7 +221,7 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2025-02-26 20:45:00 / 修改时间：20:44:42" itemprop="dateCreated datePublished" datetime="2025-02-26T20:45:00+08:00">2025-02-26</time>
+      <time title="创建时间：2025-02-26 20:45:00 / 修改时间：20:53:43" itemprop="dateCreated datePublished" datetime="2025-02-26T20:45:00+08:00">2025-02-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -246,10 +246,10 @@
           <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>SVPWM(Space Vector Pulse Width Modulation)，即电压空间矢量调制，是一种PWM生成方法，其作用是在主电路中生成给定的电压信号，而不是电机控制方法，这里需要与电机矢量控制做一个区分。</p>
 <p>SVPWM给定的是目标电压矢量，输出的是六个PWM波，这六个PWM波控制IGBT的通断，在主电路中生成三相PWM，三相PWM的基波合成起来就是目标电压矢量。</p>
 <h2 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h2><p>以如下图所示的IGBT逆变器为例来进行说明</p>
-<img src="/images/SVPWM/img1.jpg" alt="img1" width="50%" height="50%">
+<img src="/images/SVPWM/img1.png" alt="img1" width="50%" height="50%">
 
 <p>设$S_A&#x3D;1$代表A相上管通，$S_A&#x3D;0$代表A相下管通，$S_B,S_C$类似设定，则可以得到SVPWM的基本电压矢量为下图$u_0~u_7$所示</p>
-<img src="/images/SVPWM/img2.jpg" alt="img2" width="50%" height="50%">
+<img src="/images/SVPWM/img2.png" alt="img2" width="50%" height="50%">
 
 <p>矢量的合成应该遵循相邻原则和平均值等效原则。设这六个区分别为$Ⅰ~Ⅵ$，假设现在目标电压矢量处在$Ⅰ$区，那么应该由基本电压矢量$u_1和u_2$合成。如果设开关周期时间为$T_0$，$u_1$作用时间为$t_1$，$u_2$作用时间为$t_2$，那么应该有</p>
 <p>$$<br>T_0u_s&#x3D;t_1u_1+t_2u_2<br>$$</p>
