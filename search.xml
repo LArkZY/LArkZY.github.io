@@ -61,7 +61,7 @@
 <p>在Simulink当中的实现如img7所示</p>
 <img src="/images/SVPWM/img7.png" alt="img7" width=50% height=50%>
 
-<h3 id="T-1-T-2-计算模块"><a href="#T-1-T-2-计算模块" class="headerlink" title="$T_1,T_2$计算模块"></a>$T_1,T_2$计算模块</h3><p>以第Ⅰ扇区为例，设$U_{dc}$为直流电压大小，则$\abs{u_1}&#x3D;\abs{u_2}&#x3D;…&#x3D;\abs{u_6}&#x3D;\frac{2}{3}U_{dc}$</p>
+<h3 id="T-1-T-2-计算模块"><a href="#T-1-T-2-计算模块" class="headerlink" title="$T_1,T_2$计算模块"></a>$T_1,T_2$计算模块</h3><p>以第Ⅰ扇区为例，设$U_{dc}$为直流电压大小，则$|u_1|&#x3D;|u_2|&#x3D;…&#x3D;|u_6|&#x3D;\frac{2}{3}U_{dc}$</p>
 <p>$$<br>\begin{cases}<br>u_\beta&#x3D;\frac{t_2}{T_0}u_2sin\frac{\pi}{3} \\<br>u_\alpha&#x3D;\frac{t_2}{T_0}u_2cos\frac{\pi}{3}+\frac{t_1}{T_0}u_1<br>\end{cases}<br>$$</p>
 <p>于是可得</p>
 <p>$$<br>\begin{cases}<br>t_1&#x3D;\frac{\sqrt{3}T_0}{U_{dc}}(\frac{\sqrt{3}}{2}u_\alpha-\frac{1}{2}u_\beta) \\<br>t_2&#x3D;\frac{\sqrt{3}T_0}{U_{dc}}u_\beta<br>\end{cases}<br>$$</p>
