@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.png">
+  <link rel="mask-icon" href="/images/favicon.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha256-5eIC48iZUHmSlSUz9XtjRyK2mzQkHScZY1WdMaoz74E=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"larkzy.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.21.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="基本定义坐标变换这种方法在电网络、电力电子、电机建模与控制等很多领域都有应用，本文章以三相永磁同步电机为背景，主要讨论三相与两相间的转化 对于三相永磁同步电机而言，定子绕组可以等效为a,b,c三相绕组，假设这三相绕组的方向如img1所示   对于这三相绕组的任意一个物理量，比如电流，定义 $$\begin{equation}    \boldsymbol{i_a}&#x3D;i_a\boldsym">
+<meta property="og:type" content="article">
+<meta property="og:title" content="坐标变换">
+<meta property="og:url" content="http://larkzy.github.io/2025/03/11/%E5%9D%90%E6%A0%87%E5%8F%98%E6%8D%A2/index.html">
+<meta property="og:site_name" content="Lac&#39;s blog">
+<meta property="og:description" content="基本定义坐标变换这种方法在电网络、电力电子、电机建模与控制等很多领域都有应用，本文章以三相永磁同步电机为背景，主要讨论三相与两相间的转化 对于三相永磁同步电机而言，定子绕组可以等效为a,b,c三相绕组，假设这三相绕组的方向如img1所示   对于这三相绕组的任意一个物理量，比如电流，定义 $$\begin{equation}    \boldsymbol{i_a}&#x3D;i_a\boldsym">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://larkzy.github.io/images/%E5%9D%90%E6%A0%87%E5%8F%98%E6%8D%A2/img1.png">
+<meta property="og:image" content="http://larkzy.github.io/images/%E5%9D%90%E6%A0%87%E5%8F%98%E6%8D%A2/img2.png">
+<meta property="og:image" content="http://larkzy.github.io/images/%E5%9D%90%E6%A0%87%E5%8F%98%E6%8D%A2/img3.png">
+<meta property="og:image" content="http://larkzy.github.io/images/%E5%9D%90%E6%A0%87%E5%8F%98%E6%8D%A2/img4.png">
+<meta property="article:published_time" content="2025-03-11T03:23:50.000Z">
+<meta property="article:modified_time" content="2025-03-11T03:34:59.925Z">
+<meta property="article:author" content="Lark">
+<meta property="article:tag" content="坐标变换">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://larkzy.github.io/images/%E5%9D%90%E6%A0%87%E5%8F%98%E6%8D%A2/img1.png">
+
+
+<link rel="canonical" href="http://larkzy.github.io/2025/03/11/%E5%9D%90%E6%A0%87%E5%8F%98%E6%8D%A2/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://larkzy.github.io/2025/03/11/%E5%9D%90%E6%A0%87%E5%8F%98%E6%8D%A2/","path":"2025/03/11/坐标变换/","title":"坐标变换"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>坐标变换 | Lac's blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Lac's blog</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E5%AE%9A%E4%B9%89"><span class="nav-number">1.</span> <span class="nav-text">基本定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%81%92%E7%9B%B8%E5%B9%85%E5%80%BC%E5%8F%98%E6%8D%A2"><span class="nav-number">2.</span> <span class="nav-text">恒相幅值变换</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9E%AC%E6%80%81%E8%BF%87%E7%A8%8B"><span class="nav-number">2.1.</span> <span class="nav-text">瞬态过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A8%B3%E6%80%81%E8%BF%87%E7%A8%8B"><span class="nav-number">2.2.</span> <span class="nav-text">稳态过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9D%90%E6%A0%87%E5%8F%98%E6%8D%A2"><span class="nav-number">2.3.</span> <span class="nav-text">坐标变换</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#abc-alpha-beta-0"><span class="nav-number">2.3.1.</span> <span class="nav-text">$abc-\alpha\beta 0$</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#abc-dq0"><span class="nav-number">2.3.2.</span> <span class="nav-text">$abc-dq0$</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#abc-d-cq-c0"><span class="nav-number">2.3.3.</span> <span class="nav-text">$abc-d_cq_c0$</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Lark</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">4</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/larkzy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;larkzy" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:larkzy03@gmail.com" title="E-Mail → mailto:larkzy03@gmail.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://larkzy.github.io/2025/03/11/%E5%9D%90%E6%A0%87%E5%8F%98%E6%8D%A2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lark">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lac's blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="坐标变换 | Lac's blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          坐标变换
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2025-03-11 11:23:50 / 修改时间：11:34:59" itemprop="dateCreated datePublished" datetime="2025-03-11T11:23:50+08:00">2025-03-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Electrical-Machines/" itemprop="url" rel="index"><span itemprop="name">Electrical Machines</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="基本定义"><a href="#基本定义" class="headerlink" title="基本定义"></a>基本定义</h2><p>坐标变换这种方法在电网络、电力电子、电机建模与控制等很多领域都有应用，本文章以三相永磁同步电机为背景，主要讨论三相与两相间的转化</p>
+<p>对于三相永磁同步电机而言，定子绕组可以等效为a,b,c三相绕组，假设这三相绕组的方向如img1所示</p>
+<img src="/images/坐标变换/img1.png" alt="img1" width=50% height="50%">
+
+<p>对于这三相绕组的任意一个物理量，比如电流，定义</p>
+<p>$$<br>\begin{equation}<br>    \boldsymbol{i_a}&#x3D;i_a\boldsymbol{a},\boldsymbol{i_b}&#x3D;i_b\boldsymbol{b},\boldsymbol{i_c}&#x3D;i_c\boldsymbol{c}<br>\end{equation}<br>$$</p>
+<p>需要注意的是，这里的$i_a,i_b,i_c$代表的是电流的大小，并且代表的是瞬态过程</p>
+<h2 id="恒相幅值变换"><a href="#恒相幅值变换" class="headerlink" title="恒相幅值变换"></a>恒相幅值变换</h2><p>定义综合矢量$\boldsymbol{i}&#x3D;k(\boldsymbol{i_a}+\boldsymbol{i_b}+\boldsymbol{i_c})$，这里的k是一个待定的系数</p>
+<p>由于是恒相幅值变换，我们的目标是在稳态过程下，综合矢量的幅值等于a，b，c三相的幅值</p>
+<p>本文先通过瞬态过程的推导得出公式，因为稳态过程就是瞬态过程的一个特例，所以可以直接代入公式，解得k的值</p>
+<h3 id="瞬态过程"><a href="#瞬态过程" class="headerlink" title="瞬态过程"></a>瞬态过程</h3><p>要计算综合矢量的幅值，可以建立x-y坐标系，假设如图img2所示</p>
+<img src="/images/坐标变换/img2.png" alt="img2" width=50% height="50%">
+
+<p>容易得到</p>
+<p>$$<br>\begin{cases}<br>    i_x&#x3D;k(i_a-\frac{1}{2}i_b-\frac{1}{2}i_c) \\<br>    i_y&#x3D;k(\frac{\sqrt{3}}{2}i_b-\frac{\sqrt{3}}{2}i_c)<br>\end{cases} \\<br>$$<br>$$<br>\begin{equation}<br>i&#x3D;|\boldsymbol{i}|&#x3D;k\sqrt{i_x^2+i_y^2}&#x3D;k\sqrt{\frac{1}{2}\sum\limits_{cyc}(i_a-i_b)^2}(1)<br>\end{equation}<br>$$</p>
+<h3 id="稳态过程"><a href="#稳态过程" class="headerlink" title="稳态过程"></a>稳态过程</h3><p>对于稳态过程，可以假设三相是相位分别相差$\frac{2}{3}\pi$，且幅值完全相同的正弦波，即</p>
+<p>$$<br>\begin{cases}<br>    i_a&#x3D;I_m\cos(\omega t) \\<br>    i_b&#x3D;I_m\cos(\omega t-\frac{2}{3}\pi) \\<br>    i_c&#x3D;I_m\cos(\omega t+\frac{2}{3}\pi)<br>\end{cases}<br>$$</p>
+<p>将上述三个式子代入公式(1)，可以得到</p>
+<p>$$<br>\begin{align}<br>    i&amp;&#x3D;k\sqrt{\frac{1}{2}\sum\limits_{cyc}(I_m\cos\omega t-I_m\cos(\omega t-\frac{2}{3}\pi))^2} \\<br>    &amp;&#x3D;k\sqrt{\frac{1}{2}I_m^2\sum\limits_{cyc}(-2\sin(\omega t-\frac{1}{3}\pi)\sin\frac{\pi}{3})^2} \\<br>    &amp;&#x3D;k\sqrt{\frac{1}{2}I_m^2\sum\limits_{cyc}3\sin^2(\omega t-\frac{\pi}{3})} \\<br>    &amp;&#x3D;k\sqrt{\frac{3}{2}I_m^2\sum\limits_{cyc}\frac{1-cos(2\omega t-\frac{2}{3}\pi)}{2}} \\<br>    &amp;&#x3D;k\sqrt{\frac{9}{4}I_m^2} \\<br>    &amp;&#x3D;\frac{3}{2}kI_m<br>\end{align}<br>$$</p>
+<p>因此，如果要使变换前后幅值相等，应该令$k&#x3D;\frac{2}{3}$</p>
+<h3 id="坐标变换"><a href="#坐标变换" class="headerlink" title="坐标变换"></a>坐标变换</h3><p>在得出了坐标变换的系数之后，就要对物理量进行坐标变换了，在叙述坐标变换的公式之前，应该先清楚坐标变换的目的</p>
+<p>在三相永磁同步电机中，如果直接对a,b,c三相进行控制，将会非常复杂，因为a,b,c三相之间会互相耦合，也就是互感不为零，这将给控制带来麻烦</p>
+<p>为此，我们希望先将a,b,c三相通过坐标变换变成两相，对两相进行控制，控制完成后再进行逆变换生成对应的三相控制量</p>
+<p>具体的部分可参看【永磁同步电机】</p>
+<p>坐标变换的类型主要有$abc-\alpha\beta 0,abc-dq0,abc-d_cq_c0$这么三种，具体定义参见下文，明白一种之后很容易就能举一反三，这里只给出$abc-\alpha\beta 0,abc-dq0$的公式</p>
+<h4 id="abc-alpha-beta-0"><a href="#abc-alpha-beta-0" class="headerlink" title="$abc-\alpha\beta 0$"></a>$abc-\alpha\beta 0$</h4><p>a,b,c是电机等效绕组的方向，$\alpha$方向与a轴重合，$\beta$方向超前$\alpha$方向90度，如图img3所示</p>
+<img src="/images/坐标变换/img3.png" alt="img3" width=50% height="50%">
+
+<p>其实这里的$\alpha\beta$坐标与上面计算$|\boldsymbol{i}|$时用的x，y坐标是一样的，所以有</p>
+<p>$$<br>\begin{cases}<br>    i_\alpha&#x3D;i_a-\frac{1}{2}i_b-\frac{1}{2}i_c \\<br>    i_\beta&#x3D;\frac{\sqrt{3}}{2}i_b-\frac{\sqrt{3}}{2}i_c<br>\end{cases}<br>$$</p>
+<p>这样我们能通过abc坐标系，算出$i_\alpha,i_\beta$的值，但是反过来却不成立</p>
+<p>如果$i_\alpha,i_\beta$的值确立，那么综合矢量就确定了，假设有一组$i_a,i_b,i_c$使得$\boldsymbol{i}&#x3D;\frac{2}{3}(i_a\boldsymbol{a}+i_b\boldsymbol{b}+i_c\boldsymbol{c})$成立</p>
+<p>由于$\boldsymbol{a}+\boldsymbol{b}+\boldsymbol{c}&#x3D;0$,$i_a+const,i_b+const,i_c+const$都是满足条件的值，这样就有无数组解，其中const是任意实数，因此还需要一条方程约束</p>
+<p>这里先给出方程，再证明为什么给出了这条方程，就能够完全确定$i_a,i_b,i_c$,方程如下</p>
+<p>$$<br>\begin{equation}<br>    i_0&#x3D;\frac{1}{3}(i_a+i_b+i_c)<br>\end{equation}<br>$$</p>
+<p>证明如下，上面说了，$i_\alpha,i_\beta$给定之后，综合矢量就完全确定了，作综合矢量关于$a,b,c$三轴的投影，并记为$i_a’,i_b’,i_c’$</p>
+<p>$$<br>\begin{align}<br>    i_a’&amp;&#x3D;\boldsymbol{i}\cdot \boldsymbol{a} \\<br>    &amp;&#x3D;\frac{2}{3}(i_a-\frac{1}{2}i_b-\frac{1}{2}i_c)<br>\end{align}<br>$$</p>
+<p>b，c相同理可得</p>
+<p>$$<br>i_b’&#x3D;\frac{2}{3}(i_b-\frac{1}{2}i_c-\frac{1}{2}i_a)<br>$$<br>$$<br>i_c’&#x3D;\frac{2}{3}(i_c-\frac{1}{2}i_a-\frac{1}{2}i_b)<br>$$</p>
+<p>可以发现$i_a&#x3D;i_a’+i_0,i_b&#x3D;i_b’+i_0,i_c&#x3D;i_c’+i_0$</p>
+<p>这就是说，只要再给定$i_0$，就可以完全推得$i_a,i_b,i_c$</p>
+<p>这个过程用矩阵表示如下</p>
+<p>$$<br>\begin{bmatrix}<br>    i_\alpha \\<br>    i_\beta \\<br>    i_0<br>\end{bmatrix}&#x3D;\frac{2}{3}<br>\begin{bmatrix}<br>    1 &amp; -\frac{1}{2} &amp; -\frac{1}{2} \\<br>    0 &amp; \frac{\sqrt{3}}{2} &amp; -\frac{\sqrt{3}}{2} \\<br>    \frac{1}{2} &amp; \frac{1}{2} &amp; \frac{1}{2}<br>\end{bmatrix}<br>\begin{bmatrix}<br>    i_a \\<br>    i_b \\<br>    i_c<br>\end{bmatrix}<br>$$</p>
+<p>定义</p>
+<p>$$<br>\begin{equation}<br>\boldsymbol{C}&#x3D;\frac{2}{3}<br>\begin{bmatrix}<br>    1 &amp; -\frac{1}{2} &amp; -\frac{1}{2} \\<br>    0 &amp; \frac{\sqrt{3}}{2} &amp; -\frac{\sqrt{3}}{2} \\<br>    \frac{1}{2} &amp; \frac{1}{2} &amp; \frac{1}{2}<br>\end{bmatrix}<br>\end{equation}<br>$$</p>
+<p>这里的$\boldsymbol{C}$就是变换矩阵，可以算得$|\boldsymbol{C}|\not &#x3D;{0}$，故$\boldsymbol{C}$存在逆矩阵</p>
+<p>逆矩阵可以通过纯粹的数学运算得出，也可以通过上述的物理意义得到</p>
+<p>$$<br>\begin{equation}<br>\boldsymbol{C}^{-1}&#x3D;<br>\begin{bmatrix}<br>    1 &amp; 0 &amp; 1 \\<br>    -\frac{1}{2} &amp; \frac{\sqrt{3}}{2} &amp; 1 \\<br>    -\frac{1}{2} &amp; -\frac{\sqrt{3}}{2} &amp; 1<br>\end{bmatrix}<br>\end{equation}<br>$$</p>
+<p>这样$abc-\alpha\beta 0$的正逆变换就都得到了</p>
+<h4 id="abc-dq0"><a href="#abc-dq0" class="headerlink" title="$abc-dq0$"></a>$abc-dq0$</h4><p>d,q轴的定义是以转子转速$\omega$旋转的坐标系，设$\theta$是d轴与q轴的夹角，如img4所示</p>
+<img src="/images/坐标变换/img4.png" alt="img4" width=50% height="50%">
+
+<p>这里的坐标变换与$\alpha\beta 0$的坐标变换完全类似，可以根据物理含义直接给出</p>
+<p>$$<br>\boldsymbol{C}&#x3D;\frac{2}{3}<br>\begin{bmatrix}<br>    \cos\theta &amp; \cos(\theta-\frac{2}{3}\pi) &amp; \cos(\theta+\frac{2}{3}\pi) \\<br>    -\sin\theta &amp; -\sin(\theta-\frac{2}{3}\pi) &amp; -\sin(\theta+\frac{2}{3}\pi) \\<br>    \frac{1}{2} &amp; \frac{1}{2} &amp; \frac{1}{2}<br>\end{bmatrix}<br>$$<br>$$<br>\boldsymbol{C}^{-1}&#x3D;<br>\begin{bmatrix}<br>    \cos\theta &amp; -\sin\theta &amp; 1 \\<br>    \cos(\theta-\frac{2}{3}\pi) &amp; -\sin(\theta-\frac{2}{3}\pi) &amp; 1 \\<br>    \cos(\theta+\frac{2}{3}\pi) &amp; -\sin(\theta+\frac{2}{3}\pi) &amp; 1<br>\end{bmatrix}<br>$$</p>
+<h4 id="abc-d-cq-c0"><a href="#abc-d-cq-c0" class="headerlink" title="$abc-d_cq_c0$"></a>$abc-d_cq_c0$</h4><p>$d_c,q_c$轴是以同步速旋转的坐标系，在方程上与$abc-dq0$是完全一样的，只不过$\frac{d\theta}{dt}&#x3D;\omega_c$为同步速而已</p>
+<!--
+## 恒功率变换
+
+对于恒功率变换，同样的，我们需要确定k的大小，恒功率变换的原则是变换前后功率相等，瞬态过程的关系式与恒相幅值变换是完全一样的，我们直接通过稳态过程求解k
+
+### 稳态过程
+
+设电压幅值为$U_m$，电流幅值为$I_m$，电流电压之间的相位差为$\phi$，则可以知道变换前的功率为
+
+$$
+P=3*\frac{U_m}{\sqrt{2}}*
+$$
+-->
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%9D%90%E6%A0%87%E5%8F%98%E6%8D%A2/" rel="tag"># 坐标变换</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/02/26/SVPWM/" rel="prev" title="SVPWM">
+                  <i class="fa fa-angle-left"></i> SVPWM
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments utterances-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Lark</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+<script class="next-config" data-name="utterances" type="application/json">{"enable":true,"repo":"LArkZY/LArkZY.github.io","issue_term":"title","theme":"preferred-color-scheme"}</script>
+<script src="/js/third-party/comments/utterances.js"></script>
+
+</body>
+</html>
