@@ -20,12 +20,12 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"larkzy.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.21.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="简介SVPWM(Space Vector Pulse Width Modulation)，即电压空间矢量调制，是一种PWM生成方法，其作用是在主电路中生成给定的电压信号，而不是电机控制方法，这里需要与电机矢量控制做一个区分。 SVPWM给定的是目标电压矢量，输出的是六个PWM波，这六个PWM波控制IGBT的通断，在主电路中生成三相PWM，三相PWM的基波合成起来就是目标电压矢量。 基本原理以如下图">
+    <meta name="description" content="简介SVPWM(Space Vector Pulse Width Modulation)，即电压空间矢量调制，是一种PWM生成方法，其作用是在主电路中生成给定的电压信号，而不是电机控制方法，这里需要与电机矢量控制做一个区分。 SVPWM给定的是目标电压矢量，输出的是六个PWM波，这六个PWM波控制IGBT的通断，在主电路中生成三相PWM，三相PWM的基波合成起来就是目标电压矢量。 基本原理假设电机">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SVPWM">
 <meta property="og:url" content="http://larkzy.github.io/2025/02/26/SVPWM/index.html">
 <meta property="og:site_name" content="Lac&#39;s blog">
-<meta property="og:description" content="简介SVPWM(Space Vector Pulse Width Modulation)，即电压空间矢量调制，是一种PWM生成方法，其作用是在主电路中生成给定的电压信号，而不是电机控制方法，这里需要与电机矢量控制做一个区分。 SVPWM给定的是目标电压矢量，输出的是六个PWM波，这六个PWM波控制IGBT的通断，在主电路中生成三相PWM，三相PWM的基波合成起来就是目标电压矢量。 基本原理以如下图">
+<meta property="og:description" content="简介SVPWM(Space Vector Pulse Width Modulation)，即电压空间矢量调制，是一种PWM生成方法，其作用是在主电路中生成给定的电压信号，而不是电机控制方法，这里需要与电机矢量控制做一个区分。 SVPWM给定的是目标电压矢量，输出的是六个PWM波，这六个PWM波控制IGBT的通断，在主电路中生成三相PWM，三相PWM的基波合成起来就是目标电压矢量。 基本原理假设电机">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://larkzy.github.io/images/SVPWM/img1.png">
 <meta property="og:image" content="http://larkzy.github.io/images/SVPWM/img2.png">
@@ -40,7 +40,7 @@
 <meta property="og:image" content="http://larkzy.github.io/images/SVPWM/img10.png">
 <meta property="og:image" content="http://larkzy.github.io/images/SVPWM/img11.png">
 <meta property="article:published_time" content="2025-02-26T12:45:00.000Z">
-<meta property="article:modified_time" content="2025-03-27T04:09:46.036Z">
+<meta property="article:modified_time" content="2025-06-08T05:08:53.978Z">
 <meta property="article:author" content="Lark">
 <meta property="article:tag" content="SVPWM">
 <meta property="article:tag" content="Simulink">
@@ -153,7 +153,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%80%E4%BB%8B"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86"><span class="nav-number">2.</span> <span class="nav-text">基本原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Simulink%E5%AE%9E%E7%8E%B0"><span class="nav-number">3.</span> <span class="nav-text">Simulink实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%B5%E5%8E%8B%E7%9F%A2%E9%87%8F%E5%8C%BA%E5%9D%97%E6%A3%80%E6%B5%8B%E6%A8%A1%E5%9D%97"><span class="nav-number">3.1.</span> <span class="nav-text">电压矢量区块检测模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#T-1-T-2-%E8%AE%A1%E7%AE%97%E6%A8%A1%E5%9D%97"><span class="nav-number">3.2.</span> <span class="nav-text">$T_1,T_2$计算模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PWM%E6%B3%A2%E7%94%9F%E6%88%90%E6%A8%A1%E5%9D%97"><span class="nav-number">3.3.</span> <span class="nav-text">PWM波生成模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">3.4.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%80%E4%BB%8B"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86"><span class="nav-number">2.</span> <span class="nav-text">基本原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Simulink%E5%AE%9E%E7%8E%B0"><span class="nav-number">3.</span> <span class="nav-text">Simulink实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%B5%E5%8E%8B%E7%9F%A2%E9%87%8F%E5%8C%BA%E5%9D%97%E6%A3%80%E6%B5%8B%E6%A8%A1%E5%9D%97"><span class="nav-number">3.1.</span> <span class="nav-text">电压矢量区块检测模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#T-1-T-2-%E8%AE%A1%E7%AE%97%E6%A8%A1%E5%9D%97"><span class="nav-number">3.2.</span> <span class="nav-text">$T_1,T_2$计算模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PWM%E6%B3%A2%E7%94%9F%E6%88%90%E6%A8%A1%E5%9D%97"><span class="nav-number">3.3.</span> <span class="nav-text">PWM波生成模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">3.4.</span> <span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E8%A7%92%E6%8E%A5%E6%83%85%E5%86%B5"><span class="nav-number">4.</span> <span class="nav-text">三角接情况</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -251,7 +251,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-03-27 12:09:46" itemprop="dateModified" datetime="2025-03-27T12:09:46+08:00">2025-03-27</time>
+      <time title="修改时间：2025-06-08 13:08:53" itemprop="dateModified" datetime="2025-06-08T13:08:53+08:00">2025-06-08</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -274,13 +274,13 @@
     
     <div class="post-body" itemprop="articleBody"><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>SVPWM(Space Vector Pulse Width Modulation)，即电压空间矢量调制，是一种PWM生成方法，其作用是在主电路中生成给定的电压信号，而不是电机控制方法，这里需要与电机矢量控制做一个区分。</p>
 <p>SVPWM给定的是目标电压矢量，输出的是六个PWM波，这六个PWM波控制IGBT的通断，在主电路中生成三相PWM，三相PWM的基波合成起来就是目标电压矢量。</p>
-<h2 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h2><p>以如下图所示的IGBT逆变器为例来进行说明</p>
+<h2 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h2><p>假设电机内部绕组接法为星形接法，以如下图所示的IGBT逆变器为例来进行说明</p>
 <img src="/images/SVPWM/img1.png" alt="img1" width=50% height=50%>
 
-<p>设$S_A&#x3D;1$代表A相上管通，$S_A&#x3D;0$代表A相下管通，$S_B,S_C$类似设定，则可以得到SVPWM的基本电压矢量为下图$u_0~u_7$所示</p>
+<p>设$S_A&#x3D;1$代表A相上管通，$S_A&#x3D;0$代表A相下管通，$S_B,S_C$类似设定，则可以得到SVPWM的基本电压矢量为下图$u_0 ~ u_7$所示</p>
 <img src="/images/SVPWM/img2.png" alt="img2" width=50% height=50%>
 
-<p>矢量的合成应该遵循相邻原则和平均值等效原则。设这六个区分别为$Ⅰ~Ⅵ$，假设现在目标电压矢量处在$Ⅰ$区，那么应该由基本电压矢量$u_1和u_2$合成。如果设开关周期时间为$T_0$，$u_1$作用时间为$t_1$，$u_2$作用时间为$t_2$，那么应该有</p>
+<p>矢量的合成应该遵循相邻原则和平均值等效原则。设这六个区分别为$Ⅰ ~ Ⅵ$，假设现在目标电压矢量处在$Ⅰ$区，那么应该由基本电压矢量$u_1和u_2$合成。如果设开关周期时间为$T_0$，$u_1$作用时间为$t_1$，$u_2$作用时间为$t_2$，那么应该有</p>
 <p>$$<br>T_0u_s&#x3D;t_1u_1+t_2u_2<br>$$</p>
 <p>根据三角形的正弦定理和余弦定理，就可以算出$t_1,t_2$的大小</p>
 <p>如果$t_1+t_2&lt;T_0$，多出来的时间就是零矢量的作用时间，$t_0&#x3D;T_0-t_1-t_2$</p>
@@ -428,6 +428,10 @@
 <h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>将所有模块联合起来，SVPWM的内部结构就如img11所示</p>
 <img src="/images/SVPWM/img11.png" alt="img11" width=50% height=50%>
 
+<h2 id="三角接情况"><a href="#三角接情况" class="headerlink" title="三角接情况"></a>三角接情况</h2><p>以上论述了电机绕组为星形接法时的情况，那么当绕组为三角形接法时情况会发生什么变化呢？</p>
+<p>事实上，基本原理并没有发生变化，只不过基本电压矢量旋转了30°，开关与电压矢量的对应关系发生了改变</p>
+<p>后续的电压矢量作用时间计算模块和PWM生成模块按照改变后的关系分别计算即可。</p>
+
     </div>
 
     
@@ -478,16 +482,6 @@
     </span>
     <span class="author" itemprop="copyrightHolder">Lark</span>
   </div>
-<div class="busuanzi-count">
-    <span class="post-meta-item" id="busuanzi_container_site_uv">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-user"></i>
-      </span>
-      <span class="site-uv" title="总访客量">
-        <span id="busuanzi_value_site_uv"></span>
-      </span>
-    </span>
-</div>
   <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
   </div>
 
@@ -525,7 +519,6 @@
 
 
   
-  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 
 

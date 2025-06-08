@@ -5,13 +5,13 @@
     <url>/2025/02/26/SVPWM/</url>
     <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>SVPWM(Space Vector Pulse Width Modulation)，即电压空间矢量调制，是一种PWM生成方法，其作用是在主电路中生成给定的电压信号，而不是电机控制方法，这里需要与电机矢量控制做一个区分。</p>
 <p>SVPWM给定的是目标电压矢量，输出的是六个PWM波，这六个PWM波控制IGBT的通断，在主电路中生成三相PWM，三相PWM的基波合成起来就是目标电压矢量。</p>
-<h2 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h2><p>以如下图所示的IGBT逆变器为例来进行说明</p>
+<h2 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h2><p>假设电机内部绕组接法为星形接法，以如下图所示的IGBT逆变器为例来进行说明</p>
 <img src="/images/SVPWM/img1.png" alt="img1" width=50% height=50%>
 
-<p>设$S_A&#x3D;1$代表A相上管通，$S_A&#x3D;0$代表A相下管通，$S_B,S_C$类似设定，则可以得到SVPWM的基本电压矢量为下图$u_0~u_7$所示</p>
+<p>设$S_A&#x3D;1$代表A相上管通，$S_A&#x3D;0$代表A相下管通，$S_B,S_C$类似设定，则可以得到SVPWM的基本电压矢量为下图$u_0 ~ u_7$所示</p>
 <img src="/images/SVPWM/img2.png" alt="img2" width=50% height=50%>
 
-<p>矢量的合成应该遵循相邻原则和平均值等效原则。设这六个区分别为$Ⅰ~Ⅵ$，假设现在目标电压矢量处在$Ⅰ$区，那么应该由基本电压矢量$u_1和u_2$合成。如果设开关周期时间为$T_0$，$u_1$作用时间为$t_1$，$u_2$作用时间为$t_2$，那么应该有</p>
+<p>矢量的合成应该遵循相邻原则和平均值等效原则。设这六个区分别为$Ⅰ ~ Ⅵ$，假设现在目标电压矢量处在$Ⅰ$区，那么应该由基本电压矢量$u_1和u_2$合成。如果设开关周期时间为$T_0$，$u_1$作用时间为$t_1$，$u_2$作用时间为$t_2$，那么应该有</p>
 <p>$$<br>T_0u_s&#x3D;t_1u_1+t_2u_2<br>$$</p>
 <p>根据三角形的正弦定理和余弦定理，就可以算出$t_1,t_2$的大小</p>
 <p>如果$t_1+t_2&lt;T_0$，多出来的时间就是零矢量的作用时间，$t_0&#x3D;T_0-t_1-t_2$</p>
@@ -158,6 +158,10 @@
 
 <h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>将所有模块联合起来，SVPWM的内部结构就如img11所示</p>
 <img src="/images/SVPWM/img11.png" alt="img11" width=50% height=50%>
+
+<h2 id="三角接情况"><a href="#三角接情况" class="headerlink" title="三角接情况"></a>三角接情况</h2><p>以上论述了电机绕组为星形接法时的情况，那么当绕组为三角形接法时情况会发生什么变化呢？</p>
+<p>事实上，基本原理并没有发生变化，只不过基本电压矢量旋转了30°，开关与电压矢量的对应关系发生了改变</p>
+<p>后续的电压矢量作用时间计算模块和PWM生成模块按照改变后的关系分别计算即可。</p>
 ]]></content>
       <categories>
         <category>Electrical Machines</category>
@@ -165,67 +169,6 @@
       <tags>
         <tag>SVPWM</tag>
         <tag>Simulink</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>书签</title>
-    <url>/2024/11/08/%E4%B9%A6%E7%AD%BE/</url>
-    <content><![CDATA[<h2 id="ZJU"><a href="#ZJU" class="headerlink" title="ZJU"></a>ZJU</h2><ul>
-<li><a href="https://courses.zju.edu.cn/user/index">学在浙大</a></li>
-<li><a href="http://tzzd.zju.edu.cn/">团在浙大</a></li>
-<li><a href="http://zdbk.zju.edu.cn/">教务网本</a></li>
-<li><a href="https://yjsy.zju.edu.cn/">教务网研</a></li>
-<li><a href="http://ms.zju.edu.cn/">正版软件</a></li>
-<li><a href="https://zjuers.com/rd?url=http://eta.zju.edu.cn/">ETA</a></li>
-<li><a href="http://cwcx.zju.edu.cn/WFManager/login.jsp">计财处</a></li>
-<li><a href="http://ee.office.zju.edu.cn/main.htm">浙大电院</a></li>
-<li><a href="https://www.nexushd.org/">NexusHD</a></li>
-</ul>
-<hr>
-<h2 id="学术"><a href="#学术" class="headerlink" title="学术"></a>学术</h2><ul>
-<li><a href="https://scholar.google.com/">谷歌学术</a></li>
-<li><a href="https://ieeexplore.ieee.org/Xplore/home.jsp">IEEE</a></li>
-<li><a href="https://www.webofscience.com/wos/alldb/basic-search">Web-of-Science</a></li>
-<li><a href="https://www.incopat.com/advancedSearch/simpleInit">专利检索</a></li>
-<li><a href="https://www.cnki.net/">知网</a></li>
-</ul>
-<hr>
-<h2 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h2><ul>
-<li><a href="https://github.com/">Github</a></li>
-<li><a href="https://chatgpt.com/">Chatgpt</a></li>
-<li><a href="https://chat.deepseek.com/">Deepseek</a></li>
-<li><a href="https://www.zjuers.com/">ZJUer轻首页</a></li>
-<li><a href="https://yinghezhinan.com/site/z-library/">Z-library</a></li>
-</ul>
-<hr>
-<h2 id="论坛"><a href="#论坛" class="headerlink" title="论坛"></a>论坛</h2><ul>
-<li><a href="https://www.cc98.org/">CC98</a></li>
-<li><a href="https://www.1point3acres.com/">一亩三分地</a></li>
-<li><a href="https://500px.com.cn/">500px</a></li>
-</ul>
-<hr>
-<h2 id="镜像网站"><a href="#镜像网站" class="headerlink" title="镜像网站"></a>镜像网站</h2><ul>
-<li><a href="https://mirrors.zju.edu.cn/">ZJU-Mirror</a></li>
-<li><a href="https://mirrors.tuna.tsinghua.edu.cn/">THU-Mirror</a></li>
-</ul>
-<hr>
-<h2 id="娱乐"><a href="#娱乐" class="headerlink" title="娱乐"></a>娱乐</h2><ul>
-<li><a href="https://www.bilibili.com/">Bilibili</a></li>
-<li><a href="https://www.huya.com/">虎牙</a></li>
-<li><a href="https://www.czzy77.com/">影视</a></li>
-<li><a href="https://www.mutedm.com/">动漫</a></li>
-</ul>
-<hr>
-<h2 id="TOEFL"><a href="#TOEFL" class="headerlink" title="TOEFL"></a>TOEFL</h2><ul>
-<li><a href="https://top.zhan.com/toefl/listen/alltpo.html">小站</a></li>
-</ul>
-]]></content>
-      <categories>
-        <category>Bookmarks</category>
-      </categories>
-      <tags>
-        <tag>Bookmarks</tag>
-        <tag>Resources</tag>
       </tags>
   </entry>
   <entry>
@@ -305,6 +248,67 @@ $$
       </categories>
       <tags>
         <tag>坐标变换</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>书签</title>
+    <url>/2024/11/08/%E4%B9%A6%E7%AD%BE/</url>
+    <content><![CDATA[<h2 id="ZJU"><a href="#ZJU" class="headerlink" title="ZJU"></a>ZJU</h2><ul>
+<li><a href="https://courses.zju.edu.cn/user/index">学在浙大</a></li>
+<li><a href="http://tzzd.zju.edu.cn/">团在浙大</a></li>
+<li><a href="http://zdbk.zju.edu.cn/">教务网本</a></li>
+<li><a href="https://yjsy.zju.edu.cn/">教务网研</a></li>
+<li><a href="http://ms.zju.edu.cn/">正版软件</a></li>
+<li><a href="https://zjuers.com/rd?url=http://eta.zju.edu.cn/">ETA</a></li>
+<li><a href="http://cwcx.zju.edu.cn/WFManager/login.jsp">计财处</a></li>
+<li><a href="http://ee.office.zju.edu.cn/main.htm">浙大电院</a></li>
+<li><a href="https://www.nexushd.org/">NexusHD</a></li>
+</ul>
+<hr>
+<h2 id="学术"><a href="#学术" class="headerlink" title="学术"></a>学术</h2><ul>
+<li><a href="https://scholar.google.com/">谷歌学术</a></li>
+<li><a href="https://ieeexplore.ieee.org/Xplore/home.jsp">IEEE</a></li>
+<li><a href="https://www.webofscience.com/wos/alldb/basic-search">Web-of-Science</a></li>
+<li><a href="https://www.incopat.com/advancedSearch/simpleInit">专利检索</a></li>
+<li><a href="https://www.cnki.net/">知网</a></li>
+</ul>
+<hr>
+<h2 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h2><ul>
+<li><a href="https://github.com/">Github</a></li>
+<li><a href="https://chatgpt.com/">Chatgpt</a></li>
+<li><a href="https://chat.deepseek.com/">Deepseek</a></li>
+<li><a href="https://www.zjuers.com/">ZJUer轻首页</a></li>
+<li><a href="https://yinghezhinan.com/site/z-library/">Z-library</a></li>
+</ul>
+<hr>
+<h2 id="论坛"><a href="#论坛" class="headerlink" title="论坛"></a>论坛</h2><ul>
+<li><a href="https://www.cc98.org/">CC98</a></li>
+<li><a href="https://www.1point3acres.com/">一亩三分地</a></li>
+<li><a href="https://500px.com.cn/">500px</a></li>
+</ul>
+<hr>
+<h2 id="镜像网站"><a href="#镜像网站" class="headerlink" title="镜像网站"></a>镜像网站</h2><ul>
+<li><a href="https://mirrors.zju.edu.cn/">ZJU-Mirror</a></li>
+<li><a href="https://mirrors.tuna.tsinghua.edu.cn/">THU-Mirror</a></li>
+</ul>
+<hr>
+<h2 id="娱乐"><a href="#娱乐" class="headerlink" title="娱乐"></a>娱乐</h2><ul>
+<li><a href="https://www.bilibili.com/">Bilibili</a></li>
+<li><a href="https://www.huya.com/">虎牙</a></li>
+<li><a href="https://www.czzy77.com/">影视</a></li>
+<li><a href="https://www.mutedm.com/">动漫</a></li>
+</ul>
+<hr>
+<h2 id="TOEFL"><a href="#TOEFL" class="headerlink" title="TOEFL"></a>TOEFL</h2><ul>
+<li><a href="https://top.zhan.com/toefl/listen/alltpo.html">小站</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>Bookmarks</category>
+      </categories>
+      <tags>
+        <tag>Bookmarks</tag>
+        <tag>Resources</tag>
       </tags>
   </entry>
   <entry>
