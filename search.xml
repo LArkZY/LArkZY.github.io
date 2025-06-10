@@ -164,7 +164,7 @@
 <p>后续的电压矢量作用时间计算模块和PWM生成模块按照改变后的关系分别计算即可。</p>
 ]]></content>
       <categories>
-        <category>Electrical Machines</category>
+        <category>电机控制</category>
       </categories>
       <tags>
         <tag>SVPWM</tag>
@@ -172,82 +172,182 @@
       </tags>
   </entry>
   <entry>
-    <title>坐标变换</title>
-    <url>/2025/03/11/%E5%9D%90%E6%A0%87%E5%8F%98%E6%8D%A2/</url>
-    <content><![CDATA[<h2 id="基本定义"><a href="#基本定义" class="headerlink" title="基本定义"></a>基本定义</h2><p>坐标变换这种方法在电网络、电力电子、电机建模与控制等很多领域都有应用，本文章以三相永磁同步电机为背景，主要讨论三相与两相间的转化</p>
-<p>对于三相永磁同步电机而言，定子绕组可以等效为a,b,c三相绕组，假设这三相绕组的方向如img1所示</p>
-<img src="/images/坐标变换/img1.png" alt="img1" width=50% height="50%">
+    <title>latex语法</title>
+    <url>/2025/06/10/latex%E8%AF%AD%E6%B3%95/</url>
+    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>最早接触到latex是创建这个网站的时候，因为我的文章中涉及大量的专业公式，而用latex处理会比较方便。再之后，就会发现latex在简历制作、毕业论文写作方面都有很多的应用，在文章排版的方面具有天然的优势，个人写作的时候非常舒适。</p>
+<p>但当然latex同样具有缺点，最明显的缺点是团队协作性，如果遇到一个需要团队合作完成的项目文书，使用latex编辑将导致其他团队成员不好进行批注，并且latex具有一定门槛，部分专业的人员可能对latex并不熟练，因此直接修改源代码也不是很方便。还有一个方法是用latex生成PDF，在将PDF转为word，但此方法bug较多，且不如直接使用word进行编辑。</p>
+<p>总而言之，在某些应用场景下，就编写本网站博文中的专业公式时，latex是更为方便的工具。现将在此过程中常用到的一些语法汇总如下，方便查阅。</p>
+<h2 id="特殊符号"><a href="#特殊符号" class="headerlink" title="特殊符号"></a>特殊符号</h2><h3 id="希腊字母"><a href="#希腊字母" class="headerlink" title="希腊字母"></a>希腊字母</h3><table>
+<thead>
+<tr>
+<th>字母</th>
+<th>代码</th>
+<th>字母</th>
+<th>代码</th>
+<th>字母</th>
+<th>代码</th>
+<th>字母</th>
+<th>代码</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>$\alpha$</td>
+<td>\alpha</td>
+<td>$\beta$</td>
+<td>\beta</td>
+<td>$\theta$</td>
+<td>\theta</td>
+<td>$\gamma$</td>
+<td>\gamma</td>
+</tr>
+<tr>
+<td>$\pi$</td>
+<td>\pi</td>
+<td>$\phi$</td>
+<td>\phi</td>
+<td>$\Phi$</td>
+<td>\Phi</td>
+<td>$\varphi$</td>
+<td>\varphi</td>
+</tr>
+<tr>
+<td>$\mu$</td>
+<td>\mu</td>
+<td>$\sigma$</td>
+<td>\sigma</td>
+<td>$\psi$</td>
+<td>\psi</td>
+<td>$\Psi$</td>
+<td>\Psi</td>
+</tr>
+<tr>
+<td>$\tau$</td>
+<td>\tau</td>
+<td>$\Delta$</td>
+<td>\Delta</td>
+<td>$\omega$</td>
+<td>\omega</td>
+<td>$\varepsilon$</td>
+<td>\varepsilon</td>
+</tr>
+</tbody></table>
+<p>大写首字母代表大写符号，小写首字母代表小写符号</p>
+<h3 id="特殊格式"><a href="#特殊格式" class="headerlink" title="特殊格式"></a>特殊格式</h3><table>
+<thead>
+<tr>
+<th>样式</th>
+<th>代码</th>
+<th>样式</th>
+<th>代码</th>
+<th>样式</th>
+<th>代码</th>
+<th>样式</th>
+<th>代码</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>$\hat{a}$</td>
+<td>\hat{a}</td>
+<td>$\tilde{a}$</td>
+<td>\tilde{a}</td>
+<td>$\dot{a}$</td>
+<td>\dot{a}</td>
+<td>$\ddot{a}$</td>
+<td>\ddot{a}</td>
+</tr>
+<tr>
+<td>$\bar{a}$</td>
+<td>\bar{a}</td>
+<td>$\vec{a}$</td>
+<td>\vec{a}</td>
+<td>$\widehat{A}$</td>
+<td>\widehat{A}</td>
+<td>$\widetilde{A}$</td>
+<td>\widetilde{A}</td>
+</tr>
+</tbody></table>
+<h3 id="特殊运算符"><a href="#特殊运算符" class="headerlink" title="特殊运算符"></a>特殊运算符</h3><table>
+<thead>
+<tr>
+<th>样式</th>
+<th>代码</th>
+<th>样式</th>
+<th>代码</th>
+<th>样式</th>
+<th>代码</th>
+<th>样式</th>
+<th>代码</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>$\sum$</td>
+<td>\sum</td>
+<td>$\prod$</td>
+<td>\prod</td>
+<td>$\int$</td>
+<td>\int</td>
+<td>$\oint$</td>
+<td>\oint</td>
+</tr>
+</tbody></table>
+<h2 id="格式语法"><a href="#格式语法" class="headerlink" title="格式语法"></a>格式语法</h2><h3 id="方程组"><a href="#方程组" class="headerlink" title="方程组"></a>方程组</h3><figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\begin</span>&#123;cases&#125;</span><br><span class="line">    X=1 <span class="keyword">\\</span><span class="keyword">\\</span></span><br><span class="line">    Y=2</span><br><span class="line"><span class="keyword">\end</span>&#123;cases&#125;</span><br></pre></td></tr></table></figure>
 
-<p>对于这三相绕组的任意一个物理量，比如电流，定义</p>
-<p>$$<br>\begin{equation}<br>    \boldsymbol{i_a}&#x3D;i_a\boldsymbol{a},\boldsymbol{i_b}&#x3D;i_b\boldsymbol{b},\boldsymbol{i_c}&#x3D;i_c\boldsymbol{c}<br>\end{equation}<br>$$</p>
-<p>需要注意的是，这里的$i_a,i_b,i_c$代表的是电流的大小，并且代表的是瞬态过程</p>
-<h2 id="恒相幅值变换"><a href="#恒相幅值变换" class="headerlink" title="恒相幅值变换"></a>恒相幅值变换</h2><p>定义综合矢量$\boldsymbol{i}&#x3D;k(\boldsymbol{i_a}+\boldsymbol{i_b}+\boldsymbol{i_c})$，这里的k是一个待定的系数</p>
-<p>由于是恒相幅值变换，我们的目标是在稳态过程下，综合矢量的幅值等于a，b，c三相的幅值</p>
-<p>本文先通过瞬态过程的推导得出公式，因为稳态过程就是瞬态过程的一个特例，所以可以直接代入公式，解得k的值</p>
-<h3 id="瞬态过程"><a href="#瞬态过程" class="headerlink" title="瞬态过程"></a>瞬态过程</h3><p>要计算综合矢量的幅值，可以建立x-y坐标系，假设如图img2所示</p>
-<img src="/images/坐标变换/img2.png" alt="img2" width=50% height="50%">
+<p>上述代码效果如下</p>
+<p>$$<br>\begin{cases}<br>    X&#x3D;1 \\<br>    Y&#x3D;2<br>\end{cases}<br>$$</p>
+<p>其中，<code>\begin&#123;cases&#125;</code>和<code>\end&#123;cases&#125;</code>是声明一个方程组模块，<code>\\\\</code>是换行，为了获得更好的兼容性，推荐换行使用<code>\\\\</code>而不是<code>\\</code></p>
+<h3 id="矩阵"><a href="#矩阵" class="headerlink" title="矩阵"></a>矩阵</h3><p>在latex中生成矩阵可以通过关键字<code>matrix</code>生成，也可以使用<code>array</code>生成</p>
+<p><code>matrix</code>是latex自带的矩阵关键字，下面展示其效果</p>
+<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\begin</span>&#123;matrix&#125;</span><br><span class="line">    a <span class="built_in">&amp;</span> b <span class="keyword">\\</span><span class="keyword">\\</span></span><br><span class="line">    c <span class="built_in">&amp;</span> d</span><br><span class="line"><span class="keyword">\end</span>&#123;matrix&#125;</span><br></pre></td></tr></table></figure>
 
-<p>容易得到</p>
-<p>$$<br>\begin{cases}<br>    i_x&#x3D;k(i_a-\frac{1}{2}i_b-\frac{1}{2}i_c) \\<br>    i_y&#x3D;k(\frac{\sqrt{3}}{2}i_b-\frac{\sqrt{3}}{2}i_c)<br>\end{cases} \\<br>$$<br>$$<br>\begin{equation}<br>i&#x3D;|\boldsymbol{i}|&#x3D;k\sqrt{i_x^2+i_y^2}&#x3D;k\sqrt{\frac{1}{2}\sum\limits_{cyc}(i_a-i_b)^2}(1)<br>\end{equation}<br>$$</p>
-<h3 id="稳态过程"><a href="#稳态过程" class="headerlink" title="稳态过程"></a>稳态过程</h3><p>对于稳态过程，可以假设三相是相位分别相差$\frac{2}{3}\pi$，且幅值完全相同的正弦波，即</p>
-<p>$$<br>\begin{cases}<br>    i_a&#x3D;I_m\cos(\omega t) \\<br>    i_b&#x3D;I_m\cos(\omega t-\frac{2}{3}\pi) \\<br>    i_c&#x3D;I_m\cos(\omega t+\frac{2}{3}\pi)<br>\end{cases}<br>$$</p>
-<p>将上述三个式子代入公式(1)，可以得到</p>
-<p>$$<br>\begin{align}<br>    i&amp;&#x3D;k\sqrt{\frac{1}{2}\sum\limits_{cyc}(I_m\cos\omega t-I_m\cos(\omega t-\frac{2}{3}\pi))^2} \\<br>    &amp;&#x3D;k\sqrt{\frac{1}{2}I_m^2\sum\limits_{cyc}(-2\sin(\omega t-\frac{1}{3}\pi)\sin\frac{\pi}{3})^2} \\<br>    &amp;&#x3D;k\sqrt{\frac{1}{2}I_m^2\sum\limits_{cyc}3\sin^2(\omega t-\frac{\pi}{3})} \\<br>    &amp;&#x3D;k\sqrt{\frac{3}{2}I_m^2\sum\limits_{cyc}\frac{1-cos(2\omega t-\frac{2}{3}\pi)}{2}} \\<br>    &amp;&#x3D;k\sqrt{\frac{9}{4}I_m^2} \\<br>    &amp;&#x3D;\frac{3}{2}kI_m<br>\end{align}<br>$$</p>
-<p>因此，如果要使变换前后幅值相等，应该令$k&#x3D;\frac{2}{3}$</p>
-<h3 id="坐标变换"><a href="#坐标变换" class="headerlink" title="坐标变换"></a>坐标变换</h3><p>在得出了坐标变换的系数之后，就要对物理量进行坐标变换了，在叙述坐标变换的公式之前，应该先清楚坐标变换的目的</p>
-<p>在三相永磁同步电机中，如果直接对a,b,c三相进行控制，将会非常复杂，因为a,b,c三相之间会互相耦合，也就是互感不为零，这将给控制带来麻烦</p>
-<p>为此，我们希望先将a,b,c三相通过坐标变换变成两相，对两相进行控制，控制完成后再进行逆变换生成对应的三相控制量</p>
-<p>具体的部分可参看【永磁同步电机】</p>
-<p>坐标变换的类型主要有$abc-\alpha\beta 0,abc-dq0,abc-d_cq_c0$这么三种，具体定义参见下文，明白一种之后很容易就能举一反三，这里只给出$abc-\alpha\beta 0,abc-dq0$的公式</p>
-<h4 id="abc-alpha-beta-0"><a href="#abc-alpha-beta-0" class="headerlink" title="$abc-\alpha\beta 0$"></a>$abc-\alpha\beta 0$</h4><p>a,b,c是电机等效绕组的方向，$\alpha$方向与a轴重合，$\beta$方向超前$\alpha$方向90度，如图img3所示</p>
-<img src="/images/坐标变换/img3.png" alt="img3" width=50% height="50%">
+<p>$$<br>\begin{matrix}<br>    a &amp; b \\<br>    c &amp; d<br>\end{matrix}<br>$$</p>
+<p>其中<code>matrix</code>生成的是不带括号的矩阵，latex给出了带括号的关键字</p>
+<table>
+<thead>
+<tr>
+<th>样式</th>
+<th>关键字</th>
+<th>样式</th>
+<th>关键字</th>
+<th>样式</th>
+<th>关键字</th>
+<th>样式</th>
+<th>关键字</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>中括号</td>
+<td>bmatrix</td>
+<td>小括号</td>
+<td>pmatrix</td>
+<td>大括号</td>
+<td>Bmatrix</td>
+<td>行列式</td>
+<td>vmatrix</td>
+</tr>
+</tbody></table>
+<p>例如，如果我想使用中括号，那么只需要将matrix替换为bmatrix，展示如下</p>
+<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\begin</span>&#123;bmatrix&#125;</span><br><span class="line">    a <span class="built_in">&amp;</span> b <span class="keyword">\\</span><span class="keyword">\\</span></span><br><span class="line">    c <span class="built_in">&amp;</span> d</span><br><span class="line"><span class="keyword">\end</span>&#123;bmatrix&#125;</span><br></pre></td></tr></table></figure>
 
-<p>其实这里的$\alpha\beta$坐标与上面计算$|\boldsymbol{i}|$时用的x，y坐标是一样的，所以有</p>
-<p>$$<br>\begin{cases}<br>    i_\alpha&#x3D;i_a-\frac{1}{2}i_b-\frac{1}{2}i_c \\<br>    i_\beta&#x3D;\frac{\sqrt{3}}{2}i_b-\frac{\sqrt{3}}{2}i_c<br>\end{cases}<br>$$</p>
-<p>这样我们能通过abc坐标系，算出$i_\alpha,i_\beta$的值，但是反过来却不成立</p>
-<p>如果$i_\alpha,i_\beta$的值确立，那么综合矢量就确定了，假设有一组$i_a,i_b,i_c$使得$\boldsymbol{i}&#x3D;\frac{2}{3}(i_a\boldsymbol{a}+i_b\boldsymbol{b}+i_c\boldsymbol{c})$成立</p>
-<p>由于$\boldsymbol{a}+\boldsymbol{b}+\boldsymbol{c}&#x3D;0$,$i_a+const,i_b+const,i_c+const$都是满足条件的值，这样就有无数组解，其中const是任意实数，因此还需要一条方程约束</p>
-<p>这里先给出方程，再证明为什么给出了这条方程，就能够完全确定$i_a,i_b,i_c$,方程如下</p>
-<p>$$<br>\begin{equation}<br>    i_0&#x3D;\frac{1}{3}(i_a+i_b+i_c)<br>\end{equation}<br>$$</p>
-<p>证明如下，上面说了，$i_\alpha,i_\beta$给定之后，综合矢量就完全确定了，作综合矢量关于$a,b,c$三轴的投影，并记为$i_a’,i_b’,i_c’$</p>
-<p>$$<br>\begin{align}<br>    i_a’&amp;&#x3D;\boldsymbol{i}\cdot \boldsymbol{a} \\<br>    &amp;&#x3D;\frac{2}{3}(i_a-\frac{1}{2}i_b-\frac{1}{2}i_c)<br>\end{align}<br>$$</p>
-<p>b，c相同理可得</p>
-<p>$$<br>i_b’&#x3D;\frac{2}{3}(i_b-\frac{1}{2}i_c-\frac{1}{2}i_a)<br>$$<br>$$<br>i_c’&#x3D;\frac{2}{3}(i_c-\frac{1}{2}i_a-\frac{1}{2}i_b)<br>$$</p>
-<p>可以发现$i_a&#x3D;i_a’+i_0,i_b&#x3D;i_b’+i_0,i_c&#x3D;i_c’+i_0$</p>
-<p>这就是说，只要再给定$i_0$，就可以完全推得$i_a,i_b,i_c$</p>
-<p>这个过程用矩阵表示如下</p>
-<p>$$<br>\begin{bmatrix}<br>    i_\alpha \\<br>    i_\beta \\<br>    i_0<br>\end{bmatrix}&#x3D;\frac{2}{3}<br>\begin{bmatrix}<br>    1 &amp; -\frac{1}{2} &amp; -\frac{1}{2} \\<br>    0 &amp; \frac{\sqrt{3}}{2} &amp; -\frac{\sqrt{3}}{2} \\<br>    \frac{1}{2} &amp; \frac{1}{2} &amp; \frac{1}{2}<br>\end{bmatrix}<br>\begin{bmatrix}<br>    i_a \\<br>    i_b \\<br>    i_c<br>\end{bmatrix}<br>$$</p>
-<p>定义</p>
-<p>$$<br>\begin{equation}<br>\boldsymbol{C}&#x3D;\frac{2}{3}<br>\begin{bmatrix}<br>    1 &amp; -\frac{1}{2} &amp; -\frac{1}{2} \\<br>    0 &amp; \frac{\sqrt{3}}{2} &amp; -\frac{\sqrt{3}}{2} \\<br>    \frac{1}{2} &amp; \frac{1}{2} &amp; \frac{1}{2}<br>\end{bmatrix}<br>\end{equation}<br>$$</p>
-<p>这里的$\boldsymbol{C}$就是变换矩阵，可以算得$|\boldsymbol{C}|\not &#x3D;{0}$，故$\boldsymbol{C}$存在逆矩阵</p>
-<p>逆矩阵可以通过纯粹的数学运算得出，也可以通过上述的物理意义得到</p>
-<p>$$<br>\begin{equation}<br>\boldsymbol{C}^{-1}&#x3D;<br>\begin{bmatrix}<br>    1 &amp; 0 &amp; 1 \\<br>    -\frac{1}{2} &amp; \frac{\sqrt{3}}{2} &amp; 1 \\<br>    -\frac{1}{2} &amp; -\frac{\sqrt{3}}{2} &amp; 1<br>\end{bmatrix}<br>\end{equation}<br>$$</p>
-<p>这样$abc-\alpha\beta 0$的正逆变换就都得到了</p>
-<h4 id="abc-dq0"><a href="#abc-dq0" class="headerlink" title="$abc-dq0$"></a>$abc-dq0$</h4><p>d,q轴的定义是以转子转速$\omega$旋转的坐标系，设$\theta$是d轴与q轴的夹角，如img4所示</p>
-<img src="/images/坐标变换/img4.png" alt="img4" width=50% height="50%">
+<p>$$<br>\begin{bmatrix}<br>    a &amp; b \\<br>    c &amp; d<br>\end{bmatrix}<br>$$</p>
+<p>然而，有时会遇到更复杂的情况，比如说需要对矩阵进行分块，这时候<code>matrix</code>可能就不再好用了，需要用到<code>array</code></p>
+<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\left</span>(</span><br><span class="line"><span class="keyword">\begin</span>&#123;array&#125;&#123;cc&#125;</span><br><span class="line">    a <span class="built_in">&amp;</span> b <span class="keyword">\\</span><span class="keyword">\\</span></span><br><span class="line">    c <span class="built_in">&amp;</span> d</span><br><span class="line"><span class="keyword">\end</span>&#123;array&#125;</span><br><span class="line"><span class="keyword">\right</span>)</span><br></pre></td></tr></table></figure>
 
-<p>这里的坐标变换与$\alpha\beta 0$的坐标变换完全类似，可以根据物理含义直接给出</p>
-<p>$$<br>\boldsymbol{C}&#x3D;\frac{2}{3}<br>\begin{bmatrix}<br>    \cos\theta &amp; \cos(\theta-\frac{2}{3}\pi) &amp; \cos(\theta+\frac{2}{3}\pi) \\<br>    -\sin\theta &amp; -\sin(\theta-\frac{2}{3}\pi) &amp; -\sin(\theta+\frac{2}{3}\pi) \\<br>    \frac{1}{2} &amp; \frac{1}{2} &amp; \frac{1}{2}<br>\end{bmatrix}<br>$$<br>$$<br>\boldsymbol{C}^{-1}&#x3D;<br>\begin{bmatrix}<br>    \cos\theta &amp; -\sin\theta &amp; 1 \\<br>    \cos(\theta-\frac{2}{3}\pi) &amp; -\sin(\theta-\frac{2}{3}\pi) &amp; 1 \\<br>    \cos(\theta+\frac{2}{3}\pi) &amp; -\sin(\theta+\frac{2}{3}\pi) &amp; 1<br>\end{bmatrix}<br>$$</p>
-<h4 id="abc-d-cq-c0"><a href="#abc-d-cq-c0" class="headerlink" title="$abc-d_cq_c0$"></a>$abc-d_cq_c0$</h4><p>$d_c,q_c$轴是以同步速旋转的坐标系，在方程上与$abc-dq0$是完全一样的，只不过$\frac{d\theta}{dt}&#x3D;\omega_c$为同步速而已</p>
-<!--
-## 恒功率变换
+<p>$$<br>\left(<br>\begin{array}{cc}<br>    a &amp; b \\<br>    c &amp; d<br>\end{array}<br>\right)<br>$$</p>
+<p>上面展示了<code>array</code>的基础用法，一个<code>c</code>代表一列，几个<code>c</code>代表几列，<code>\left(</code>和<code>\right)</code>代表自动适应大小的左右括号</p>
+<p>如果需要加竖线，只需要在<code>c</code>之间打一个竖线即可，实线是<code>|</code>，虚线是<code>:</code>，例如</p>
+<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\left</span>(</span><br><span class="line"><span class="keyword">\begin</span>&#123;array&#125;&#123;c:c&#125;</span><br><span class="line">    a <span class="built_in">&amp;</span> b <span class="keyword">\\</span><span class="keyword">\\</span></span><br><span class="line">    c <span class="built_in">&amp;</span> d</span><br><span class="line"><span class="keyword">\end</span>&#123;array&#125;</span><br><span class="line"><span class="keyword">\right</span>)</span><br></pre></td></tr></table></figure>
 
-对于恒功率变换，同样的，我们需要确定k的大小，恒功率变换的原则是变换前后功率相等，瞬态过程的关系式与恒相幅值变换是完全一样的，我们直接通过稳态过程求解k
+<p>$$<br>\left(<br>\begin{array}{c:c}<br>    a &amp; b \\<br>    c &amp; d<br>\end{array}<br>\right)<br>$$</p>
+<p>如果需要加横线，需要在对应的行后加一段代码，实线是<code>\hline</code>，虚线是<code>\hdashline</code></p>
+<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="keyword">\left</span>(</span><br><span class="line"><span class="keyword">\begin</span>&#123;array&#125;&#123;cc&#125;</span><br><span class="line">    a <span class="built_in">&amp;</span> b <span class="keyword">\\</span><span class="keyword">\\</span> <span class="keyword">\hline</span></span><br><span class="line">    c <span class="built_in">&amp;</span> d</span><br><span class="line"><span class="keyword">\end</span>&#123;array&#125;</span><br><span class="line"><span class="keyword">\right</span>)</span><br></pre></td></tr></table></figure>
 
-### 稳态过程
-
-设电压幅值为$U_m$，电流幅值为$I_m$，电流电压之间的相位差为$\phi$，则可以知道变换前的功率为
-
-$$
-P=3*\frac{U_m}{\sqrt{2}}*
-$$
--->
+<p>$$<br>\left(<br>\begin{array}{cc}<br>    a &amp; b \\ \hline<br>    c &amp; d<br>\end{array}<br>\right)<br>$$</p>
 ]]></content>
       <categories>
-        <category>Electrical Machines</category>
+        <category>CS</category>
       </categories>
       <tags>
-        <tag>坐标变换</tag>
+        <tag>latex</tag>
       </tags>
   </entry>
   <entry>
@@ -304,11 +404,11 @@ $$
 </ul>
 ]]></content>
       <categories>
-        <category>Bookmarks</category>
+        <category>书签</category>
       </categories>
       <tags>
-        <tag>Bookmarks</tag>
-        <tag>Resources</tag>
+        <tag>书签</tag>
+        <tag>资源</tag>
       </tags>
   </entry>
   <entry>
@@ -445,11 +545,90 @@ $$
 <p>本章当中仅仅涉及了一般化电机的内容，对于直流电机、异步电机、同步电机，实际上可以通过坐标变换进行转化，后续有机会将继续讨论</p>
 ]]></content>
       <categories>
-        <category>Electrical Machines</category>
+        <category>电机控制</category>
       </categories>
       <tags>
-        <tag>Modeling</tag>
+        <tag>电机建模</tag>
         <tag>一般化电机</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>坐标变换</title>
+    <url>/2025/03/11/%E5%9D%90%E6%A0%87%E5%8F%98%E6%8D%A2/</url>
+    <content><![CDATA[<h2 id="基本定义"><a href="#基本定义" class="headerlink" title="基本定义"></a>基本定义</h2><p>坐标变换这种方法在电网络、电力电子、电机建模与控制等很多领域都有应用，本文章以三相永磁同步电机为背景，主要讨论三相与两相间的转化</p>
+<p>对于三相永磁同步电机而言，定子绕组可以等效为a,b,c三相绕组，假设这三相绕组的方向如img1所示</p>
+<img src="/images/坐标变换/img1.png" alt="img1" width=50% height="50%">
+
+<p>对于这三相绕组的任意一个物理量，比如电流，定义</p>
+<p>$$<br>\begin{equation}<br>    \boldsymbol{i_a}&#x3D;i_a\boldsymbol{a},\boldsymbol{i_b}&#x3D;i_b\boldsymbol{b},\boldsymbol{i_c}&#x3D;i_c\boldsymbol{c}<br>\end{equation}<br>$$</p>
+<p>需要注意的是，这里的$i_a,i_b,i_c$代表的是电流的大小，并且代表的是瞬态过程</p>
+<h2 id="恒相幅值变换"><a href="#恒相幅值变换" class="headerlink" title="恒相幅值变换"></a>恒相幅值变换</h2><p>定义综合矢量$\boldsymbol{i}&#x3D;k(\boldsymbol{i_a}+\boldsymbol{i_b}+\boldsymbol{i_c})$，这里的k是一个待定的系数</p>
+<p>由于是恒相幅值变换，我们的目标是在稳态过程下，综合矢量的幅值等于a，b，c三相的幅值</p>
+<p>本文先通过瞬态过程的推导得出公式，因为稳态过程就是瞬态过程的一个特例，所以可以直接代入公式，解得k的值</p>
+<h3 id="瞬态过程"><a href="#瞬态过程" class="headerlink" title="瞬态过程"></a>瞬态过程</h3><p>要计算综合矢量的幅值，可以建立x-y坐标系，假设如图img2所示</p>
+<img src="/images/坐标变换/img2.png" alt="img2" width=50% height="50%">
+
+<p>容易得到</p>
+<p>$$<br>\begin{cases}<br>    i_x&#x3D;k(i_a-\frac{1}{2}i_b-\frac{1}{2}i_c) \\<br>    i_y&#x3D;k(\frac{\sqrt{3}}{2}i_b-\frac{\sqrt{3}}{2}i_c)<br>\end{cases} \\<br>$$<br>$$<br>\begin{equation}<br>i&#x3D;|\boldsymbol{i}|&#x3D;k\sqrt{i_x^2+i_y^2}&#x3D;k\sqrt{\frac{1}{2}\sum\limits_{cyc}(i_a-i_b)^2}(1)<br>\end{equation}<br>$$</p>
+<h3 id="稳态过程"><a href="#稳态过程" class="headerlink" title="稳态过程"></a>稳态过程</h3><p>对于稳态过程，可以假设三相是相位分别相差$\frac{2}{3}\pi$，且幅值完全相同的正弦波，即</p>
+<p>$$<br>\begin{cases}<br>    i_a&#x3D;I_m\cos(\omega t) \\<br>    i_b&#x3D;I_m\cos(\omega t-\frac{2}{3}\pi) \\<br>    i_c&#x3D;I_m\cos(\omega t+\frac{2}{3}\pi)<br>\end{cases}<br>$$</p>
+<p>将上述三个式子代入公式(1)，可以得到</p>
+<p>$$<br>\begin{align}<br>    i&amp;&#x3D;k\sqrt{\frac{1}{2}\sum\limits_{cyc}(I_m\cos\omega t-I_m\cos(\omega t-\frac{2}{3}\pi))^2} \\<br>    &amp;&#x3D;k\sqrt{\frac{1}{2}I_m^2\sum\limits_{cyc}(-2\sin(\omega t-\frac{1}{3}\pi)\sin\frac{\pi}{3})^2} \\<br>    &amp;&#x3D;k\sqrt{\frac{1}{2}I_m^2\sum\limits_{cyc}3\sin^2(\omega t-\frac{\pi}{3})} \\<br>    &amp;&#x3D;k\sqrt{\frac{3}{2}I_m^2\sum\limits_{cyc}\frac{1-cos(2\omega t-\frac{2}{3}\pi)}{2}} \\<br>    &amp;&#x3D;k\sqrt{\frac{9}{4}I_m^2} \\<br>    &amp;&#x3D;\frac{3}{2}kI_m<br>\end{align}<br>$$</p>
+<p>因此，如果要使变换前后幅值相等，应该令$k&#x3D;\frac{2}{3}$</p>
+<h3 id="坐标变换"><a href="#坐标变换" class="headerlink" title="坐标变换"></a>坐标变换</h3><p>在得出了坐标变换的系数之后，就要对物理量进行坐标变换了，在叙述坐标变换的公式之前，应该先清楚坐标变换的目的</p>
+<p>在三相永磁同步电机中，如果直接对a,b,c三相进行控制，将会非常复杂，因为a,b,c三相之间会互相耦合，也就是互感不为零，这将给控制带来麻烦</p>
+<p>为此，我们希望先将a,b,c三相通过坐标变换变成两相，对两相进行控制，控制完成后再进行逆变换生成对应的三相控制量</p>
+<p>具体的部分可参看【永磁同步电机】</p>
+<p>坐标变换的类型主要有$abc-\alpha\beta 0,abc-dq0,abc-d_cq_c0$这么三种，具体定义参见下文，明白一种之后很容易就能举一反三，这里只给出$abc-\alpha\beta 0,abc-dq0$的公式</p>
+<h4 id="abc-alpha-beta-0"><a href="#abc-alpha-beta-0" class="headerlink" title="$abc-\alpha\beta 0$"></a>$abc-\alpha\beta 0$</h4><p>a,b,c是电机等效绕组的方向，$\alpha$方向与a轴重合，$\beta$方向超前$\alpha$方向90度，如图img3所示</p>
+<img src="/images/坐标变换/img3.png" alt="img3" width=50% height="50%">
+
+<p>其实这里的$\alpha\beta$坐标与上面计算$|\boldsymbol{i}|$时用的x，y坐标是一样的，所以有</p>
+<p>$$<br>\begin{cases}<br>    i_\alpha&#x3D;i_a-\frac{1}{2}i_b-\frac{1}{2}i_c \\<br>    i_\beta&#x3D;\frac{\sqrt{3}}{2}i_b-\frac{\sqrt{3}}{2}i_c<br>\end{cases}<br>$$</p>
+<p>这样我们能通过abc坐标系，算出$i_\alpha,i_\beta$的值，但是反过来却不成立</p>
+<p>如果$i_\alpha,i_\beta$的值确立，那么综合矢量就确定了，假设有一组$i_a,i_b,i_c$使得$\boldsymbol{i}&#x3D;\frac{2}{3}(i_a\boldsymbol{a}+i_b\boldsymbol{b}+i_c\boldsymbol{c})$成立</p>
+<p>由于$\boldsymbol{a}+\boldsymbol{b}+\boldsymbol{c}&#x3D;0$,$i_a+const,i_b+const,i_c+const$都是满足条件的值，这样就有无数组解，其中const是任意实数，因此还需要一条方程约束</p>
+<p>这里先给出方程，再证明为什么给出了这条方程，就能够完全确定$i_a,i_b,i_c$,方程如下</p>
+<p>$$<br>\begin{equation}<br>    i_0&#x3D;\frac{1}{3}(i_a+i_b+i_c)<br>\end{equation}<br>$$</p>
+<p>证明如下，上面说了，$i_\alpha,i_\beta$给定之后，综合矢量就完全确定了，作综合矢量关于$a,b,c$三轴的投影，并记为$i_a’,i_b’,i_c’$</p>
+<p>$$<br>\begin{align}<br>    i_a’&amp;&#x3D;\boldsymbol{i}\cdot \boldsymbol{a} \\<br>    &amp;&#x3D;\frac{2}{3}(i_a-\frac{1}{2}i_b-\frac{1}{2}i_c)<br>\end{align}<br>$$</p>
+<p>b，c相同理可得</p>
+<p>$$<br>i_b’&#x3D;\frac{2}{3}(i_b-\frac{1}{2}i_c-\frac{1}{2}i_a)<br>$$<br>$$<br>i_c’&#x3D;\frac{2}{3}(i_c-\frac{1}{2}i_a-\frac{1}{2}i_b)<br>$$</p>
+<p>可以发现$i_a&#x3D;i_a’+i_0,i_b&#x3D;i_b’+i_0,i_c&#x3D;i_c’+i_0$</p>
+<p>这就是说，只要再给定$i_0$，就可以完全推得$i_a,i_b,i_c$</p>
+<p>这个过程用矩阵表示如下</p>
+<p>$$<br>\begin{bmatrix}<br>    i_\alpha \\<br>    i_\beta \\<br>    i_0<br>\end{bmatrix}&#x3D;\frac{2}{3}<br>\begin{bmatrix}<br>    1 &amp; -\frac{1}{2} &amp; -\frac{1}{2} \\<br>    0 &amp; \frac{\sqrt{3}}{2} &amp; -\frac{\sqrt{3}}{2} \\<br>    \frac{1}{2} &amp; \frac{1}{2} &amp; \frac{1}{2}<br>\end{bmatrix}<br>\begin{bmatrix}<br>    i_a \\<br>    i_b \\<br>    i_c<br>\end{bmatrix}<br>$$</p>
+<p>定义</p>
+<p>$$<br>\begin{equation}<br>\boldsymbol{C}&#x3D;\frac{2}{3}<br>\begin{bmatrix}<br>    1 &amp; -\frac{1}{2} &amp; -\frac{1}{2} \\<br>    0 &amp; \frac{\sqrt{3}}{2} &amp; -\frac{\sqrt{3}}{2} \\<br>    \frac{1}{2} &amp; \frac{1}{2} &amp; \frac{1}{2}<br>\end{bmatrix}<br>\end{equation}<br>$$</p>
+<p>这里的$\boldsymbol{C}$就是变换矩阵，可以算得$|\boldsymbol{C}|\not &#x3D;{0}$，故$\boldsymbol{C}$存在逆矩阵</p>
+<p>逆矩阵可以通过纯粹的数学运算得出，也可以通过上述的物理意义得到</p>
+<p>$$<br>\begin{equation}<br>\boldsymbol{C}^{-1}&#x3D;<br>\begin{bmatrix}<br>    1 &amp; 0 &amp; 1 \\<br>    -\frac{1}{2} &amp; \frac{\sqrt{3}}{2} &amp; 1 \\<br>    -\frac{1}{2} &amp; -\frac{\sqrt{3}}{2} &amp; 1<br>\end{bmatrix}<br>\end{equation}<br>$$</p>
+<p>这样$abc-\alpha\beta 0$的正逆变换就都得到了</p>
+<h4 id="abc-dq0"><a href="#abc-dq0" class="headerlink" title="$abc-dq0$"></a>$abc-dq0$</h4><p>d,q轴的定义是以转子转速$\omega$旋转的坐标系，设$\theta$是d轴与q轴的夹角，如img4所示</p>
+<img src="/images/坐标变换/img4.png" alt="img4" width=50% height="50%">
+
+<p>这里的坐标变换与$\alpha\beta 0$的坐标变换完全类似，可以根据物理含义直接给出</p>
+<p>$$<br>\boldsymbol{C}&#x3D;\frac{2}{3}<br>\begin{bmatrix}<br>    \cos\theta &amp; \cos(\theta-\frac{2}{3}\pi) &amp; \cos(\theta+\frac{2}{3}\pi) \\<br>    -\sin\theta &amp; -\sin(\theta-\frac{2}{3}\pi) &amp; -\sin(\theta+\frac{2}{3}\pi) \\<br>    \frac{1}{2} &amp; \frac{1}{2} &amp; \frac{1}{2}<br>\end{bmatrix}<br>$$<br>$$<br>\boldsymbol{C}^{-1}&#x3D;<br>\begin{bmatrix}<br>    \cos\theta &amp; -\sin\theta &amp; 1 \\<br>    \cos(\theta-\frac{2}{3}\pi) &amp; -\sin(\theta-\frac{2}{3}\pi) &amp; 1 \\<br>    \cos(\theta+\frac{2}{3}\pi) &amp; -\sin(\theta+\frac{2}{3}\pi) &amp; 1<br>\end{bmatrix}<br>$$</p>
+<h4 id="abc-d-cq-c0"><a href="#abc-d-cq-c0" class="headerlink" title="$abc-d_cq_c0$"></a>$abc-d_cq_c0$</h4><p>$d_c,q_c$轴是以同步速旋转的坐标系，在方程上与$abc-dq0$是完全一样的，只不过$\frac{d\theta}{dt}&#x3D;\omega_c$为同步速而已</p>
+<!--
+## 恒功率变换
+
+对于恒功率变换，同样的，我们需要确定k的大小，恒功率变换的原则是变换前后功率相等，瞬态过程的关系式与恒相幅值变换是完全一样的，我们直接通过稳态过程求解k
+
+### 稳态过程
+
+设电压幅值为$U_m$，电流幅值为$I_m$，电流电压之间的相位差为$\phi$，则可以知道变换前的功率为
+
+$$
+P=3*\frac{U_m}{\sqrt{2}}*
+$$
+-->
+]]></content>
+      <categories>
+        <category>电机控制</category>
+      </categories>
+      <tags>
+        <tag>坐标变换</tag>
       </tags>
   </entry>
 </search>

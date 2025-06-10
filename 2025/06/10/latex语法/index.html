@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.png">
+  <link rel="mask-icon" href="/images/favicon.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha256-5eIC48iZUHmSlSUz9XtjRyK2mzQkHScZY1WdMaoz74E=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"larkzy.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.21.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="前言最早接触到latex是创建这个网站的时候，因为我的文章中涉及大量的专业公式，而用latex处理会比较方便。再之后，就会发现latex在简历制作、毕业论文写作方面都有很多的应用，在文章排版的方面具有天然的优势，个人写作的时候非常舒适。 但当然latex同样具有缺点，最明显的缺点是团队协作性，如果遇到一个需要团队合作完成的项目文书，使用latex编辑将导致其他团队成员不好进行批注，并且latex具">
+<meta property="og:type" content="article">
+<meta property="og:title" content="latex语法">
+<meta property="og:url" content="http://larkzy.github.io/2025/06/10/latex%E8%AF%AD%E6%B3%95/index.html">
+<meta property="og:site_name" content="Lac&#39;s blog">
+<meta property="og:description" content="前言最早接触到latex是创建这个网站的时候，因为我的文章中涉及大量的专业公式，而用latex处理会比较方便。再之后，就会发现latex在简历制作、毕业论文写作方面都有很多的应用，在文章排版的方面具有天然的优势，个人写作的时候非常舒适。 但当然latex同样具有缺点，最明显的缺点是团队协作性，如果遇到一个需要团队合作完成的项目文书，使用latex编辑将导致其他团队成员不好进行批注，并且latex具">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-06-10T02:23:00.000Z">
+<meta property="article:modified_time" content="2025-06-10T02:23:34.908Z">
+<meta property="article:author" content="Lark">
+<meta property="article:tag" content="latex">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://larkzy.github.io/2025/06/10/latex%E8%AF%AD%E6%B3%95/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://larkzy.github.io/2025/06/10/latex%E8%AF%AD%E6%B3%95/","path":"2025/06/10/latex语法/","title":"latex语法"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>latex语法 | Lac's blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Lac's blog</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%89%B9%E6%AE%8A%E7%AC%A6%E5%8F%B7"><span class="nav-number">2.</span> <span class="nav-text">特殊符号</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%8C%E8%85%8A%E5%AD%97%E6%AF%8D"><span class="nav-number">2.1.</span> <span class="nav-text">希腊字母</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%89%B9%E6%AE%8A%E6%A0%BC%E5%BC%8F"><span class="nav-number">2.2.</span> <span class="nav-text">特殊格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%89%B9%E6%AE%8A%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">2.3.</span> <span class="nav-text">特殊运算符</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%BC%E5%BC%8F%E8%AF%AD%E6%B3%95"><span class="nav-number">3.</span> <span class="nav-text">格式语法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E7%A8%8B%E7%BB%84"><span class="nav-number">3.1.</span> <span class="nav-text">方程组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9F%A9%E9%98%B5"><span class="nav-number">3.2.</span> <span class="nav-text">矩阵</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Lark</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">5</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/larkzy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;larkzy" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:larkzy03@gmail.com" title="E-Mail → mailto:larkzy03@gmail.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://500px.com.cn/lark0305/graphic" title="500px → https:&#x2F;&#x2F;500px.com.cn&#x2F;lark0305&#x2F;graphic" rel="noopener me" target="_blank"><i class="fa fa-camera fa-fw"></i>500px</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://larkzy.github.io/2025/06/10/latex%E8%AF%AD%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lark">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lac's blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="latex语法 | Lac's blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          latex语法
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2025-06-10 10:23:00 / 修改时间：10:23:34" itemprop="dateCreated datePublished" datetime="2025-06-10T10:23:00+08:00">2025-06-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/CS/" itemprop="url" rel="index"><span itemprop="name">CS</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>最早接触到latex是创建这个网站的时候，因为我的文章中涉及大量的专业公式，而用latex处理会比较方便。再之后，就会发现latex在简历制作、毕业论文写作方面都有很多的应用，在文章排版的方面具有天然的优势，个人写作的时候非常舒适。</p>
+<p>但当然latex同样具有缺点，最明显的缺点是团队协作性，如果遇到一个需要团队合作完成的项目文书，使用latex编辑将导致其他团队成员不好进行批注，并且latex具有一定门槛，部分专业的人员可能对latex并不熟练，因此直接修改源代码也不是很方便。还有一个方法是用latex生成PDF，在将PDF转为word，但此方法bug较多，且不如直接使用word进行编辑。</p>
+<p>总而言之，在某些应用场景下，就编写本网站博文中的专业公式时，latex是更为方便的工具。现将在此过程中常用到的一些语法汇总如下，方便查阅。</p>
+<h2 id="特殊符号"><a href="#特殊符号" class="headerlink" title="特殊符号"></a>特殊符号</h2><h3 id="希腊字母"><a href="#希腊字母" class="headerlink" title="希腊字母"></a>希腊字母</h3><table>
+<thead>
+<tr>
+<th>字母</th>
+<th>代码</th>
+<th>字母</th>
+<th>代码</th>
+<th>字母</th>
+<th>代码</th>
+<th>字母</th>
+<th>代码</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>$\alpha$</td>
+<td>\alpha</td>
+<td>$\beta$</td>
+<td>\beta</td>
+<td>$\theta$</td>
+<td>\theta</td>
+<td>$\gamma$</td>
+<td>\gamma</td>
+</tr>
+<tr>
+<td>$\pi$</td>
+<td>\pi</td>
+<td>$\phi$</td>
+<td>\phi</td>
+<td>$\Phi$</td>
+<td>\Phi</td>
+<td>$\varphi$</td>
+<td>\varphi</td>
+</tr>
+<tr>
+<td>$\mu$</td>
+<td>\mu</td>
+<td>$\sigma$</td>
+<td>\sigma</td>
+<td>$\psi$</td>
+<td>\psi</td>
+<td>$\Psi$</td>
+<td>\Psi</td>
+</tr>
+<tr>
+<td>$\tau$</td>
+<td>\tau</td>
+<td>$\Delta$</td>
+<td>\Delta</td>
+<td>$\omega$</td>
+<td>\omega</td>
+<td>$\varepsilon$</td>
+<td>\varepsilon</td>
+</tr>
+</tbody></table>
+<p>大写首字母代表大写符号，小写首字母代表小写符号</p>
+<h3 id="特殊格式"><a href="#特殊格式" class="headerlink" title="特殊格式"></a>特殊格式</h3><table>
+<thead>
+<tr>
+<th>样式</th>
+<th>代码</th>
+<th>样式</th>
+<th>代码</th>
+<th>样式</th>
+<th>代码</th>
+<th>样式</th>
+<th>代码</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>$\hat{a}$</td>
+<td>\hat{a}</td>
+<td>$\tilde{a}$</td>
+<td>\tilde{a}</td>
+<td>$\dot{a}$</td>
+<td>\dot{a}</td>
+<td>$\ddot{a}$</td>
+<td>\ddot{a}</td>
+</tr>
+<tr>
+<td>$\bar{a}$</td>
+<td>\bar{a}</td>
+<td>$\vec{a}$</td>
+<td>\vec{a}</td>
+<td>$\widehat{A}$</td>
+<td>\widehat{A}</td>
+<td>$\widetilde{A}$</td>
+<td>\widetilde{A}</td>
+</tr>
+</tbody></table>
+<h3 id="特殊运算符"><a href="#特殊运算符" class="headerlink" title="特殊运算符"></a>特殊运算符</h3><table>
+<thead>
+<tr>
+<th>样式</th>
+<th>代码</th>
+<th>样式</th>
+<th>代码</th>
+<th>样式</th>
+<th>代码</th>
+<th>样式</th>
+<th>代码</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>$\sum$</td>
+<td>\sum</td>
+<td>$\prod$</td>
+<td>\prod</td>
+<td>$\int$</td>
+<td>\int</td>
+<td>$\oint$</td>
+<td>\oint</td>
+</tr>
+</tbody></table>
+<h2 id="格式语法"><a href="#格式语法" class="headerlink" title="格式语法"></a>格式语法</h2><h3 id="方程组"><a href="#方程组" class="headerlink" title="方程组"></a>方程组</h3><figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">\begin</span>&#123;cases&#125;</span><br><span class="line">    X=1 <span class="keyword">\\</span><span class="keyword">\\</span></span><br><span class="line">    Y=2</span><br><span class="line"><span class="keyword">\end</span>&#123;cases&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上述代码效果如下</p>
+<p>$$<br>\begin{cases}<br>    X&#x3D;1 \\<br>    Y&#x3D;2<br>\end{cases}<br>$$</p>
+<p>其中，<code>\begin&#123;cases&#125;</code>和<code>\end&#123;cases&#125;</code>是声明一个方程组模块，<code>\\\\</code>是换行，为了获得更好的兼容性，推荐换行使用<code>\\\\</code>而不是<code>\\</code></p>
+<h3 id="矩阵"><a href="#矩阵" class="headerlink" title="矩阵"></a>矩阵</h3><p>在latex中生成矩阵可以通过关键字<code>matrix</code>生成，也可以使用<code>array</code>生成</p>
+<p><code>matrix</code>是latex自带的矩阵关键字，下面展示其效果</p>
+<figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">\begin</span>&#123;matrix&#125;</span><br><span class="line">    a <span class="built_in">&amp;</span> b <span class="keyword">\\</span><span class="keyword">\\</span></span><br><span class="line">    c <span class="built_in">&amp;</span> d</span><br><span class="line"><span class="keyword">\end</span>&#123;matrix&#125;</span><br></pre></td></tr></table></figure>
+
+<p>$$<br>\begin{matrix}<br>    a &amp; b \\<br>    c &amp; d<br>\end{matrix}<br>$$</p>
+<p>其中<code>matrix</code>生成的是不带括号的矩阵，latex给出了带括号的关键字</p>
+<table>
+<thead>
+<tr>
+<th>样式</th>
+<th>关键字</th>
+<th>样式</th>
+<th>关键字</th>
+<th>样式</th>
+<th>关键字</th>
+<th>样式</th>
+<th>关键字</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>中括号</td>
+<td>bmatrix</td>
+<td>小括号</td>
+<td>pmatrix</td>
+<td>大括号</td>
+<td>Bmatrix</td>
+<td>行列式</td>
+<td>vmatrix</td>
+</tr>
+</tbody></table>
+<p>例如，如果我想使用中括号，那么只需要将matrix替换为bmatrix，展示如下</p>
+<figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">\begin</span>&#123;bmatrix&#125;</span><br><span class="line">    a <span class="built_in">&amp;</span> b <span class="keyword">\\</span><span class="keyword">\\</span></span><br><span class="line">    c <span class="built_in">&amp;</span> d</span><br><span class="line"><span class="keyword">\end</span>&#123;bmatrix&#125;</span><br></pre></td></tr></table></figure>
+
+<p>$$<br>\begin{bmatrix}<br>    a &amp; b \\<br>    c &amp; d<br>\end{bmatrix}<br>$$</p>
+<p>然而，有时会遇到更复杂的情况，比如说需要对矩阵进行分块，这时候<code>matrix</code>可能就不再好用了，需要用到<code>array</code></p>
+<figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">\left</span>(</span><br><span class="line"><span class="keyword">\begin</span>&#123;array&#125;&#123;cc&#125;</span><br><span class="line">    a <span class="built_in">&amp;</span> b <span class="keyword">\\</span><span class="keyword">\\</span></span><br><span class="line">    c <span class="built_in">&amp;</span> d</span><br><span class="line"><span class="keyword">\end</span>&#123;array&#125;</span><br><span class="line"><span class="keyword">\right</span>)</span><br></pre></td></tr></table></figure>
+
+<p>$$<br>\left(<br>\begin{array}{cc}<br>    a &amp; b \\<br>    c &amp; d<br>\end{array}<br>\right)<br>$$</p>
+<p>上面展示了<code>array</code>的基础用法，一个<code>c</code>代表一列，几个<code>c</code>代表几列，<code>\left(</code>和<code>\right)</code>代表自动适应大小的左右括号</p>
+<p>如果需要加竖线，只需要在<code>c</code>之间打一个竖线即可，实线是<code>|</code>，虚线是<code>:</code>，例如</p>
+<figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">\left</span>(</span><br><span class="line"><span class="keyword">\begin</span>&#123;array&#125;&#123;c:c&#125;</span><br><span class="line">    a <span class="built_in">&amp;</span> b <span class="keyword">\\</span><span class="keyword">\\</span></span><br><span class="line">    c <span class="built_in">&amp;</span> d</span><br><span class="line"><span class="keyword">\end</span>&#123;array&#125;</span><br><span class="line"><span class="keyword">\right</span>)</span><br></pre></td></tr></table></figure>
+
+<p>$$<br>\left(<br>\begin{array}{c:c}<br>    a &amp; b \\<br>    c &amp; d<br>\end{array}<br>\right)<br>$$</p>
+<p>如果需要加横线，需要在对应的行后加一段代码，实线是<code>\hline</code>，虚线是<code>\hdashline</code></p>
+<figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">\left</span>(</span><br><span class="line"><span class="keyword">\begin</span>&#123;array&#125;&#123;cc&#125;</span><br><span class="line">    a <span class="built_in">&amp;</span> b <span class="keyword">\\</span><span class="keyword">\\</span> <span class="keyword">\hline</span></span><br><span class="line">    c <span class="built_in">&amp;</span> d</span><br><span class="line"><span class="keyword">\end</span>&#123;array&#125;</span><br><span class="line"><span class="keyword">\right</span>)</span><br></pre></td></tr></table></figure>
+
+<p>$$<br>\left(<br>\begin{array}{cc}<br>    a &amp; b \\ \hline<br>    c &amp; d<br>\end{array}<br>\right)<br>$$</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/latex/" rel="tag"># latex</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/03/11/%E5%9D%90%E6%A0%87%E5%8F%98%E6%8D%A2/" rel="prev" title="坐标变换">
+                  <i class="fa fa-angle-left"></i> 坐标变换
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments utterances-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Lark</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+<script class="next-config" data-name="utterances" type="application/json">{"enable":true,"repo":"LArkZY/LArkZY.github.io","issue_term":"title","theme":"preferred-color-scheme"}</script>
+<script src="/js/third-party/comments/utterances.js"></script>
+
+</body>
+</html>
