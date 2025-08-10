@@ -1,143 +1,251 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>书签</title>
-    <url>/2024/11/08/%E4%B9%A6%E7%AD%BE/</url>
-    <content><![CDATA[<h2 id="ZJU"><a href="#ZJU" class="headerlink" title="ZJU"></a>ZJU</h2><ul>
-<li><a href="https://courses.zju.edu.cn/user/index">学在浙大</a></li>
-<li><a href="http://tzzd.zju.edu.cn/">团在浙大</a></li>
-<li><a href="http://zdbk.zju.edu.cn/">教务网本</a></li>
-<li><a href="https://yjsy.zju.edu.cn/">教务网研</a></li>
-<li><a href="http://ms.zju.edu.cn/">正版软件</a></li>
-<li><a href="https://zjuers.com/rd?url=http://eta.zju.edu.cn/">ETA</a></li>
-<li><a href="http://cwcx.zju.edu.cn/WFManager/login.jsp">计财处</a></li>
-<li><a href="http://ee.office.zju.edu.cn/main.htm">浙大电院</a></li>
-<li><a href="https://www.nexushd.org/">NexusHD</a></li>
-</ul>
+    <title>CS自学</title>
+    <url>/2025/06/12/CS%E8%87%AA%E5%AD%A6/</url>
+    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本文主要用于归纳作者的CS自学过程，课程顺序代表了作者自学CS的顺序，内容由浅入深。</p>
 <hr>
-<h2 id="学术"><a href="#学术" class="headerlink" title="学术"></a>学术</h2><ul>
-<li><a href="https://scholar.google.com/">谷歌学术</a></li>
-<li><a href="https://ieeexplore.ieee.org/Xplore/home.jsp">IEEE</a></li>
-<li><a href="https://www.webofscience.com/wos/alldb/basic-search">Web-of-Science</a></li>
-<li><a href="https://www.incopat.com/advancedSearch/simpleInit">专利检索</a></li>
-<li><a href="https://www.cnki.net/">知网</a></li>
+<h2 id="CS自学指南"><a href="#CS自学指南" class="headerlink" title="CS自学指南"></a>CS自学指南</h2><p>这是一个CS自学导航性质的网站，资源丰富而全面，且具有可行性，本文的大部分内容都来源于此，非常推荐一读。</p>
+<p>然而这本书写作时间较早，有些开源资源或不可用，或已改名，对于这些资源，本文加以更新。</p>
+<ul>
+<li>CS自学指南: <a href="https://csdiy.wiki/">电子书网站</a></li>
 </ul>
-<hr>
-<h2 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h2><ul>
-<li><a href="https://github.com/">Github</a></li>
-<li><a href="https://chatgpt.com/">Chatgpt</a></li>
-<li><a href="https://chat.deepseek.com/">Deepseek</a></li>
-<li><a href="https://www.zjuers.com/">ZJUer轻首页</a></li>
-<li><a href="https://yinghezhinan.com/site/z-library/">Z-library</a></li>
+<h2 id="Crash-Course-Computer-Science"><a href="#Crash-Course-Computer-Science" class="headerlink" title="Crash Course: Computer Science"></a>Crash Course: Computer Science</h2><p>这是一个科普性质的视频，通过这个视频，你可以对计算机科学学科有一个整体的概览。</p>
+<ul>
+<li>课程视频: <a href="https://www.bilibili.com/video/BV1EW411u7th/">B站</a></li>
 </ul>
-<hr>
-<h2 id="论坛"><a href="#论坛" class="headerlink" title="论坛"></a>论坛</h2><ul>
-<li><a href="https://www.cc98.org/">CC98</a></li>
-<li><a href="https://www.1point3acres.com/">一亩三分地</a></li>
-<li><a href="https://500px.com.cn/">500px</a></li>
+<h2 id="MIT-Missing-Semester"><a href="#MIT-Missing-Semester" class="headerlink" title="MIT Missing Semester"></a>MIT Missing Semester</h2><p>Missing Semester从字面上看译为消失的学期，旨在讲解计算机中各种各样的前置工具和知识，比如Shell, Vim, Git等等。</p>
+<p>这门课程无关代码，却指向了开发代码的环境，比如版本控制，比如命令行，比如数据结构。</p>
+<p>内容不深，但相当广泛，听完后可以在其中挑选自己感兴趣的内容进一步深入学习，适合新手学习，非常推荐。</p>
+<ul>
+<li>课程视频: <a href="https://space.bilibili.com/518734451">2020</a></li>
+<li>课程网站: <a href="https://missing.csail.mit.edu/2020/">2020</a></li>
 </ul>
-<hr>
-<h2 id="镜像网站"><a href="#镜像网站" class="headerlink" title="镜像网站"></a>镜像网站</h2><ul>
-<li><a href="https://mirrors.zju.edu.cn/">ZJU-Mirror</a></li>
-<li><a href="https://mirrors.tuna.tsinghua.edu.cn/">THU-Mirror</a></li>
+<h2 id="Git"><a href="#Git" class="headerlink" title="Git"></a>Git</h2><p>Git是一个大名鼎鼎的版本控制工具。</p>
+<p>学习中，你可能很早就听说过了Github，但却不知道该如何使用。对于工程，你可能有分工思想，但却不知道怎么实现多人合作。修改论文时，你可能只能通过不断创建副本1，副本2来进行版本迭代，但为文件夹中一长串的副本而深感头疼。</p>
+<p>这些都能在学习Git的过程中得到解决，推荐学习。</p>
+<ul>
+<li>课程视频: <a href="https://www.bilibili.com/video/BV1vy4y1s7k6/">尚硅谷</a></li>
 </ul>
-<hr>
-<h2 id="娱乐"><a href="#娱乐" class="headerlink" title="娱乐"></a>娱乐</h2><ul>
-<li><a href="https://www.bilibili.com/">Bilibili</a></li>
-<li><a href="https://www.huya.com/">虎牙</a></li>
-<li><a href="https://www.czzy77.com/">影视</a></li>
-<li><a href="https://www.mutedm.com/">动漫</a></li>
+<h2 id="Coursera-Nand2Tetris-Part1"><a href="#Coursera-Nand2Tetris-Part1" class="headerlink" title="Coursera Nand2Tetris: Part1"></a>Coursera Nand2Tetris: Part1</h2><p>Nand2Tetris是由希伯来大学Noam和Shimon开设的一门课，课程内容为计算机架构。全课分为Part1和Part2两部分，Part1讲述计算机硬件架构，Part2讲述计算机软件架构，两部分内容相关，但完全独立，如果你是新手，推荐按顺序学习。</p>
+<p>在Part1，你将从与非门电路开始，通过归纳抽象的方法，一步一步搭建与门或门等门电路，进而搭建全加器和半加器等芯片，进而搭建内存、ALU，进而搭建CPU完成Hack电脑的搭建。</p>
+<p>为了控制你搭建的这台电脑，你还将学习汇编语言，以及学习如何将汇编语言翻译为机器语言，也即所谓的汇编器。</p>
+<p>通过这门课程的学习，你将明白电脑本身并非什么魔法，仅仅是一台蕴含人类智慧的机器，究其物理介质，不过数字电路的高低电平而已。</p>
+<p>然而，你又将惊叹于电脑设计的精密性,包含各种各样的协议与标准，使之成为一项工程，非常推荐学习。</p>
+<ul>
+<li>课程网站: <a href="https://www.coursera.org/learn/build-a-computer/home/module/1">Part1</a></li>
+<li>课程笔记: <a href="https://github.com/PKUFlyingPig/NandToTetris">PKUFlyingPig</a></li>
 </ul>
-<hr>
-<h2 id="TOEFL"><a href="#TOEFL" class="headerlink" title="TOEFL"></a>TOEFL</h2><ul>
-<li><a href="https://top.zhan.com/toefl/listen/alltpo.html">小站</a></li>
+<h2 id="MIT-6-092-Introduction-To-Programming-In-Java"><a href="#MIT-6-092-Introduction-To-Programming-In-Java" class="headerlink" title="MIT 6.092: Introduction To Programming In Java"></a>MIT 6.092: Introduction To Programming In Java</h2><p>这门课程较为系统的介绍了Java的特征、语法和库，课程没有视频，但PPT内容清晰，易于自学，适合新手入门。</p>
+<p>课程后附带作业，推荐完成。</p>
+<p>作业内容较为简单，且下次课的PPT开头一般会进行讲解，网络上相关的作业解答资源也非常丰富。</p>
+<ul>
+<li>课程网站: <a href="https://ocw.mit.edu/courses/6-092-introduction-to-programming-in-java-january-iap-2010/pages/syllabus/">Winter 2010</a></li>
+</ul>
+<h2 id="作者自用"><a href="#作者自用" class="headerlink" title="作者自用"></a>作者自用</h2><p>作者自用楼中主要列举了作者正在学习的一些内容，内容通常不太完整全面，读者可以选择忽视。</p>
+<h3 id="Coursera-Nand2Tetris-Part2"><a href="#Coursera-Nand2Tetris-Part2" class="headerlink" title="Coursera Nand2Tetris: Part2"></a>Coursera Nand2Tetris: Part2</h3><p>Nand2Tetris Part2是Part1的后续课程，在Part2中，主要介绍了计算机的软件架构。</p>
+<ul>
+<li><a href="https://www.coursera.org/learn/nand2tetris2/home/module/1">课程网站part2</a></li>
+</ul>
+<h3 id="UCB-CS70"><a href="#UCB-CS70" class="headerlink" title="UCB CS70"></a>UCB CS70</h3><ul>
+<li><a href="https://www.youtube.com/watch?v=HEfu_XQo3Rw&list=PLu0nzW8Es1x0Ivn-757Za_ps090FJxOPd">课程视频</a></li>
+<li><a href="https://github.com/PKUFlyingPig/UCB-CS70">课程笔记</a></li>
+</ul>
+<h3 id="MIT-6-041SC"><a href="#MIT-6-041SC" class="headerlink" title="MIT 6.041SC"></a>MIT 6.041SC</h3><ul>
+<li><a href="https://ocw.mit.edu/courses/6-041sc-probabilistic-systems-analysis-and-applied-probability-fall-2013/">课程网站</a></li>
+</ul>
+<h3 id="UCB-CS61A"><a href="#UCB-CS61A" class="headerlink" title="UCB CS61A"></a>UCB CS61A</h3><ul>
+<li><a href="https://www.bilibili.com/video/BV1sy411z7nA/">课程视频</a></li>
+<li><a href="https://github.com/InsideEmpire/CS61A-PathwayToSuccess/">课程笔记</a></li>
+</ul>
+<h3 id="UCB-EE120"><a href="#UCB-EE120" class="headerlink" title="UCB EE120"></a>UCB EE120</h3><ul>
+<li><a href="https://www.bilibili.com/video/BV1J7421o7pF/">课程视频</a></li>
+<li><a href="https://github.com/ukeSJTU/EE120/tree/main">课程笔记</a></li>
+</ul>
+<h3 id="MIT-6-102-Software-Construction"><a href="#MIT-6-102-Software-Construction" class="headerlink" title="MIT 6.102: Software Construction"></a>MIT 6.102: Software Construction</h3><p>这门课实际上是一门软件工程专业的课程，其目标在于教会你如何写出高质量的代码。</p>
+<p>这门课程使用的编程语言是Java，因此将其放在这篇文章当中。</p>
+<p>课程没有视频，但有详尽的文字解释，内容清晰，易于自学。</p>
+<ul>
+<li>课程网站: <a href="https://web.mit.edu/6.102/www/sp25/">Spring 2025</a></li>
 </ul>
 ]]></content>
       <categories>
-        <category>书签</category>
+        <category>CS</category>
       </categories>
       <tags>
-        <tag>书签</tag>
-        <tag>资源</tag>
+        <tag>自学</tag>
+        <tag>导航</tag>
       </tags>
   </entry>
   <entry>
-    <title>坐标变换</title>
-    <url>/2025/03/11/%E5%9D%90%E6%A0%87%E5%8F%98%E6%8D%A2/</url>
-    <content><![CDATA[<h2 id="基本定义"><a href="#基本定义" class="headerlink" title="基本定义"></a>基本定义</h2><p>坐标变换这种方法在电网络、电力电子、电机建模与控制等很多领域都有应用，本文章以三相永磁同步电机为背景，主要讨论三相与两相间的转化</p>
-<p>对于三相永磁同步电机而言，定子绕组可以等效为a,b,c三相绕组，假设这三相绕组的方向如img1所示</p>
-<img src="/images/坐标变换/img1.png" alt="img1" width=50% height="50%">
+    <title>SVPWM</title>
+    <url>/2025/02/26/SVPWM/</url>
+    <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>SVPWM(Space Vector Pulse Width Modulation)，即电压空间矢量调制，是一种PWM生成方法，其作用是在主电路中生成给定的电压信号，而不是电机控制方法，这里需要与电机矢量控制做一个区分。</p>
+<p>SVPWM给定的是目标电压矢量，输出的是六个PWM波，这六个PWM波控制IGBT的通断，在主电路中生成三相PWM，三相PWM的基波合成起来就是目标电压矢量。</p>
+<h2 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h2><p>假设电机内部绕组接法为星形接法，以如下图所示的IGBT逆变器为例来进行说明</p>
+<img src="/images/SVPWM/img1.png" alt="img1" width=50% height=50%>
 
-<p>对于这三相绕组的任意一个物理量，比如电流，定义</p>
-<p>$$<br>\begin{equation}<br>    \boldsymbol{i_a}&#x3D;i_a\boldsymbol{a},\boldsymbol{i_b}&#x3D;i_b\boldsymbol{b},\boldsymbol{i_c}&#x3D;i_c\boldsymbol{c}<br>\end{equation}<br>$$</p>
-<p>需要注意的是，这里的$i_a,i_b,i_c$代表的是电流的大小，并且代表的是瞬态过程</p>
-<h2 id="恒相幅值变换"><a href="#恒相幅值变换" class="headerlink" title="恒相幅值变换"></a>恒相幅值变换</h2><p>定义综合矢量$\boldsymbol{i}&#x3D;k(\boldsymbol{i_a}+\boldsymbol{i_b}+\boldsymbol{i_c})$，这里的k是一个待定的系数</p>
-<p>由于是恒相幅值变换，我们的目标是在稳态过程下，综合矢量的幅值等于a，b，c三相的幅值</p>
-<p>本文先通过瞬态过程的推导得出公式，因为稳态过程就是瞬态过程的一个特例，所以可以直接代入公式，解得k的值</p>
-<h3 id="瞬态过程"><a href="#瞬态过程" class="headerlink" title="瞬态过程"></a>瞬态过程</h3><p>要计算综合矢量的幅值，可以建立x-y坐标系，假设如图img2所示</p>
-<img src="/images/坐标变换/img2.png" alt="img2" width=50% height="50%">
+<p>设$S_A&#x3D;1$代表A相上管通，$S_A&#x3D;0$代表A相下管通，$S_B,S_C$类似设定，则可以得到SVPWM的基本电压矢量为下图$u_0 ~ u_7$所示</p>
+<img src="/images/SVPWM/img2.png" alt="img2" width=50% height=50%>
 
-<p>容易得到</p>
-<p>$$<br>\begin{cases}<br>    i_x&#x3D;k(i_a-\frac{1}{2}i_b-\frac{1}{2}i_c) \\<br>    i_y&#x3D;k(\frac{\sqrt{3}}{2}i_b-\frac{\sqrt{3}}{2}i_c)<br>\end{cases} \\<br>$$<br>$$<br>\begin{equation}<br>i&#x3D;|\boldsymbol{i}|&#x3D;k\sqrt{i_x^2+i_y^2}&#x3D;k\sqrt{\frac{1}{2}\sum\limits_{cyc}(i_a-i_b)^2}(1)<br>\end{equation}<br>$$</p>
-<h3 id="稳态过程"><a href="#稳态过程" class="headerlink" title="稳态过程"></a>稳态过程</h3><p>对于稳态过程，可以假设三相是相位分别相差$\frac{2}{3}\pi$，且幅值完全相同的正弦波，即</p>
-<p>$$<br>\begin{cases}<br>    i_a&#x3D;I_m\cos(\omega t) \\<br>    i_b&#x3D;I_m\cos(\omega t-\frac{2}{3}\pi) \\<br>    i_c&#x3D;I_m\cos(\omega t+\frac{2}{3}\pi)<br>\end{cases}<br>$$</p>
-<p>将上述三个式子代入公式(1)，可以得到</p>
-<p>$$<br>\begin{align}<br>    i&amp;&#x3D;k\sqrt{\frac{1}{2}\sum\limits_{cyc}(I_m\cos\omega t-I_m\cos(\omega t-\frac{2}{3}\pi))^2} \\<br>    &amp;&#x3D;k\sqrt{\frac{1}{2}I_m^2\sum\limits_{cyc}(-2\sin(\omega t-\frac{1}{3}\pi)\sin\frac{\pi}{3})^2} \\<br>    &amp;&#x3D;k\sqrt{\frac{1}{2}I_m^2\sum\limits_{cyc}3\sin^2(\omega t-\frac{\pi}{3})} \\<br>    &amp;&#x3D;k\sqrt{\frac{3}{2}I_m^2\sum\limits_{cyc}\frac{1-cos(2\omega t-\frac{2}{3}\pi)}{2}} \\<br>    &amp;&#x3D;k\sqrt{\frac{9}{4}I_m^2} \\<br>    &amp;&#x3D;\frac{3}{2}kI_m<br>\end{align}<br>$$</p>
-<p>因此，如果要使变换前后幅值相等，应该令$k&#x3D;\frac{2}{3}$</p>
-<h3 id="坐标变换"><a href="#坐标变换" class="headerlink" title="坐标变换"></a>坐标变换</h3><p>在得出了坐标变换的系数之后，就要对物理量进行坐标变换了，在叙述坐标变换的公式之前，应该先清楚坐标变换的目的</p>
-<p>在三相永磁同步电机中，如果直接对a,b,c三相进行控制，将会非常复杂，因为a,b,c三相之间会互相耦合，也就是互感不为零，这将给控制带来麻烦</p>
-<p>为此，我们希望先将a,b,c三相通过坐标变换变成两相，对两相进行控制，控制完成后再进行逆变换生成对应的三相控制量</p>
-<p>具体的部分可参看【永磁同步电机】</p>
-<p>坐标变换的类型主要有$abc-\alpha\beta 0,abc-dq0,abc-d_cq_c0$这么三种，具体定义参见下文，明白一种之后很容易就能举一反三，这里只给出$abc-\alpha\beta 0,abc-dq0$的公式</p>
-<h4 id="abc-alpha-beta-0"><a href="#abc-alpha-beta-0" class="headerlink" title="$abc-\alpha\beta 0$"></a>$abc-\alpha\beta 0$</h4><p>a,b,c是电机等效绕组的方向，$\alpha$方向与a轴重合，$\beta$方向超前$\alpha$方向90度，如图img3所示</p>
-<img src="/images/坐标变换/img3.png" alt="img3" width=50% height="50%">
+<p>矢量的合成应该遵循相邻原则和平均值等效原则。设这六个区分别为$Ⅰ ~ Ⅵ$，假设现在目标电压矢量处在$Ⅰ$区，那么应该由基本电压矢量$u_1和u_2$合成。如果设开关周期时间为$T_0$，$u_1$作用时间为$t_1$，$u_2$作用时间为$t_2$，那么应该有</p>
+<p>$$<br>T_0u_s&#x3D;t_1u_1+t_2u_2<br>$$</p>
+<p>根据三角形的正弦定理和余弦定理，就可以算出$t_1,t_2$的大小</p>
+<p>如果$t_1+t_2&lt;T_0$，多出来的时间就是零矢量的作用时间，$t_0&#x3D;T_0-t_1-t_2$</p>
+<p>如果$t_1+t_2&gt;T_0$，则令$t_1’&#x3D;\frac{t_1}{t_1+t_2}T_0,t_2’&#x3D;\frac{t_2}{t_1+t_2}T_0$</p>
+<p>用上述$t_1’,t_2’$代替原有的导通时间</p>
+<p>但是$t_1,t_2,t_0$在$T_0$中的时间分配是自由的，一般来说，一方面希望尽量减少开关次数减少开关损耗，另一方面希望减少谐波成分</p>
+<p>一般而言有两种实现方式，分别是零矢量集中和零矢量分散方式</p>
+<p>以上图img2为例，集中和分散分别对应于img3和img4</p>
+<img src="/images/SVPWM/img3.png" alt="img3" width=50% height=50%>
 
-<p>其实这里的$\alpha\beta$坐标与上面计算$|\boldsymbol{i}|$时用的x，y坐标是一样的，所以有</p>
-<p>$$<br>\begin{cases}<br>    i_\alpha&#x3D;i_a-\frac{1}{2}i_b-\frac{1}{2}i_c \\<br>    i_\beta&#x3D;\frac{\sqrt{3}}{2}i_b-\frac{\sqrt{3}}{2}i_c<br>\end{cases}<br>$$</p>
-<p>这样我们能通过abc坐标系，算出$i_\alpha,i_\beta$的值，但是反过来却不成立</p>
-<p>如果$i_\alpha,i_\beta$的值确立，那么综合矢量就确定了，假设有一组$i_a,i_b,i_c$使得$\boldsymbol{i}&#x3D;\frac{2}{3}(i_a\boldsymbol{a}+i_b\boldsymbol{b}+i_c\boldsymbol{c})$成立</p>
-<p>由于$\boldsymbol{a}+\boldsymbol{b}+\boldsymbol{c}&#x3D;0$,$i_a+const,i_b+const,i_c+const$都是满足条件的值，这样就有无数组解，其中const是任意实数，因此还需要一条方程约束</p>
-<p>这里先给出方程，再证明为什么给出了这条方程，就能够完全确定$i_a,i_b,i_c$,方程如下</p>
-<p>$$<br>\begin{equation}<br>    i_0&#x3D;\frac{1}{3}(i_a+i_b+i_c)<br>\end{equation}<br>$$</p>
-<p>证明如下，上面说了，$i_\alpha,i_\beta$给定之后，综合矢量就完全确定了，作综合矢量关于$a,b,c$三轴的投影，并记为$i_a’,i_b’,i_c’$</p>
-<p>$$<br>\begin{align}<br>    i_a’&amp;&#x3D;\boldsymbol{i}\cdot \boldsymbol{a} \\<br>    &amp;&#x3D;\frac{2}{3}(i_a-\frac{1}{2}i_b-\frac{1}{2}i_c)<br>\end{align}<br>$$</p>
-<p>b，c相同理可得</p>
-<p>$$<br>i_b’&#x3D;\frac{2}{3}(i_b-\frac{1}{2}i_c-\frac{1}{2}i_a)<br>$$<br>$$<br>i_c’&#x3D;\frac{2}{3}(i_c-\frac{1}{2}i_a-\frac{1}{2}i_b)<br>$$</p>
-<p>可以发现$i_a&#x3D;i_a’+i_0,i_b&#x3D;i_b’+i_0,i_c&#x3D;i_c’+i_0$</p>
-<p>这就是说，只要再给定$i_0$，就可以完全推得$i_a,i_b,i_c$</p>
-<p>这个过程用矩阵表示如下</p>
-<p>$$<br>\begin{bmatrix}<br>    i_\alpha \\<br>    i_\beta \\<br>    i_0<br>\end{bmatrix}&#x3D;\frac{2}{3}<br>\begin{bmatrix}<br>    1 &amp; -\frac{1}{2} &amp; -\frac{1}{2} \\<br>    0 &amp; \frac{\sqrt{3}}{2} &amp; -\frac{\sqrt{3}}{2} \\<br>    \frac{1}{2} &amp; \frac{1}{2} &amp; \frac{1}{2}<br>\end{bmatrix}<br>\begin{bmatrix}<br>    i_a \\<br>    i_b \\<br>    i_c<br>\end{bmatrix}<br>$$</p>
-<p>定义</p>
-<p>$$<br>\begin{equation}<br>\boldsymbol{C}&#x3D;\frac{2}{3}<br>\begin{bmatrix}<br>    1 &amp; -\frac{1}{2} &amp; -\frac{1}{2} \\<br>    0 &amp; \frac{\sqrt{3}}{2} &amp; -\frac{\sqrt{3}}{2} \\<br>    \frac{1}{2} &amp; \frac{1}{2} &amp; \frac{1}{2}<br>\end{bmatrix}<br>\end{equation}<br>$$</p>
-<p>这里的$\boldsymbol{C}$就是变换矩阵，可以算得$|\boldsymbol{C}|\not &#x3D;{0}$，故$\boldsymbol{C}$存在逆矩阵</p>
-<p>逆矩阵可以通过纯粹的数学运算得出，也可以通过上述的物理意义得到</p>
-<p>$$<br>\begin{equation}<br>\boldsymbol{C}^{-1}&#x3D;<br>\begin{bmatrix}<br>    1 &amp; 0 &amp; 1 \\<br>    -\frac{1}{2} &amp; \frac{\sqrt{3}}{2} &amp; 1 \\<br>    -\frac{1}{2} &amp; -\frac{\sqrt{3}}{2} &amp; 1<br>\end{bmatrix}<br>\end{equation}<br>$$</p>
-<p>这样$abc-\alpha\beta 0$的正逆变换就都得到了</p>
-<h4 id="abc-dq0"><a href="#abc-dq0" class="headerlink" title="$abc-dq0$"></a>$abc-dq0$</h4><p>d,q轴的定义是以转子转速$\omega$旋转的坐标系，设$\theta$是d轴与q轴的夹角，如img4所示</p>
-<img src="/images/坐标变换/img4.png" alt="img4" width=50% height="50%">
+<img src="/images/SVPWM/img4.png" alt="img4" width=50% height=50%>
 
-<p>这里的坐标变换与$\alpha\beta 0$的坐标变换完全类似，可以根据物理含义直接给出</p>
-<p>$$<br>\boldsymbol{C}&#x3D;\frac{2}{3}<br>\begin{bmatrix}<br>    \cos\theta &amp; \cos(\theta-\frac{2}{3}\pi) &amp; \cos(\theta+\frac{2}{3}\pi) \\<br>    -\sin\theta &amp; -\sin(\theta-\frac{2}{3}\pi) &amp; -\sin(\theta+\frac{2}{3}\pi) \\<br>    \frac{1}{2} &amp; \frac{1}{2} &amp; \frac{1}{2}<br>\end{bmatrix}<br>$$<br>$$<br>\boldsymbol{C}^{-1}&#x3D;<br>\begin{bmatrix}<br>    \cos\theta &amp; -\sin\theta &amp; 1 \\<br>    \cos(\theta-\frac{2}{3}\pi) &amp; -\sin(\theta-\frac{2}{3}\pi) &amp; 1 \\<br>    \cos(\theta+\frac{2}{3}\pi) &amp; -\sin(\theta+\frac{2}{3}\pi) &amp; 1<br>\end{bmatrix}<br>$$</p>
-<h4 id="abc-d-cq-c0"><a href="#abc-d-cq-c0" class="headerlink" title="$abc-d_cq_c0$"></a>$abc-d_cq_c0$</h4><p>$d_c,q_c$轴是以同步速旋转的坐标系，在方程上与$abc-dq0$是完全一样的，只不过$\frac{d\theta}{dt}&#x3D;\omega_c$为同步速而已</p>
-<!--
-## 恒功率变换
+<p>集中的优势在于开关损耗较小，但是由于零矢量单次停留时间过长，会导致谐波成分增加</p>
+<p>而分散的优劣势则恰恰与集中相反</p>
+<h2 id="Simulink实现"><a href="#Simulink实现" class="headerlink" title="Simulink实现"></a>Simulink实现</h2><p>总体的形状应该如img5所示，其中$u_\alpha,u_\beta$给定，也就是说，$u_s$给定，直流电压$U_d$和开关周期时间$T_0$已知</p>
+<img src="/images/SVPWM/img5.png" alt="img5" width=50% height=50%>
 
-对于恒功率变换，同样的，我们需要确定k的大小，恒功率变换的原则是变换前后功率相等，瞬态过程的关系式与恒相幅值变换是完全一样的，我们直接通过稳态过程求解k
+<p>为了实现功能，可以粗略的将整个模块分为三部分：电压矢量区块检测模块、$T_1,T_2$计算模块和PWM波生成模块</p>
+<h3 id="电压矢量区块检测模块"><a href="#电压矢量区块检测模块" class="headerlink" title="电压矢量区块检测模块"></a>电压矢量区块检测模块</h3><p>可以用投影的方式确定电压矢量所在区块，如图img6所示，将电压矢量往$1~3$三个方向投影，则可以得到投影大小为</p>
+<img src="/images/SVPWM/img6.png" alt="img6" width=50% height=50%>
 
-### 稳态过程
+<p>$$<br>\begin{cases}<br>u_{ref1}&#x3D;u_\beta \\<br>u_{ref2}&#x3D;\frac{\sqrt{3}}{2}u_\alpha-\frac{1}{2}u_\beta \\<br>u_{ref3}&#x3D;-\frac{\sqrt{3}}{2}u_\alpha-\frac{1}{2}u_\beta<br>\end{cases}<br>$$</p>
+<p>定义一个二进制数$N&#x3D;CBA_2$,如果$u_{ref1}&gt;0$，则$A&#x3D;1$，否则$A&#x3D;0$。其余C对应$u_{ref3}$，B对应$u_{ref2}$，类似定义</p>
+<p>那么可以得出</p>
+<table>
+<thead>
+<tr>
+<th>N</th>
+<th>3</th>
+<th>1</th>
+<th>5</th>
+<th>4</th>
+<th>6</th>
+<th>2</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>扇区</td>
+<td>Ⅰ</td>
+<td>Ⅱ</td>
+<td>Ⅲ</td>
+<td>Ⅳ</td>
+<td>Ⅴ</td>
+<td>Ⅵ</td>
+</tr>
+</tbody></table>
+<p>在Simulink当中的实现如img7所示</p>
+<img src="/images/SVPWM/img7.png" alt="img7" width=50% height=50%>
 
-设电压幅值为$U_m$，电流幅值为$I_m$，电流电压之间的相位差为$\phi$，则可以知道变换前的功率为
+<h3 id="T-1-T-2-计算模块"><a href="#T-1-T-2-计算模块" class="headerlink" title="$T_1,T_2$计算模块"></a>$T_1,T_2$计算模块</h3><p>以第Ⅰ扇区为例，设$U_{dc}$为直流电压大小，则$|u_1|&#x3D;|u_2|&#x3D;…&#x3D;|u_6|&#x3D;\frac{2}{3}U_{dc}$</p>
+<p>$$<br>\begin{cases}<br>u_\beta&#x3D;\frac{t_2}{T_0}u_2sin\frac{\pi}{3} \\<br>u_\alpha&#x3D;\frac{t_2}{T_0}u_2cos\frac{\pi}{3}+\frac{t_1}{T_0}u_1<br>\end{cases}<br>$$</p>
+<p>于是可得</p>
+<p>$$<br>\begin{cases}<br>t_1&#x3D;\frac{\sqrt{3}T_0}{U_{dc}}(\frac{\sqrt{3}}{2}u_\alpha-\frac{1}{2}u_\beta) \\<br>t_2&#x3D;\frac{\sqrt{3}T_0}{U_{dc}}u_\beta<br>\end{cases}<br>$$</p>
+<p>在其他区同理可以计算作用时间</p>
+<p>在这里可以对所有情况做一个归纳</p>
+<p>定义:</p>
+<p>$$<br>\begin{cases}<br>X&#x3D;\frac{\sqrt{3}T_0}{U_{dc}}u_\beta \\<br>Y&#x3D;\frac{\sqrt{3}T_0}{U_{dc}}(\frac{\sqrt{3}}{2}u_\alpha+\frac{1}{2}u_\beta) \\<br>Z&#x3D;\frac{\sqrt{3}T_0}{U_{dc}}(-\frac{\sqrt{3}}{2}u_\alpha+\frac{1}{2}u_\beta)<br>\end{cases}<br>$$</p>
+<p>这样不同N值对应的时间可以总结为下表</p>
+<table>
+<thead>
+<tr>
+<th>N</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>6</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>$T_1$</td>
+<td>Z</td>
+<td>Y</td>
+<td>-Z</td>
+<td>-X</td>
+<td>X</td>
+<td>-Y</td>
+</tr>
+<tr>
+<td>$T_2$</td>
+<td>Y</td>
+<td>-X</td>
+<td>X</td>
+<td>Z</td>
+<td>-Y</td>
+<td>-Z</td>
+</tr>
+</tbody></table>
+<p>在Simulink当中的实现如img8和img9所示</p>
+<img src="/images/SVPWM/img8.png" alt="img8" width=50% height=50%>
 
-$$
-P=3*\frac{U_m}{\sqrt{2}}*
-$$
--->
+<img src="/images/SVPWM/img9.png" alt="img9" width=50% height=50%>
+
+<h3 id="PWM波生成模块"><a href="#PWM波生成模块" class="headerlink" title="PWM波生成模块"></a>PWM波生成模块</h3><p>要生成PWM波需要确定$a,b,c$三管的开关时间，下面以第Ⅰ扇区，采用零矢量分散式为例</p>
+<img src="/images/SVPWM/img4.png" alt="img4" width=50% height=50%>
+
+<p>这里可以参考前面的img4，可以看到三个管的开启时间分别为</p>
+<p>$$<br>\begin{cases}<br>T_{a1}&#x3D;\frac{T_0-t_1-t_2}{4} \\<br>T_{b1}&#x3D;T_{a1}+\frac{1}{2}t_1 \\<br>T_{c1}&#x3D;T_{b1}+\frac{1}{2}t_2<br>\end{cases}<br>$$</p>
+<p>注：零矢量集中式则可以参考img3推得</p>
+<p>对于所有扇区的情况，如果定义$T_a,T_b,T_c$分别为三个管开启的时间，可以将开启时间总结为下表</p>
+<table>
+<thead>
+<tr>
+<th>N</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>6</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>$T_A$</td>
+<td>$T_{b1}$</td>
+<td>$T_{a1}$</td>
+<td>$T_{a1}$</td>
+<td>$T_{c1}$</td>
+<td>$T_{c1}$</td>
+<td>$T_{b1}$</td>
+</tr>
+<tr>
+<td>$T_B$</td>
+<td>$T_{a1}$</td>
+<td>$T_{c1}$</td>
+<td>$T_{b1}$</td>
+<td>$T_{b1}$</td>
+<td>$T_{a1}$</td>
+<td>$T_{c1}$</td>
+</tr>
+<tr>
+<td>$T_C$</td>
+<td>$T_{c1}$</td>
+<td>$T_{b1}$</td>
+<td>$T_{c1}$</td>
+<td>$T_{a1}$</td>
+<td>$T_{b1}$</td>
+<td>$T_{a1}$</td>
+</tr>
+</tbody></table>
+<p>在Simulink当中的实现如img10所示</p>
+<img src="/images/SVPWM/img10.png" alt="img10" width=50% height=50%>
+
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>将所有模块联合起来，SVPWM的内部结构就如img11所示</p>
+<img src="/images/SVPWM/img11.png" alt="img11" width=50% height=50%>
+
+<h2 id="三角接情况"><a href="#三角接情况" class="headerlink" title="三角接情况"></a>三角接情况</h2><p>以上论述了电机绕组为星形接法时的情况，那么当绕组为三角形接法时情况会发生什么变化呢？</p>
+<p>事实上，基本原理并没有发生变化，只不过基本电压矢量旋转了30°，开关与电压矢量的对应关系发生了改变</p>
+<p>后续的电压矢量作用时间计算模块和PWM生成模块按照改变后的关系分别计算即可。</p>
 ]]></content>
       <categories>
         <category>电机控制</category>
       </categories>
       <tags>
-        <tag>坐标变换</tag>
+        <tag>SVPWM</tag>
+        <tag>Simulink</tag>
       </tags>
   </entry>
   <entry>
@@ -320,6 +428,66 @@ $$
       </tags>
   </entry>
   <entry>
+    <title>书签</title>
+    <url>/2024/11/08/%E4%B9%A6%E7%AD%BE/</url>
+    <content><![CDATA[<h2 id="ZJU"><a href="#ZJU" class="headerlink" title="ZJU"></a>ZJU</h2><ul>
+<li><a href="https://courses.zju.edu.cn/user/index">学在浙大</a></li>
+<li><a href="http://tzzd.zju.edu.cn/">团在浙大</a></li>
+<li><a href="http://zdbk.zju.edu.cn/">教务网本</a></li>
+<li><a href="https://yjsy.zju.edu.cn/">教务网研</a></li>
+<li><a href="http://ms.zju.edu.cn/">正版软件</a></li>
+<li><a href="https://zjuers.com/rd?url=http://eta.zju.edu.cn/">ETA</a></li>
+<li><a href="http://cwcx.zju.edu.cn/WFManager/login.jsp">计财处</a></li>
+<li><a href="http://ee.office.zju.edu.cn/main.htm">浙大电院</a></li>
+<li><a href="https://www.nexushd.org/">NexusHD</a></li>
+</ul>
+<hr>
+<h2 id="学术"><a href="#学术" class="headerlink" title="学术"></a>学术</h2><ul>
+<li><a href="https://scholar.google.com/">谷歌学术</a></li>
+<li><a href="https://ieeexplore.ieee.org/Xplore/home.jsp">IEEE</a></li>
+<li><a href="https://www.webofscience.com/wos/alldb/basic-search">Web-of-Science</a></li>
+<li><a href="https://www.incopat.com/advancedSearch/simpleInit">专利检索</a></li>
+<li><a href="https://www.cnki.net/">知网</a></li>
+</ul>
+<hr>
+<h2 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h2><ul>
+<li><a href="https://github.com/">Github</a></li>
+<li><a href="https://chatgpt.com/">Chatgpt</a></li>
+<li><a href="https://chat.deepseek.com/">Deepseek</a></li>
+<li><a href="https://www.zjuers.com/">ZJUer轻首页</a></li>
+<li><a href="https://yinghezhinan.com/site/z-library/">Z-library</a></li>
+</ul>
+<hr>
+<h2 id="论坛"><a href="#论坛" class="headerlink" title="论坛"></a>论坛</h2><ul>
+<li><a href="https://www.cc98.org/">CC98</a></li>
+<li><a href="https://www.1point3acres.com/">一亩三分地</a></li>
+<li><a href="https://500px.com.cn/">500px</a></li>
+</ul>
+<hr>
+<h2 id="镜像网站"><a href="#镜像网站" class="headerlink" title="镜像网站"></a>镜像网站</h2><ul>
+<li><a href="https://mirrors.zju.edu.cn/">ZJU-Mirror</a></li>
+<li><a href="https://mirrors.tuna.tsinghua.edu.cn/">THU-Mirror</a></li>
+</ul>
+<hr>
+<h2 id="娱乐"><a href="#娱乐" class="headerlink" title="娱乐"></a>娱乐</h2><ul>
+<li><a href="https://www.bilibili.com/">Bilibili</a></li>
+<li><a href="https://www.huya.com/">虎牙</a></li>
+<li><a href="https://www.czzy77.com/">影视</a></li>
+<li><a href="https://www.mutedm.com/">动漫</a></li>
+</ul>
+<hr>
+<h2 id="TOEFL"><a href="#TOEFL" class="headerlink" title="TOEFL"></a>TOEFL</h2><ul>
+<li><a href="https://top.zhan.com/toefl/listen/alltpo.html">小站</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>书签</category>
+      </categories>
+      <tags>
+        <tag>导航</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>电机建模</title>
     <url>/2024/11/13/%E7%94%B5%E6%9C%BA%E5%BB%BA%E6%A8%A1/</url>
     <content><![CDATA[<h2 id="电机建模能用来干什么"><a href="#电机建模能用来干什么" class="headerlink" title="电机建模能用来干什么"></a>电机建模能用来干什么</h2><ul>
@@ -461,228 +629,82 @@ $$
       </tags>
   </entry>
   <entry>
-    <title>自学资源</title>
-    <url>/2025/06/12/%E8%87%AA%E5%AD%A6%E8%B5%84%E6%BA%90/</url>
-    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本文主要分为两部分，第一部分为自用部分，汇集了作者本人近期自学的内容，第二部分为资源汇总，在作者学完一门课程后，会将有用的课程资源汇总到第二部分。</p>
-<hr>
-<h2 id="作者自用"><a href="#作者自用" class="headerlink" title="作者自用"></a>作者自用</h2><h3 id="UCB-CS70"><a href="#UCB-CS70" class="headerlink" title="UCB CS70"></a>UCB CS70</h3><ul>
-<li><a href="https://www.youtube.com/watch?v=HEfu_XQo3Rw&list=PLu0nzW8Es1x0Ivn-757Za_ps090FJxOPd">课程视频</a></li>
-<li><a href="https://github.com/PKUFlyingPig/UCB-CS70">课程笔记</a></li>
-</ul>
-<h3 id="MIT-6-041SC"><a href="#MIT-6-041SC" class="headerlink" title="MIT 6.041SC"></a>MIT 6.041SC</h3><ul>
-<li><a href="https://ocw.mit.edu/courses/6-041sc-probabilistic-systems-analysis-and-applied-probability-fall-2013/">课程网站</a></li>
-</ul>
-<h3 id="UCB-CS61A"><a href="#UCB-CS61A" class="headerlink" title="UCB CS61A"></a>UCB CS61A</h3><ul>
-<li><a href="https://www.bilibili.com/video/BV1sy411z7nA/">课程视频</a></li>
-<li><a href="https://github.com/InsideEmpire/CS61A-PathwayToSuccess/">课程笔记</a></li>
-</ul>
-<h3 id="UCB-EE120"><a href="#UCB-EE120" class="headerlink" title="UCB EE120"></a>UCB EE120</h3><ul>
-<li><a href="https://www.bilibili.com/video/BV1J7421o7pF/">课程视频</a></li>
-<li><a href="https://github.com/ukeSJTU/EE120/tree/main">课程笔记</a></li>
-</ul>
-<h3 id="MIT-6-102"><a href="#MIT-6-102" class="headerlink" title="MIT 6.102"></a>MIT 6.102</h3><ul>
-<li><a href="https://web.mit.edu/6.102/www/sp25/">课程网站</a></li>
-</ul>
-<h3 id="Coursera-Nand2Tetris"><a href="#Coursera-Nand2Tetris" class="headerlink" title="Coursera Nand2Tetris"></a>Coursera Nand2Tetris</h3><ul>
-<li><a href="https://www.coursera.org/learn/build-a-computer/home/module/1">课程网站part1</a></li>
-<li><a href="https://www.coursera.org/learn/nand2tetris2/home/module/1">课程网站part2</a></li>
-<li><a href="https://github.com/PKUFlyingPig/NandToTetris">课程笔记</a></li>
-</ul>
-<h3 id="Japanese"><a href="#Japanese" class="headerlink" title="Japanese"></a>Japanese</h3><ul>
-<li><a href="https://github.com/yudataguy/Awesome-Japanese">课程网站</a></li>
-</ul>
-<hr>
-<h2 id="资源汇总"><a href="#资源汇总" class="headerlink" title="资源汇总"></a>资源汇总</h2><h3 id="CS自学导航网站"><a href="#CS自学导航网站" class="headerlink" title="CS自学导航网站"></a>CS自学导航网站</h3><ul>
-<li><a href="https://csdiy.wiki/">CS自学指南</a></li>
-</ul>
-<h3 id="MIT-Missing-Semester"><a href="#MIT-Missing-Semester" class="headerlink" title="MIT Missing Semester"></a>MIT Missing Semester</h3><ul>
-<li><a href="https://space.bilibili.com/518734451">课程视频</a></li>
-<li><a href="https://missing.csail.mit.edu/2020/">课程网站</a></li>
-</ul>
-<h3 id="Git"><a href="#Git" class="headerlink" title="Git"></a>Git</h3><ul>
-<li><a href="https://www.bilibili.com/video/BV1vy4y1s7k6/">课程视频</a></li>
-</ul>
-<h3 id="Crash-Course-Computer-Science"><a href="#Crash-Course-Computer-Science" class="headerlink" title="Crash Course Computer Science"></a>Crash Course Computer Science</h3><ul>
-<li><a href="https://www.bilibili.com/video/BV1EW411u7th/">课程视频</a></li>
-</ul>
-]]></content>
-      <categories>
-        <category>书签</category>
-      </categories>
-      <tags>
-        <tag>资源</tag>
-        <tag>自学</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>SVPWM</title>
-    <url>/2025/02/26/SVPWM/</url>
-    <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>SVPWM(Space Vector Pulse Width Modulation)，即电压空间矢量调制，是一种PWM生成方法，其作用是在主电路中生成给定的电压信号，而不是电机控制方法，这里需要与电机矢量控制做一个区分。</p>
-<p>SVPWM给定的是目标电压矢量，输出的是六个PWM波，这六个PWM波控制IGBT的通断，在主电路中生成三相PWM，三相PWM的基波合成起来就是目标电压矢量。</p>
-<h2 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h2><p>假设电机内部绕组接法为星形接法，以如下图所示的IGBT逆变器为例来进行说明</p>
-<img src="/images/SVPWM/img1.png" alt="img1" width=50% height=50%>
+    <title>坐标变换</title>
+    <url>/2025/03/11/%E5%9D%90%E6%A0%87%E5%8F%98%E6%8D%A2/</url>
+    <content><![CDATA[<h2 id="基本定义"><a href="#基本定义" class="headerlink" title="基本定义"></a>基本定义</h2><p>坐标变换这种方法在电网络、电力电子、电机建模与控制等很多领域都有应用，本文章以三相永磁同步电机为背景，主要讨论三相与两相间的转化</p>
+<p>对于三相永磁同步电机而言，定子绕组可以等效为a,b,c三相绕组，假设这三相绕组的方向如img1所示</p>
+<img src="/images/坐标变换/img1.png" alt="img1" width=50% height="50%">
 
-<p>设$S_A&#x3D;1$代表A相上管通，$S_A&#x3D;0$代表A相下管通，$S_B,S_C$类似设定，则可以得到SVPWM的基本电压矢量为下图$u_0 ~ u_7$所示</p>
-<img src="/images/SVPWM/img2.png" alt="img2" width=50% height=50%>
+<p>对于这三相绕组的任意一个物理量，比如电流，定义</p>
+<p>$$<br>\begin{equation}<br>    \boldsymbol{i_a}&#x3D;i_a\boldsymbol{a},\boldsymbol{i_b}&#x3D;i_b\boldsymbol{b},\boldsymbol{i_c}&#x3D;i_c\boldsymbol{c}<br>\end{equation}<br>$$</p>
+<p>需要注意的是，这里的$i_a,i_b,i_c$代表的是电流的大小，并且代表的是瞬态过程</p>
+<h2 id="恒相幅值变换"><a href="#恒相幅值变换" class="headerlink" title="恒相幅值变换"></a>恒相幅值变换</h2><p>定义综合矢量$\boldsymbol{i}&#x3D;k(\boldsymbol{i_a}+\boldsymbol{i_b}+\boldsymbol{i_c})$，这里的k是一个待定的系数</p>
+<p>由于是恒相幅值变换，我们的目标是在稳态过程下，综合矢量的幅值等于a，b，c三相的幅值</p>
+<p>本文先通过瞬态过程的推导得出公式，因为稳态过程就是瞬态过程的一个特例，所以可以直接代入公式，解得k的值</p>
+<h3 id="瞬态过程"><a href="#瞬态过程" class="headerlink" title="瞬态过程"></a>瞬态过程</h3><p>要计算综合矢量的幅值，可以建立x-y坐标系，假设如图img2所示</p>
+<img src="/images/坐标变换/img2.png" alt="img2" width=50% height="50%">
 
-<p>矢量的合成应该遵循相邻原则和平均值等效原则。设这六个区分别为$Ⅰ ~ Ⅵ$，假设现在目标电压矢量处在$Ⅰ$区，那么应该由基本电压矢量$u_1和u_2$合成。如果设开关周期时间为$T_0$，$u_1$作用时间为$t_1$，$u_2$作用时间为$t_2$，那么应该有</p>
-<p>$$<br>T_0u_s&#x3D;t_1u_1+t_2u_2<br>$$</p>
-<p>根据三角形的正弦定理和余弦定理，就可以算出$t_1,t_2$的大小</p>
-<p>如果$t_1+t_2&lt;T_0$，多出来的时间就是零矢量的作用时间，$t_0&#x3D;T_0-t_1-t_2$</p>
-<p>如果$t_1+t_2&gt;T_0$，则令$t_1’&#x3D;\frac{t_1}{t_1+t_2}T_0,t_2’&#x3D;\frac{t_2}{t_1+t_2}T_0$</p>
-<p>用上述$t_1’,t_2’$代替原有的导通时间</p>
-<p>但是$t_1,t_2,t_0$在$T_0$中的时间分配是自由的，一般来说，一方面希望尽量减少开关次数减少开关损耗，另一方面希望减少谐波成分</p>
-<p>一般而言有两种实现方式，分别是零矢量集中和零矢量分散方式</p>
-<p>以上图img2为例，集中和分散分别对应于img3和img4</p>
-<img src="/images/SVPWM/img3.png" alt="img3" width=50% height=50%>
+<p>容易得到</p>
+<p>$$<br>\begin{cases}<br>    i_x&#x3D;k(i_a-\frac{1}{2}i_b-\frac{1}{2}i_c) \\<br>    i_y&#x3D;k(\frac{\sqrt{3}}{2}i_b-\frac{\sqrt{3}}{2}i_c)<br>\end{cases} \\<br>$$<br>$$<br>\begin{equation}<br>i&#x3D;|\boldsymbol{i}|&#x3D;k\sqrt{i_x^2+i_y^2}&#x3D;k\sqrt{\frac{1}{2}\sum\limits_{cyc}(i_a-i_b)^2}(1)<br>\end{equation}<br>$$</p>
+<h3 id="稳态过程"><a href="#稳态过程" class="headerlink" title="稳态过程"></a>稳态过程</h3><p>对于稳态过程，可以假设三相是相位分别相差$\frac{2}{3}\pi$，且幅值完全相同的正弦波，即</p>
+<p>$$<br>\begin{cases}<br>    i_a&#x3D;I_m\cos(\omega t) \\<br>    i_b&#x3D;I_m\cos(\omega t-\frac{2}{3}\pi) \\<br>    i_c&#x3D;I_m\cos(\omega t+\frac{2}{3}\pi)<br>\end{cases}<br>$$</p>
+<p>将上述三个式子代入公式(1)，可以得到</p>
+<p>$$<br>\begin{align}<br>    i&amp;&#x3D;k\sqrt{\frac{1}{2}\sum\limits_{cyc}(I_m\cos\omega t-I_m\cos(\omega t-\frac{2}{3}\pi))^2} \\<br>    &amp;&#x3D;k\sqrt{\frac{1}{2}I_m^2\sum\limits_{cyc}(-2\sin(\omega t-\frac{1}{3}\pi)\sin\frac{\pi}{3})^2} \\<br>    &amp;&#x3D;k\sqrt{\frac{1}{2}I_m^2\sum\limits_{cyc}3\sin^2(\omega t-\frac{\pi}{3})} \\<br>    &amp;&#x3D;k\sqrt{\frac{3}{2}I_m^2\sum\limits_{cyc}\frac{1-cos(2\omega t-\frac{2}{3}\pi)}{2}} \\<br>    &amp;&#x3D;k\sqrt{\frac{9}{4}I_m^2} \\<br>    &amp;&#x3D;\frac{3}{2}kI_m<br>\end{align}<br>$$</p>
+<p>因此，如果要使变换前后幅值相等，应该令$k&#x3D;\frac{2}{3}$</p>
+<h3 id="坐标变换"><a href="#坐标变换" class="headerlink" title="坐标变换"></a>坐标变换</h3><p>在得出了坐标变换的系数之后，就要对物理量进行坐标变换了，在叙述坐标变换的公式之前，应该先清楚坐标变换的目的</p>
+<p>在三相永磁同步电机中，如果直接对a,b,c三相进行控制，将会非常复杂，因为a,b,c三相之间会互相耦合，也就是互感不为零，这将给控制带来麻烦</p>
+<p>为此，我们希望先将a,b,c三相通过坐标变换变成两相，对两相进行控制，控制完成后再进行逆变换生成对应的三相控制量</p>
+<p>具体的部分可参看【永磁同步电机】</p>
+<p>坐标变换的类型主要有$abc-\alpha\beta 0,abc-dq0,abc-d_cq_c0$这么三种，具体定义参见下文，明白一种之后很容易就能举一反三，这里只给出$abc-\alpha\beta 0,abc-dq0$的公式</p>
+<h4 id="abc-alpha-beta-0"><a href="#abc-alpha-beta-0" class="headerlink" title="$abc-\alpha\beta 0$"></a>$abc-\alpha\beta 0$</h4><p>a,b,c是电机等效绕组的方向，$\alpha$方向与a轴重合，$\beta$方向超前$\alpha$方向90度，如图img3所示</p>
+<img src="/images/坐标变换/img3.png" alt="img3" width=50% height="50%">
 
-<img src="/images/SVPWM/img4.png" alt="img4" width=50% height=50%>
+<p>其实这里的$\alpha\beta$坐标与上面计算$|\boldsymbol{i}|$时用的x，y坐标是一样的，所以有</p>
+<p>$$<br>\begin{cases}<br>    i_\alpha&#x3D;i_a-\frac{1}{2}i_b-\frac{1}{2}i_c \\<br>    i_\beta&#x3D;\frac{\sqrt{3}}{2}i_b-\frac{\sqrt{3}}{2}i_c<br>\end{cases}<br>$$</p>
+<p>这样我们能通过abc坐标系，算出$i_\alpha,i_\beta$的值，但是反过来却不成立</p>
+<p>如果$i_\alpha,i_\beta$的值确立，那么综合矢量就确定了，假设有一组$i_a,i_b,i_c$使得$\boldsymbol{i}&#x3D;\frac{2}{3}(i_a\boldsymbol{a}+i_b\boldsymbol{b}+i_c\boldsymbol{c})$成立</p>
+<p>由于$\boldsymbol{a}+\boldsymbol{b}+\boldsymbol{c}&#x3D;0$,$i_a+const,i_b+const,i_c+const$都是满足条件的值，这样就有无数组解，其中const是任意实数，因此还需要一条方程约束</p>
+<p>这里先给出方程，再证明为什么给出了这条方程，就能够完全确定$i_a,i_b,i_c$,方程如下</p>
+<p>$$<br>\begin{equation}<br>    i_0&#x3D;\frac{1}{3}(i_a+i_b+i_c)<br>\end{equation}<br>$$</p>
+<p>证明如下，上面说了，$i_\alpha,i_\beta$给定之后，综合矢量就完全确定了，作综合矢量关于$a,b,c$三轴的投影，并记为$i_a’,i_b’,i_c’$</p>
+<p>$$<br>\begin{align}<br>    i_a’&amp;&#x3D;\boldsymbol{i}\cdot \boldsymbol{a} \\<br>    &amp;&#x3D;\frac{2}{3}(i_a-\frac{1}{2}i_b-\frac{1}{2}i_c)<br>\end{align}<br>$$</p>
+<p>b，c相同理可得</p>
+<p>$$<br>i_b’&#x3D;\frac{2}{3}(i_b-\frac{1}{2}i_c-\frac{1}{2}i_a)<br>$$<br>$$<br>i_c’&#x3D;\frac{2}{3}(i_c-\frac{1}{2}i_a-\frac{1}{2}i_b)<br>$$</p>
+<p>可以发现$i_a&#x3D;i_a’+i_0,i_b&#x3D;i_b’+i_0,i_c&#x3D;i_c’+i_0$</p>
+<p>这就是说，只要再给定$i_0$，就可以完全推得$i_a,i_b,i_c$</p>
+<p>这个过程用矩阵表示如下</p>
+<p>$$<br>\begin{bmatrix}<br>    i_\alpha \\<br>    i_\beta \\<br>    i_0<br>\end{bmatrix}&#x3D;\frac{2}{3}<br>\begin{bmatrix}<br>    1 &amp; -\frac{1}{2} &amp; -\frac{1}{2} \\<br>    0 &amp; \frac{\sqrt{3}}{2} &amp; -\frac{\sqrt{3}}{2} \\<br>    \frac{1}{2} &amp; \frac{1}{2} &amp; \frac{1}{2}<br>\end{bmatrix}<br>\begin{bmatrix}<br>    i_a \\<br>    i_b \\<br>    i_c<br>\end{bmatrix}<br>$$</p>
+<p>定义</p>
+<p>$$<br>\begin{equation}<br>\boldsymbol{C}&#x3D;\frac{2}{3}<br>\begin{bmatrix}<br>    1 &amp; -\frac{1}{2} &amp; -\frac{1}{2} \\<br>    0 &amp; \frac{\sqrt{3}}{2} &amp; -\frac{\sqrt{3}}{2} \\<br>    \frac{1}{2} &amp; \frac{1}{2} &amp; \frac{1}{2}<br>\end{bmatrix}<br>\end{equation}<br>$$</p>
+<p>这里的$\boldsymbol{C}$就是变换矩阵，可以算得$|\boldsymbol{C}|\not &#x3D;{0}$，故$\boldsymbol{C}$存在逆矩阵</p>
+<p>逆矩阵可以通过纯粹的数学运算得出，也可以通过上述的物理意义得到</p>
+<p>$$<br>\begin{equation}<br>\boldsymbol{C}^{-1}&#x3D;<br>\begin{bmatrix}<br>    1 &amp; 0 &amp; 1 \\<br>    -\frac{1}{2} &amp; \frac{\sqrt{3}}{2} &amp; 1 \\<br>    -\frac{1}{2} &amp; -\frac{\sqrt{3}}{2} &amp; 1<br>\end{bmatrix}<br>\end{equation}<br>$$</p>
+<p>这样$abc-\alpha\beta 0$的正逆变换就都得到了</p>
+<h4 id="abc-dq0"><a href="#abc-dq0" class="headerlink" title="$abc-dq0$"></a>$abc-dq0$</h4><p>d,q轴的定义是以转子转速$\omega$旋转的坐标系，设$\theta$是d轴与q轴的夹角，如img4所示</p>
+<img src="/images/坐标变换/img4.png" alt="img4" width=50% height="50%">
 
-<p>集中的优势在于开关损耗较小，但是由于零矢量单次停留时间过长，会导致谐波成分增加</p>
-<p>而分散的优劣势则恰恰与集中相反</p>
-<h2 id="Simulink实现"><a href="#Simulink实现" class="headerlink" title="Simulink实现"></a>Simulink实现</h2><p>总体的形状应该如img5所示，其中$u_\alpha,u_\beta$给定，也就是说，$u_s$给定，直流电压$U_d$和开关周期时间$T_0$已知</p>
-<img src="/images/SVPWM/img5.png" alt="img5" width=50% height=50%>
+<p>这里的坐标变换与$\alpha\beta 0$的坐标变换完全类似，可以根据物理含义直接给出</p>
+<p>$$<br>\boldsymbol{C}&#x3D;\frac{2}{3}<br>\begin{bmatrix}<br>    \cos\theta &amp; \cos(\theta-\frac{2}{3}\pi) &amp; \cos(\theta+\frac{2}{3}\pi) \\<br>    -\sin\theta &amp; -\sin(\theta-\frac{2}{3}\pi) &amp; -\sin(\theta+\frac{2}{3}\pi) \\<br>    \frac{1}{2} &amp; \frac{1}{2} &amp; \frac{1}{2}<br>\end{bmatrix}<br>$$<br>$$<br>\boldsymbol{C}^{-1}&#x3D;<br>\begin{bmatrix}<br>    \cos\theta &amp; -\sin\theta &amp; 1 \\<br>    \cos(\theta-\frac{2}{3}\pi) &amp; -\sin(\theta-\frac{2}{3}\pi) &amp; 1 \\<br>    \cos(\theta+\frac{2}{3}\pi) &amp; -\sin(\theta+\frac{2}{3}\pi) &amp; 1<br>\end{bmatrix}<br>$$</p>
+<h4 id="abc-d-cq-c0"><a href="#abc-d-cq-c0" class="headerlink" title="$abc-d_cq_c0$"></a>$abc-d_cq_c0$</h4><p>$d_c,q_c$轴是以同步速旋转的坐标系，在方程上与$abc-dq0$是完全一样的，只不过$\frac{d\theta}{dt}&#x3D;\omega_c$为同步速而已</p>
+<!--
+## 恒功率变换
 
-<p>为了实现功能，可以粗略的将整个模块分为三部分：电压矢量区块检测模块、$T_1,T_2$计算模块和PWM波生成模块</p>
-<h3 id="电压矢量区块检测模块"><a href="#电压矢量区块检测模块" class="headerlink" title="电压矢量区块检测模块"></a>电压矢量区块检测模块</h3><p>可以用投影的方式确定电压矢量所在区块，如图img6所示，将电压矢量往$1~3$三个方向投影，则可以得到投影大小为</p>
-<img src="/images/SVPWM/img6.png" alt="img6" width=50% height=50%>
+对于恒功率变换，同样的，我们需要确定k的大小，恒功率变换的原则是变换前后功率相等，瞬态过程的关系式与恒相幅值变换是完全一样的，我们直接通过稳态过程求解k
 
-<p>$$<br>\begin{cases}<br>u_{ref1}&#x3D;u_\beta \\<br>u_{ref2}&#x3D;\frac{\sqrt{3}}{2}u_\alpha-\frac{1}{2}u_\beta \\<br>u_{ref3}&#x3D;-\frac{\sqrt{3}}{2}u_\alpha-\frac{1}{2}u_\beta<br>\end{cases}<br>$$</p>
-<p>定义一个二进制数$N&#x3D;CBA_2$,如果$u_{ref1}&gt;0$，则$A&#x3D;1$，否则$A&#x3D;0$。其余C对应$u_{ref3}$，B对应$u_{ref2}$，类似定义</p>
-<p>那么可以得出</p>
-<table>
-<thead>
-<tr>
-<th>N</th>
-<th>3</th>
-<th>1</th>
-<th>5</th>
-<th>4</th>
-<th>6</th>
-<th>2</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>扇区</td>
-<td>Ⅰ</td>
-<td>Ⅱ</td>
-<td>Ⅲ</td>
-<td>Ⅳ</td>
-<td>Ⅴ</td>
-<td>Ⅵ</td>
-</tr>
-</tbody></table>
-<p>在Simulink当中的实现如img7所示</p>
-<img src="/images/SVPWM/img7.png" alt="img7" width=50% height=50%>
+### 稳态过程
 
-<h3 id="T-1-T-2-计算模块"><a href="#T-1-T-2-计算模块" class="headerlink" title="$T_1,T_2$计算模块"></a>$T_1,T_2$计算模块</h3><p>以第Ⅰ扇区为例，设$U_{dc}$为直流电压大小，则$|u_1|&#x3D;|u_2|&#x3D;…&#x3D;|u_6|&#x3D;\frac{2}{3}U_{dc}$</p>
-<p>$$<br>\begin{cases}<br>u_\beta&#x3D;\frac{t_2}{T_0}u_2sin\frac{\pi}{3} \\<br>u_\alpha&#x3D;\frac{t_2}{T_0}u_2cos\frac{\pi}{3}+\frac{t_1}{T_0}u_1<br>\end{cases}<br>$$</p>
-<p>于是可得</p>
-<p>$$<br>\begin{cases}<br>t_1&#x3D;\frac{\sqrt{3}T_0}{U_{dc}}(\frac{\sqrt{3}}{2}u_\alpha-\frac{1}{2}u_\beta) \\<br>t_2&#x3D;\frac{\sqrt{3}T_0}{U_{dc}}u_\beta<br>\end{cases}<br>$$</p>
-<p>在其他区同理可以计算作用时间</p>
-<p>在这里可以对所有情况做一个归纳</p>
-<p>定义:</p>
-<p>$$<br>\begin{cases}<br>X&#x3D;\frac{\sqrt{3}T_0}{U_{dc}}u_\beta \\<br>Y&#x3D;\frac{\sqrt{3}T_0}{U_{dc}}(\frac{\sqrt{3}}{2}u_\alpha+\frac{1}{2}u_\beta) \\<br>Z&#x3D;\frac{\sqrt{3}T_0}{U_{dc}}(-\frac{\sqrt{3}}{2}u_\alpha+\frac{1}{2}u_\beta)<br>\end{cases}<br>$$</p>
-<p>这样不同N值对应的时间可以总结为下表</p>
-<table>
-<thead>
-<tr>
-<th>N</th>
-<th>1</th>
-<th>2</th>
-<th>3</th>
-<th>4</th>
-<th>5</th>
-<th>6</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>$T_1$</td>
-<td>Z</td>
-<td>Y</td>
-<td>-Z</td>
-<td>-X</td>
-<td>X</td>
-<td>-Y</td>
-</tr>
-<tr>
-<td>$T_2$</td>
-<td>Y</td>
-<td>-X</td>
-<td>X</td>
-<td>Z</td>
-<td>-Y</td>
-<td>-Z</td>
-</tr>
-</tbody></table>
-<p>在Simulink当中的实现如img8和img9所示</p>
-<img src="/images/SVPWM/img8.png" alt="img8" width=50% height=50%>
+设电压幅值为$U_m$，电流幅值为$I_m$，电流电压之间的相位差为$\phi$，则可以知道变换前的功率为
 
-<img src="/images/SVPWM/img9.png" alt="img9" width=50% height=50%>
-
-<h3 id="PWM波生成模块"><a href="#PWM波生成模块" class="headerlink" title="PWM波生成模块"></a>PWM波生成模块</h3><p>要生成PWM波需要确定$a,b,c$三管的开关时间，下面以第Ⅰ扇区，采用零矢量分散式为例</p>
-<img src="/images/SVPWM/img4.png" alt="img4" width=50% height=50%>
-
-<p>这里可以参考前面的img4，可以看到三个管的开启时间分别为</p>
-<p>$$<br>\begin{cases}<br>T_{a1}&#x3D;\frac{T_0-t_1-t_2}{4} \\<br>T_{b1}&#x3D;T_{a1}+\frac{1}{2}t_1 \\<br>T_{c1}&#x3D;T_{b1}+\frac{1}{2}t_2<br>\end{cases}<br>$$</p>
-<p>注：零矢量集中式则可以参考img3推得</p>
-<p>对于所有扇区的情况，如果定义$T_a,T_b,T_c$分别为三个管开启的时间，可以将开启时间总结为下表</p>
-<table>
-<thead>
-<tr>
-<th>N</th>
-<th>1</th>
-<th>2</th>
-<th>3</th>
-<th>4</th>
-<th>5</th>
-<th>6</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>$T_A$</td>
-<td>$T_{b1}$</td>
-<td>$T_{a1}$</td>
-<td>$T_{a1}$</td>
-<td>$T_{c1}$</td>
-<td>$T_{c1}$</td>
-<td>$T_{b1}$</td>
-</tr>
-<tr>
-<td>$T_B$</td>
-<td>$T_{a1}$</td>
-<td>$T_{c1}$</td>
-<td>$T_{b1}$</td>
-<td>$T_{b1}$</td>
-<td>$T_{a1}$</td>
-<td>$T_{c1}$</td>
-</tr>
-<tr>
-<td>$T_C$</td>
-<td>$T_{c1}$</td>
-<td>$T_{b1}$</td>
-<td>$T_{c1}$</td>
-<td>$T_{a1}$</td>
-<td>$T_{b1}$</td>
-<td>$T_{a1}$</td>
-</tr>
-</tbody></table>
-<p>在Simulink当中的实现如img10所示</p>
-<img src="/images/SVPWM/img10.png" alt="img10" width=50% height=50%>
-
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>将所有模块联合起来，SVPWM的内部结构就如img11所示</p>
-<img src="/images/SVPWM/img11.png" alt="img11" width=50% height=50%>
-
-<h2 id="三角接情况"><a href="#三角接情况" class="headerlink" title="三角接情况"></a>三角接情况</h2><p>以上论述了电机绕组为星形接法时的情况，那么当绕组为三角形接法时情况会发生什么变化呢？</p>
-<p>事实上，基本原理并没有发生变化，只不过基本电压矢量旋转了30°，开关与电压矢量的对应关系发生了改变</p>
-<p>后续的电压矢量作用时间计算模块和PWM生成模块按照改变后的关系分别计算即可。</p>
+$$
+P=3*\frac{U_m}{\sqrt{2}}*
+$$
+-->
 ]]></content>
       <categories>
         <category>电机控制</category>
       </categories>
       <tags>
-        <tag>SVPWM</tag>
-        <tag>Simulink</tag>
+        <tag>坐标变换</tag>
       </tags>
   </entry>
 </search>
