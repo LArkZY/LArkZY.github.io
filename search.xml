@@ -84,177 +84,6 @@
       </tags>
   </entry>
   <entry>
-    <title>SVPWM</title>
-    <url>/2025/02/26/SVPWM/</url>
-    <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>SVPWM(Space Vector Pulse Width Modulation)，即电压空间矢量调制，是一种PWM生成方法，其作用是在主电路中生成给定的电压信号，而不是电机控制方法，这里需要与电机矢量控制做一个区分。</p>
-<p>SVPWM给定的是目标电压矢量，输出的是六个PWM波，这六个PWM波控制IGBT的通断，在主电路中生成三相PWM，三相PWM的基波合成起来就是目标电压矢量。</p>
-<h2 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h2><p>假设电机内部绕组接法为星形接法，以如下图所示的IGBT逆变器为例来进行说明</p>
-<img src="/images/SVPWM/img1.png" alt="img1" width=50% height=50%>
-
-<p>设$S_A&#x3D;1$代表A相上管通，$S_A&#x3D;0$代表A相下管通，$S_B,S_C$类似设定，则可以得到SVPWM的基本电压矢量为下图$u_0 ~ u_7$所示</p>
-<img src="/images/SVPWM/img2.png" alt="img2" width=50% height=50%>
-
-<p>矢量的合成应该遵循相邻原则和平均值等效原则。设这六个区分别为$Ⅰ ~ Ⅵ$，假设现在目标电压矢量处在$Ⅰ$区，那么应该由基本电压矢量$u_1和u_2$合成。如果设开关周期时间为$T_0$，$u_1$作用时间为$t_1$，$u_2$作用时间为$t_2$，那么应该有</p>
-<p>$$<br>T_0u_s&#x3D;t_1u_1+t_2u_2<br>$$</p>
-<p>根据三角形的正弦定理和余弦定理，就可以算出$t_1,t_2$的大小</p>
-<p>如果$t_1+t_2&lt;T_0$，多出来的时间就是零矢量的作用时间，$t_0&#x3D;T_0-t_1-t_2$</p>
-<p>如果$t_1+t_2&gt;T_0$，则令$t_1’&#x3D;\frac{t_1}{t_1+t_2}T_0,t_2’&#x3D;\frac{t_2}{t_1+t_2}T_0$</p>
-<p>用上述$t_1’,t_2’$代替原有的导通时间</p>
-<p>但是$t_1,t_2,t_0$在$T_0$中的时间分配是自由的，一般来说，一方面希望尽量减少开关次数减少开关损耗，另一方面希望减少谐波成分</p>
-<p>一般而言有两种实现方式，分别是零矢量集中和零矢量分散方式</p>
-<p>以上图img2为例，集中和分散分别对应于img3和img4</p>
-<img src="/images/SVPWM/img3.png" alt="img3" width=50% height=50%>
-
-<img src="/images/SVPWM/img4.png" alt="img4" width=50% height=50%>
-
-<p>集中的优势在于开关损耗较小，但是由于零矢量单次停留时间过长，会导致谐波成分增加</p>
-<p>而分散的优劣势则恰恰与集中相反</p>
-<h2 id="Simulink实现"><a href="#Simulink实现" class="headerlink" title="Simulink实现"></a>Simulink实现</h2><p>总体的形状应该如img5所示，其中$u_\alpha,u_\beta$给定，也就是说，$u_s$给定，直流电压$U_d$和开关周期时间$T_0$已知</p>
-<img src="/images/SVPWM/img5.png" alt="img5" width=50% height=50%>
-
-<p>为了实现功能，可以粗略的将整个模块分为三部分：电压矢量区块检测模块、$T_1,T_2$计算模块和PWM波生成模块</p>
-<h3 id="电压矢量区块检测模块"><a href="#电压矢量区块检测模块" class="headerlink" title="电压矢量区块检测模块"></a>电压矢量区块检测模块</h3><p>可以用投影的方式确定电压矢量所在区块，如图img6所示，将电压矢量往$1~3$三个方向投影，则可以得到投影大小为</p>
-<img src="/images/SVPWM/img6.png" alt="img6" width=50% height=50%>
-
-<p>$$<br>\begin{cases}<br>u_{ref1}&#x3D;u_\beta \\<br>u_{ref2}&#x3D;\frac{\sqrt{3}}{2}u_\alpha-\frac{1}{2}u_\beta \\<br>u_{ref3}&#x3D;-\frac{\sqrt{3}}{2}u_\alpha-\frac{1}{2}u_\beta<br>\end{cases}<br>$$</p>
-<p>定义一个二进制数$N&#x3D;CBA_2$,如果$u_{ref1}&gt;0$，则$A&#x3D;1$，否则$A&#x3D;0$。其余C对应$u_{ref3}$，B对应$u_{ref2}$，类似定义</p>
-<p>那么可以得出</p>
-<table>
-<thead>
-<tr>
-<th>N</th>
-<th>3</th>
-<th>1</th>
-<th>5</th>
-<th>4</th>
-<th>6</th>
-<th>2</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>扇区</td>
-<td>Ⅰ</td>
-<td>Ⅱ</td>
-<td>Ⅲ</td>
-<td>Ⅳ</td>
-<td>Ⅴ</td>
-<td>Ⅵ</td>
-</tr>
-</tbody></table>
-<p>在Simulink当中的实现如img7所示</p>
-<img src="/images/SVPWM/img7.png" alt="img7" width=50% height=50%>
-
-<h3 id="T-1-T-2-计算模块"><a href="#T-1-T-2-计算模块" class="headerlink" title="$T_1,T_2$计算模块"></a>$T_1,T_2$计算模块</h3><p>以第Ⅰ扇区为例，设$U_{dc}$为直流电压大小，则$|u_1|&#x3D;|u_2|&#x3D;…&#x3D;|u_6|&#x3D;\frac{2}{3}U_{dc}$</p>
-<p>$$<br>\begin{cases}<br>u_\beta&#x3D;\frac{t_2}{T_0}u_2sin\frac{\pi}{3} \\<br>u_\alpha&#x3D;\frac{t_2}{T_0}u_2cos\frac{\pi}{3}+\frac{t_1}{T_0}u_1<br>\end{cases}<br>$$</p>
-<p>于是可得</p>
-<p>$$<br>\begin{cases}<br>t_1&#x3D;\frac{\sqrt{3}T_0}{U_{dc}}(\frac{\sqrt{3}}{2}u_\alpha-\frac{1}{2}u_\beta) \\<br>t_2&#x3D;\frac{\sqrt{3}T_0}{U_{dc}}u_\beta<br>\end{cases}<br>$$</p>
-<p>在其他区同理可以计算作用时间</p>
-<p>在这里可以对所有情况做一个归纳</p>
-<p>定义:</p>
-<p>$$<br>\begin{cases}<br>X&#x3D;\frac{\sqrt{3}T_0}{U_{dc}}u_\beta \\<br>Y&#x3D;\frac{\sqrt{3}T_0}{U_{dc}}(\frac{\sqrt{3}}{2}u_\alpha+\frac{1}{2}u_\beta) \\<br>Z&#x3D;\frac{\sqrt{3}T_0}{U_{dc}}(-\frac{\sqrt{3}}{2}u_\alpha+\frac{1}{2}u_\beta)<br>\end{cases}<br>$$</p>
-<p>这样不同N值对应的时间可以总结为下表</p>
-<table>
-<thead>
-<tr>
-<th>N</th>
-<th>1</th>
-<th>2</th>
-<th>3</th>
-<th>4</th>
-<th>5</th>
-<th>6</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>$T_1$</td>
-<td>Z</td>
-<td>Y</td>
-<td>-Z</td>
-<td>-X</td>
-<td>X</td>
-<td>-Y</td>
-</tr>
-<tr>
-<td>$T_2$</td>
-<td>Y</td>
-<td>-X</td>
-<td>X</td>
-<td>Z</td>
-<td>-Y</td>
-<td>-Z</td>
-</tr>
-</tbody></table>
-<p>在Simulink当中的实现如img8和img9所示</p>
-<img src="/images/SVPWM/img8.png" alt="img8" width=50% height=50%>
-
-<img src="/images/SVPWM/img9.png" alt="img9" width=50% height=50%>
-
-<h3 id="PWM波生成模块"><a href="#PWM波生成模块" class="headerlink" title="PWM波生成模块"></a>PWM波生成模块</h3><p>要生成PWM波需要确定$a,b,c$三管的开关时间，下面以第Ⅰ扇区，采用零矢量分散式为例</p>
-<img src="/images/SVPWM/img4.png" alt="img4" width=50% height=50%>
-
-<p>这里可以参考前面的img4，可以看到三个管的开启时间分别为</p>
-<p>$$<br>\begin{cases}<br>T_{a1}&#x3D;\frac{T_0-t_1-t_2}{4} \\<br>T_{b1}&#x3D;T_{a1}+\frac{1}{2}t_1 \\<br>T_{c1}&#x3D;T_{b1}+\frac{1}{2}t_2<br>\end{cases}<br>$$</p>
-<p>注：零矢量集中式则可以参考img3推得</p>
-<p>对于所有扇区的情况，如果定义$T_a,T_b,T_c$分别为三个管开启的时间，可以将开启时间总结为下表</p>
-<table>
-<thead>
-<tr>
-<th>N</th>
-<th>1</th>
-<th>2</th>
-<th>3</th>
-<th>4</th>
-<th>5</th>
-<th>6</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>$T_A$</td>
-<td>$T_{b1}$</td>
-<td>$T_{a1}$</td>
-<td>$T_{a1}$</td>
-<td>$T_{c1}$</td>
-<td>$T_{c1}$</td>
-<td>$T_{b1}$</td>
-</tr>
-<tr>
-<td>$T_B$</td>
-<td>$T_{a1}$</td>
-<td>$T_{c1}$</td>
-<td>$T_{b1}$</td>
-<td>$T_{b1}$</td>
-<td>$T_{a1}$</td>
-<td>$T_{c1}$</td>
-</tr>
-<tr>
-<td>$T_C$</td>
-<td>$T_{c1}$</td>
-<td>$T_{b1}$</td>
-<td>$T_{c1}$</td>
-<td>$T_{a1}$</td>
-<td>$T_{b1}$</td>
-<td>$T_{a1}$</td>
-</tr>
-</tbody></table>
-<p>在Simulink当中的实现如img10所示</p>
-<img src="/images/SVPWM/img10.png" alt="img10" width=50% height=50%>
-
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>将所有模块联合起来，SVPWM的内部结构就如img11所示</p>
-<img src="/images/SVPWM/img11.png" alt="img11" width=50% height=50%>
-
-<h2 id="三角接情况"><a href="#三角接情况" class="headerlink" title="三角接情况"></a>三角接情况</h2><p>以上论述了电机绕组为星形接法时的情况，那么当绕组为三角形接法时情况会发生什么变化呢？</p>
-<p>事实上，基本原理并没有发生变化，只不过基本电压矢量旋转了30°，开关与电压矢量的对应关系发生了改变</p>
-<p>后续的电压矢量作用时间计算模块和PWM生成模块按照改变后的关系分别计算即可。</p>
-]]></content>
-      <categories>
-        <category>电机控制</category>
-      </categories>
-      <tags>
-        <tag>SVPWM</tag>
-        <tag>Simulink</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>书签</title>
     <url>/2024/11/08/%E4%B9%A6%E7%AD%BE/</url>
     <content><![CDATA[<h2 id="ZJU"><a href="#ZJU" class="headerlink" title="ZJU"></a>ZJU</h2><ul>
@@ -312,85 +141,6 @@
       </categories>
       <tags>
         <tag>导航</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>坐标变换</title>
-    <url>/2025/03/11/%E5%9D%90%E6%A0%87%E5%8F%98%E6%8D%A2/</url>
-    <content><![CDATA[<h2 id="基本定义"><a href="#基本定义" class="headerlink" title="基本定义"></a>基本定义</h2><p>坐标变换这种方法在电网络、电力电子、电机建模与控制等很多领域都有应用，本文章以三相永磁同步电机为背景，主要讨论三相与两相间的转化</p>
-<p>对于三相永磁同步电机而言，定子绕组可以等效为a,b,c三相绕组，假设这三相绕组的方向如img1所示</p>
-<img src="/images/坐标变换/img1.png" alt="img1" width=50% height="50%">
-
-<p>对于这三相绕组的任意一个物理量，比如电流，定义</p>
-<p>$$<br>\begin{equation}<br>    \boldsymbol{i_a}&#x3D;i_a\boldsymbol{a},\boldsymbol{i_b}&#x3D;i_b\boldsymbol{b},\boldsymbol{i_c}&#x3D;i_c\boldsymbol{c}<br>\end{equation}<br>$$</p>
-<p>需要注意的是，这里的$i_a,i_b,i_c$代表的是电流的大小，并且代表的是瞬态过程</p>
-<h2 id="恒相幅值变换"><a href="#恒相幅值变换" class="headerlink" title="恒相幅值变换"></a>恒相幅值变换</h2><p>定义综合矢量$\boldsymbol{i}&#x3D;k(\boldsymbol{i_a}+\boldsymbol{i_b}+\boldsymbol{i_c})$，这里的k是一个待定的系数</p>
-<p>由于是恒相幅值变换，我们的目标是在稳态过程下，综合矢量的幅值等于a，b，c三相的幅值</p>
-<p>本文先通过瞬态过程的推导得出公式，因为稳态过程就是瞬态过程的一个特例，所以可以直接代入公式，解得k的值</p>
-<h3 id="瞬态过程"><a href="#瞬态过程" class="headerlink" title="瞬态过程"></a>瞬态过程</h3><p>要计算综合矢量的幅值，可以建立x-y坐标系，假设如图img2所示</p>
-<img src="/images/坐标变换/img2.png" alt="img2" width=50% height="50%">
-
-<p>容易得到</p>
-<p>$$<br>\begin{cases}<br>    i_x&#x3D;k(i_a-\frac{1}{2}i_b-\frac{1}{2}i_c) \\<br>    i_y&#x3D;k(\frac{\sqrt{3}}{2}i_b-\frac{\sqrt{3}}{2}i_c)<br>\end{cases} \\<br>$$<br>$$<br>\begin{equation}<br>i&#x3D;|\boldsymbol{i}|&#x3D;k\sqrt{i_x^2+i_y^2}&#x3D;k\sqrt{\frac{1}{2}\sum\limits_{cyc}(i_a-i_b)^2}(1)<br>\end{equation}<br>$$</p>
-<h3 id="稳态过程"><a href="#稳态过程" class="headerlink" title="稳态过程"></a>稳态过程</h3><p>对于稳态过程，可以假设三相是相位分别相差$\frac{2}{3}\pi$，且幅值完全相同的正弦波，即</p>
-<p>$$<br>\begin{cases}<br>    i_a&#x3D;I_m\cos(\omega t) \\<br>    i_b&#x3D;I_m\cos(\omega t-\frac{2}{3}\pi) \\<br>    i_c&#x3D;I_m\cos(\omega t+\frac{2}{3}\pi)<br>\end{cases}<br>$$</p>
-<p>将上述三个式子代入公式(1)，可以得到</p>
-<p>$$<br>\begin{align}<br>    i&amp;&#x3D;k\sqrt{\frac{1}{2}\sum\limits_{cyc}(I_m\cos\omega t-I_m\cos(\omega t-\frac{2}{3}\pi))^2} \\<br>    &amp;&#x3D;k\sqrt{\frac{1}{2}I_m^2\sum\limits_{cyc}(-2\sin(\omega t-\frac{1}{3}\pi)\sin\frac{\pi}{3})^2} \\<br>    &amp;&#x3D;k\sqrt{\frac{1}{2}I_m^2\sum\limits_{cyc}3\sin^2(\omega t-\frac{\pi}{3})} \\<br>    &amp;&#x3D;k\sqrt{\frac{3}{2}I_m^2\sum\limits_{cyc}\frac{1-cos(2\omega t-\frac{2}{3}\pi)}{2}} \\<br>    &amp;&#x3D;k\sqrt{\frac{9}{4}I_m^2} \\<br>    &amp;&#x3D;\frac{3}{2}kI_m<br>\end{align}<br>$$</p>
-<p>因此，如果要使变换前后幅值相等，应该令$k&#x3D;\frac{2}{3}$</p>
-<h3 id="坐标变换"><a href="#坐标变换" class="headerlink" title="坐标变换"></a>坐标变换</h3><p>在得出了坐标变换的系数之后，就要对物理量进行坐标变换了，在叙述坐标变换的公式之前，应该先清楚坐标变换的目的</p>
-<p>在三相永磁同步电机中，如果直接对a,b,c三相进行控制，将会非常复杂，因为a,b,c三相之间会互相耦合，也就是互感不为零，这将给控制带来麻烦</p>
-<p>为此，我们希望先将a,b,c三相通过坐标变换变成两相，对两相进行控制，控制完成后再进行逆变换生成对应的三相控制量</p>
-<p>具体的部分可参看【永磁同步电机】</p>
-<p>坐标变换的类型主要有$abc-\alpha\beta 0,abc-dq0,abc-d_cq_c0$这么三种，具体定义参见下文，明白一种之后很容易就能举一反三，这里只给出$abc-\alpha\beta 0,abc-dq0$的公式</p>
-<h4 id="abc-alpha-beta-0"><a href="#abc-alpha-beta-0" class="headerlink" title="$abc-\alpha\beta 0$"></a>$abc-\alpha\beta 0$</h4><p>a,b,c是电机等效绕组的方向，$\alpha$方向与a轴重合，$\beta$方向超前$\alpha$方向90度，如图img3所示</p>
-<img src="/images/坐标变换/img3.png" alt="img3" width=50% height="50%">
-
-<p>其实这里的$\alpha\beta$坐标与上面计算$|\boldsymbol{i}|$时用的x，y坐标是一样的，所以有</p>
-<p>$$<br>\begin{cases}<br>    i_\alpha&#x3D;i_a-\frac{1}{2}i_b-\frac{1}{2}i_c \\<br>    i_\beta&#x3D;\frac{\sqrt{3}}{2}i_b-\frac{\sqrt{3}}{2}i_c<br>\end{cases}<br>$$</p>
-<p>这样我们能通过abc坐标系，算出$i_\alpha,i_\beta$的值，但是反过来却不成立</p>
-<p>如果$i_\alpha,i_\beta$的值确立，那么综合矢量就确定了，假设有一组$i_a,i_b,i_c$使得$\boldsymbol{i}&#x3D;\frac{2}{3}(i_a\boldsymbol{a}+i_b\boldsymbol{b}+i_c\boldsymbol{c})$成立</p>
-<p>由于$\boldsymbol{a}+\boldsymbol{b}+\boldsymbol{c}&#x3D;0$,$i_a+const,i_b+const,i_c+const$都是满足条件的值，这样就有无数组解，其中const是任意实数，因此还需要一条方程约束</p>
-<p>这里先给出方程，再证明为什么给出了这条方程，就能够完全确定$i_a,i_b,i_c$,方程如下</p>
-<p>$$<br>\begin{equation}<br>    i_0&#x3D;\frac{1}{3}(i_a+i_b+i_c)<br>\end{equation}<br>$$</p>
-<p>证明如下，上面说了，$i_\alpha,i_\beta$给定之后，综合矢量就完全确定了，作综合矢量关于$a,b,c$三轴的投影，并记为$i_a’,i_b’,i_c’$</p>
-<p>$$<br>\begin{align}<br>    i_a’&amp;&#x3D;\boldsymbol{i}\cdot \boldsymbol{a} \\<br>    &amp;&#x3D;\frac{2}{3}(i_a-\frac{1}{2}i_b-\frac{1}{2}i_c)<br>\end{align}<br>$$</p>
-<p>b，c相同理可得</p>
-<p>$$<br>i_b’&#x3D;\frac{2}{3}(i_b-\frac{1}{2}i_c-\frac{1}{2}i_a)<br>$$<br>$$<br>i_c’&#x3D;\frac{2}{3}(i_c-\frac{1}{2}i_a-\frac{1}{2}i_b)<br>$$</p>
-<p>可以发现$i_a&#x3D;i_a’+i_0,i_b&#x3D;i_b’+i_0,i_c&#x3D;i_c’+i_0$</p>
-<p>这就是说，只要再给定$i_0$，就可以完全推得$i_a,i_b,i_c$</p>
-<p>这个过程用矩阵表示如下</p>
-<p>$$<br>\begin{bmatrix}<br>    i_\alpha \\<br>    i_\beta \\<br>    i_0<br>\end{bmatrix}&#x3D;\frac{2}{3}<br>\begin{bmatrix}<br>    1 &amp; -\frac{1}{2} &amp; -\frac{1}{2} \\<br>    0 &amp; \frac{\sqrt{3}}{2} &amp; -\frac{\sqrt{3}}{2} \\<br>    \frac{1}{2} &amp; \frac{1}{2} &amp; \frac{1}{2}<br>\end{bmatrix}<br>\begin{bmatrix}<br>    i_a \\<br>    i_b \\<br>    i_c<br>\end{bmatrix}<br>$$</p>
-<p>定义</p>
-<p>$$<br>\begin{equation}<br>\boldsymbol{C}&#x3D;\frac{2}{3}<br>\begin{bmatrix}<br>    1 &amp; -\frac{1}{2} &amp; -\frac{1}{2} \\<br>    0 &amp; \frac{\sqrt{3}}{2} &amp; -\frac{\sqrt{3}}{2} \\<br>    \frac{1}{2} &amp; \frac{1}{2} &amp; \frac{1}{2}<br>\end{bmatrix}<br>\end{equation}<br>$$</p>
-<p>这里的$\boldsymbol{C}$就是变换矩阵，可以算得$|\boldsymbol{C}|\not &#x3D;{0}$，故$\boldsymbol{C}$存在逆矩阵</p>
-<p>逆矩阵可以通过纯粹的数学运算得出，也可以通过上述的物理意义得到</p>
-<p>$$<br>\begin{equation}<br>\boldsymbol{C}^{-1}&#x3D;<br>\begin{bmatrix}<br>    1 &amp; 0 &amp; 1 \\<br>    -\frac{1}{2} &amp; \frac{\sqrt{3}}{2} &amp; 1 \\<br>    -\frac{1}{2} &amp; -\frac{\sqrt{3}}{2} &amp; 1<br>\end{bmatrix}<br>\end{equation}<br>$$</p>
-<p>这样$abc-\alpha\beta 0$的正逆变换就都得到了</p>
-<h4 id="abc-dq0"><a href="#abc-dq0" class="headerlink" title="$abc-dq0$"></a>$abc-dq0$</h4><p>d,q轴的定义是以转子转速$\omega$旋转的坐标系，设$\theta$是d轴与q轴的夹角，如img4所示</p>
-<img src="/images/坐标变换/img4.png" alt="img4" width=50% height="50%">
-
-<p>这里的坐标变换与$\alpha\beta 0$的坐标变换完全类似，可以根据物理含义直接给出</p>
-<p>$$<br>\boldsymbol{C}&#x3D;\frac{2}{3}<br>\begin{bmatrix}<br>    \cos\theta &amp; \cos(\theta-\frac{2}{3}\pi) &amp; \cos(\theta+\frac{2}{3}\pi) \\<br>    -\sin\theta &amp; -\sin(\theta-\frac{2}{3}\pi) &amp; -\sin(\theta+\frac{2}{3}\pi) \\<br>    \frac{1}{2} &amp; \frac{1}{2} &amp; \frac{1}{2}<br>\end{bmatrix}<br>$$<br>$$<br>\boldsymbol{C}^{-1}&#x3D;<br>\begin{bmatrix}<br>    \cos\theta &amp; -\sin\theta &amp; 1 \\<br>    \cos(\theta-\frac{2}{3}\pi) &amp; -\sin(\theta-\frac{2}{3}\pi) &amp; 1 \\<br>    \cos(\theta+\frac{2}{3}\pi) &amp; -\sin(\theta+\frac{2}{3}\pi) &amp; 1<br>\end{bmatrix}<br>$$</p>
-<h4 id="abc-d-cq-c0"><a href="#abc-d-cq-c0" class="headerlink" title="$abc-d_cq_c0$"></a>$abc-d_cq_c0$</h4><p>$d_c,q_c$轴是以同步速旋转的坐标系，在方程上与$abc-dq0$是完全一样的，只不过$\frac{d\theta}{dt}&#x3D;\omega_c$为同步速而已</p>
-<!--
-## 恒功率变换
-
-对于恒功率变换，同样的，我们需要确定k的大小，恒功率变换的原则是变换前后功率相等，瞬态过程的关系式与恒相幅值变换是完全一样的，我们直接通过稳态过程求解k
-
-### 稳态过程
-
-设电压幅值为$U_m$，电流幅值为$I_m$，电流电压之间的相位差为$\phi$，则可以知道变换前的功率为
-
-$$
-P=3*\frac{U_m}{\sqrt{2}}*
-$$
--->
-]]></content>
-      <categories>
-        <category>电机控制</category>
-      </categories>
-      <tags>
-        <tag>坐标变换</tag>
       </tags>
   </entry>
   <entry>
@@ -573,6 +323,256 @@ $$
       </tags>
   </entry>
   <entry>
+    <title>SVPWM</title>
+    <url>/2025/02/26/SVPWM/</url>
+    <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>SVPWM(Space Vector Pulse Width Modulation)，即电压空间矢量调制，是一种PWM生成方法，其作用是在主电路中生成给定的电压信号，而不是电机控制方法，这里需要与电机矢量控制做一个区分。</p>
+<p>SVPWM给定的是目标电压矢量，输出的是六个PWM波，这六个PWM波控制IGBT的通断，在主电路中生成三相PWM，三相PWM的基波合成起来就是目标电压矢量。</p>
+<h2 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h2><p>假设电机内部绕组接法为星形接法，以如下图所示的IGBT逆变器为例来进行说明</p>
+<img src="/images/SVPWM/img1.png" alt="img1" width=50% height=50%>
+
+<p>设$S_A&#x3D;1$代表A相上管通，$S_A&#x3D;0$代表A相下管通，$S_B,S_C$类似设定，则可以得到SVPWM的基本电压矢量为下图$u_0 ~ u_7$所示</p>
+<img src="/images/SVPWM/img2.png" alt="img2" width=50% height=50%>
+
+<p>矢量的合成应该遵循相邻原则和平均值等效原则。设这六个区分别为$Ⅰ ~ Ⅵ$，假设现在目标电压矢量处在$Ⅰ$区，那么应该由基本电压矢量$u_1和u_2$合成。如果设开关周期时间为$T_0$，$u_1$作用时间为$t_1$，$u_2$作用时间为$t_2$，那么应该有</p>
+<p>$$<br>T_0u_s&#x3D;t_1u_1+t_2u_2<br>$$</p>
+<p>根据三角形的正弦定理和余弦定理，就可以算出$t_1,t_2$的大小</p>
+<p>如果$t_1+t_2&lt;T_0$，多出来的时间就是零矢量的作用时间，$t_0&#x3D;T_0-t_1-t_2$</p>
+<p>如果$t_1+t_2&gt;T_0$，则令$t_1’&#x3D;\frac{t_1}{t_1+t_2}T_0,t_2’&#x3D;\frac{t_2}{t_1+t_2}T_0$</p>
+<p>用上述$t_1’,t_2’$代替原有的导通时间</p>
+<p>但是$t_1,t_2,t_0$在$T_0$中的时间分配是自由的，一般来说，一方面希望尽量减少开关次数减少开关损耗，另一方面希望减少谐波成分</p>
+<p>一般而言有两种实现方式，分别是零矢量集中和零矢量分散方式</p>
+<p>以上图img2为例，集中和分散分别对应于img3和img4</p>
+<img src="/images/SVPWM/img3.png" alt="img3" width=50% height=50%>
+
+<img src="/images/SVPWM/img4.png" alt="img4" width=50% height=50%>
+
+<p>集中的优势在于开关损耗较小，但是由于零矢量单次停留时间过长，会导致谐波成分增加</p>
+<p>而分散的优劣势则恰恰与集中相反</p>
+<h2 id="Simulink实现"><a href="#Simulink实现" class="headerlink" title="Simulink实现"></a>Simulink实现</h2><p>总体的形状应该如img5所示，其中$u_\alpha,u_\beta$给定，也就是说，$u_s$给定，直流电压$U_d$和开关周期时间$T_0$已知</p>
+<img src="/images/SVPWM/img5.png" alt="img5" width=50% height=50%>
+
+<p>为了实现功能，可以粗略的将整个模块分为三部分：电压矢量区块检测模块、$T_1,T_2$计算模块和PWM波生成模块</p>
+<h3 id="电压矢量区块检测模块"><a href="#电压矢量区块检测模块" class="headerlink" title="电压矢量区块检测模块"></a>电压矢量区块检测模块</h3><p>可以用投影的方式确定电压矢量所在区块，如图img6所示，将电压矢量往$1~3$三个方向投影，则可以得到投影大小为</p>
+<img src="/images/SVPWM/img6.png" alt="img6" width=50% height=50%>
+
+<p>$$<br>\begin{cases}<br>u_{ref1}&#x3D;u_\beta \\<br>u_{ref2}&#x3D;\frac{\sqrt{3}}{2}u_\alpha-\frac{1}{2}u_\beta \\<br>u_{ref3}&#x3D;-\frac{\sqrt{3}}{2}u_\alpha-\frac{1}{2}u_\beta<br>\end{cases}<br>$$</p>
+<p>定义一个二进制数$N&#x3D;CBA_2$,如果$u_{ref1}&gt;0$，则$A&#x3D;1$，否则$A&#x3D;0$。其余C对应$u_{ref3}$，B对应$u_{ref2}$，类似定义</p>
+<p>那么可以得出</p>
+<table>
+<thead>
+<tr>
+<th>N</th>
+<th>3</th>
+<th>1</th>
+<th>5</th>
+<th>4</th>
+<th>6</th>
+<th>2</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>扇区</td>
+<td>Ⅰ</td>
+<td>Ⅱ</td>
+<td>Ⅲ</td>
+<td>Ⅳ</td>
+<td>Ⅴ</td>
+<td>Ⅵ</td>
+</tr>
+</tbody></table>
+<p>在Simulink当中的实现如img7所示</p>
+<img src="/images/SVPWM/img7.png" alt="img7" width=50% height=50%>
+
+<h3 id="T-1-T-2-计算模块"><a href="#T-1-T-2-计算模块" class="headerlink" title="$T_1,T_2$计算模块"></a>$T_1,T_2$计算模块</h3><p>以第Ⅰ扇区为例，设$U_{dc}$为直流电压大小，则$|u_1|&#x3D;|u_2|&#x3D;…&#x3D;|u_6|&#x3D;\frac{2}{3}U_{dc}$</p>
+<p>$$<br>\begin{cases}<br>u_\beta&#x3D;\frac{t_2}{T_0}u_2sin\frac{\pi}{3} \\<br>u_\alpha&#x3D;\frac{t_2}{T_0}u_2cos\frac{\pi}{3}+\frac{t_1}{T_0}u_1<br>\end{cases}<br>$$</p>
+<p>于是可得</p>
+<p>$$<br>\begin{cases}<br>t_1&#x3D;\frac{\sqrt{3}T_0}{U_{dc}}(\frac{\sqrt{3}}{2}u_\alpha-\frac{1}{2}u_\beta) \\<br>t_2&#x3D;\frac{\sqrt{3}T_0}{U_{dc}}u_\beta<br>\end{cases}<br>$$</p>
+<p>在其他区同理可以计算作用时间</p>
+<p>在这里可以对所有情况做一个归纳</p>
+<p>定义:</p>
+<p>$$<br>\begin{cases}<br>X&#x3D;\frac{\sqrt{3}T_0}{U_{dc}}u_\beta \\<br>Y&#x3D;\frac{\sqrt{3}T_0}{U_{dc}}(\frac{\sqrt{3}}{2}u_\alpha+\frac{1}{2}u_\beta) \\<br>Z&#x3D;\frac{\sqrt{3}T_0}{U_{dc}}(-\frac{\sqrt{3}}{2}u_\alpha+\frac{1}{2}u_\beta)<br>\end{cases}<br>$$</p>
+<p>这样不同N值对应的时间可以总结为下表</p>
+<table>
+<thead>
+<tr>
+<th>N</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>6</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>$T_1$</td>
+<td>Z</td>
+<td>Y</td>
+<td>-Z</td>
+<td>-X</td>
+<td>X</td>
+<td>-Y</td>
+</tr>
+<tr>
+<td>$T_2$</td>
+<td>Y</td>
+<td>-X</td>
+<td>X</td>
+<td>Z</td>
+<td>-Y</td>
+<td>-Z</td>
+</tr>
+</tbody></table>
+<p>在Simulink当中的实现如img8和img9所示</p>
+<img src="/images/SVPWM/img8.png" alt="img8" width=50% height=50%>
+
+<img src="/images/SVPWM/img9.png" alt="img9" width=50% height=50%>
+
+<h3 id="PWM波生成模块"><a href="#PWM波生成模块" class="headerlink" title="PWM波生成模块"></a>PWM波生成模块</h3><p>要生成PWM波需要确定$a,b,c$三管的开关时间，下面以第Ⅰ扇区，采用零矢量分散式为例</p>
+<img src="/images/SVPWM/img4.png" alt="img4" width=50% height=50%>
+
+<p>这里可以参考前面的img4，可以看到三个管的开启时间分别为</p>
+<p>$$<br>\begin{cases}<br>T_{a1}&#x3D;\frac{T_0-t_1-t_2}{4} \\<br>T_{b1}&#x3D;T_{a1}+\frac{1}{2}t_1 \\<br>T_{c1}&#x3D;T_{b1}+\frac{1}{2}t_2<br>\end{cases}<br>$$</p>
+<p>注：零矢量集中式则可以参考img3推得</p>
+<p>对于所有扇区的情况，如果定义$T_a,T_b,T_c$分别为三个管开启的时间，可以将开启时间总结为下表</p>
+<table>
+<thead>
+<tr>
+<th>N</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>6</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>$T_A$</td>
+<td>$T_{b1}$</td>
+<td>$T_{a1}$</td>
+<td>$T_{a1}$</td>
+<td>$T_{c1}$</td>
+<td>$T_{c1}$</td>
+<td>$T_{b1}$</td>
+</tr>
+<tr>
+<td>$T_B$</td>
+<td>$T_{a1}$</td>
+<td>$T_{c1}$</td>
+<td>$T_{b1}$</td>
+<td>$T_{b1}$</td>
+<td>$T_{a1}$</td>
+<td>$T_{c1}$</td>
+</tr>
+<tr>
+<td>$T_C$</td>
+<td>$T_{c1}$</td>
+<td>$T_{b1}$</td>
+<td>$T_{c1}$</td>
+<td>$T_{a1}$</td>
+<td>$T_{b1}$</td>
+<td>$T_{a1}$</td>
+</tr>
+</tbody></table>
+<p>在Simulink当中的实现如img10所示</p>
+<img src="/images/SVPWM/img10.png" alt="img10" width=50% height=50%>
+
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>将所有模块联合起来，SVPWM的内部结构就如img11所示</p>
+<img src="/images/SVPWM/img11.png" alt="img11" width=50% height=50%>
+
+<h2 id="三角接情况"><a href="#三角接情况" class="headerlink" title="三角接情况"></a>三角接情况</h2><p>以上论述了电机绕组为星形接法时的情况，那么当绕组为三角形接法时情况会发生什么变化呢？</p>
+<p>事实上，基本原理并没有发生变化，只不过基本电压矢量旋转了30°，开关与电压矢量的对应关系发生了改变</p>
+<p>后续的电压矢量作用时间计算模块和PWM生成模块按照改变后的关系分别计算即可。</p>
+]]></content>
+      <categories>
+        <category>电机控制</category>
+      </categories>
+      <tags>
+        <tag>SVPWM</tag>
+        <tag>Simulink</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>坐标变换</title>
+    <url>/2025/03/11/%E5%9D%90%E6%A0%87%E5%8F%98%E6%8D%A2/</url>
+    <content><![CDATA[<h2 id="基本定义"><a href="#基本定义" class="headerlink" title="基本定义"></a>基本定义</h2><p>坐标变换这种方法在电网络、电力电子、电机建模与控制等很多领域都有应用，本文章以三相永磁同步电机为背景，主要讨论三相与两相间的转化</p>
+<p>对于三相永磁同步电机而言，定子绕组可以等效为a,b,c三相绕组，假设这三相绕组的方向如img1所示</p>
+<img src="/images/坐标变换/img1.png" alt="img1" width=50% height="50%">
+
+<p>对于这三相绕组的任意一个物理量，比如电流，定义</p>
+<p>$$<br>\begin{equation}<br>    \boldsymbol{i_a}&#x3D;i_a\boldsymbol{a},\boldsymbol{i_b}&#x3D;i_b\boldsymbol{b},\boldsymbol{i_c}&#x3D;i_c\boldsymbol{c}<br>\end{equation}<br>$$</p>
+<p>需要注意的是，这里的$i_a,i_b,i_c$代表的是电流的大小，并且代表的是瞬态过程</p>
+<h2 id="恒相幅值变换"><a href="#恒相幅值变换" class="headerlink" title="恒相幅值变换"></a>恒相幅值变换</h2><p>定义综合矢量$\boldsymbol{i}&#x3D;k(\boldsymbol{i_a}+\boldsymbol{i_b}+\boldsymbol{i_c})$，这里的k是一个待定的系数</p>
+<p>由于是恒相幅值变换，我们的目标是在稳态过程下，综合矢量的幅值等于a，b，c三相的幅值</p>
+<p>本文先通过瞬态过程的推导得出公式，因为稳态过程就是瞬态过程的一个特例，所以可以直接代入公式，解得k的值</p>
+<h3 id="瞬态过程"><a href="#瞬态过程" class="headerlink" title="瞬态过程"></a>瞬态过程</h3><p>要计算综合矢量的幅值，可以建立x-y坐标系，假设如图img2所示</p>
+<img src="/images/坐标变换/img2.png" alt="img2" width=50% height="50%">
+
+<p>容易得到</p>
+<p>$$<br>\begin{cases}<br>    i_x&#x3D;k(i_a-\frac{1}{2}i_b-\frac{1}{2}i_c) \\<br>    i_y&#x3D;k(\frac{\sqrt{3}}{2}i_b-\frac{\sqrt{3}}{2}i_c)<br>\end{cases} \\<br>$$<br>$$<br>\begin{equation}<br>i&#x3D;|\boldsymbol{i}|&#x3D;k\sqrt{i_x^2+i_y^2}&#x3D;k\sqrt{\frac{1}{2}\sum\limits_{cyc}(i_a-i_b)^2}(1)<br>\end{equation}<br>$$</p>
+<h3 id="稳态过程"><a href="#稳态过程" class="headerlink" title="稳态过程"></a>稳态过程</h3><p>对于稳态过程，可以假设三相是相位分别相差$\frac{2}{3}\pi$，且幅值完全相同的正弦波，即</p>
+<p>$$<br>\begin{cases}<br>    i_a&#x3D;I_m\cos(\omega t) \\<br>    i_b&#x3D;I_m\cos(\omega t-\frac{2}{3}\pi) \\<br>    i_c&#x3D;I_m\cos(\omega t+\frac{2}{3}\pi)<br>\end{cases}<br>$$</p>
+<p>将上述三个式子代入公式(1)，可以得到</p>
+<p>$$<br>\begin{align}<br>    i&amp;&#x3D;k\sqrt{\frac{1}{2}\sum\limits_{cyc}(I_m\cos\omega t-I_m\cos(\omega t-\frac{2}{3}\pi))^2} \\<br>    &amp;&#x3D;k\sqrt{\frac{1}{2}I_m^2\sum\limits_{cyc}(-2\sin(\omega t-\frac{1}{3}\pi)\sin\frac{\pi}{3})^2} \\<br>    &amp;&#x3D;k\sqrt{\frac{1}{2}I_m^2\sum\limits_{cyc}3\sin^2(\omega t-\frac{\pi}{3})} \\<br>    &amp;&#x3D;k\sqrt{\frac{3}{2}I_m^2\sum\limits_{cyc}\frac{1-cos(2\omega t-\frac{2}{3}\pi)}{2}} \\<br>    &amp;&#x3D;k\sqrt{\frac{9}{4}I_m^2} \\<br>    &amp;&#x3D;\frac{3}{2}kI_m<br>\end{align}<br>$$</p>
+<p>因此，如果要使变换前后幅值相等，应该令$k&#x3D;\frac{2}{3}$</p>
+<h3 id="坐标变换"><a href="#坐标变换" class="headerlink" title="坐标变换"></a>坐标变换</h3><p>在得出了坐标变换的系数之后，就要对物理量进行坐标变换了，在叙述坐标变换的公式之前，应该先清楚坐标变换的目的</p>
+<p>在三相永磁同步电机中，如果直接对a,b,c三相进行控制，将会非常复杂，因为a,b,c三相之间会互相耦合，也就是互感不为零，这将给控制带来麻烦</p>
+<p>为此，我们希望先将a,b,c三相通过坐标变换变成两相，对两相进行控制，控制完成后再进行逆变换生成对应的三相控制量</p>
+<p>具体的部分可参看【永磁同步电机】</p>
+<p>坐标变换的类型主要有$abc-\alpha\beta 0,abc-dq0,abc-d_cq_c0$这么三种，具体定义参见下文，明白一种之后很容易就能举一反三，这里只给出$abc-\alpha\beta 0,abc-dq0$的公式</p>
+<h4 id="abc-alpha-beta-0"><a href="#abc-alpha-beta-0" class="headerlink" title="$abc-\alpha\beta 0$"></a>$abc-\alpha\beta 0$</h4><p>a,b,c是电机等效绕组的方向，$\alpha$方向与a轴重合，$\beta$方向超前$\alpha$方向90度，如图img3所示</p>
+<img src="/images/坐标变换/img3.png" alt="img3" width=50% height="50%">
+
+<p>其实这里的$\alpha\beta$坐标与上面计算$|\boldsymbol{i}|$时用的x，y坐标是一样的，所以有</p>
+<p>$$<br>\begin{cases}<br>    i_\alpha&#x3D;i_a-\frac{1}{2}i_b-\frac{1}{2}i_c \\<br>    i_\beta&#x3D;\frac{\sqrt{3}}{2}i_b-\frac{\sqrt{3}}{2}i_c<br>\end{cases}<br>$$</p>
+<p>这样我们能通过abc坐标系，算出$i_\alpha,i_\beta$的值，但是反过来却不成立</p>
+<p>如果$i_\alpha,i_\beta$的值确立，那么综合矢量就确定了，假设有一组$i_a,i_b,i_c$使得$\boldsymbol{i}&#x3D;\frac{2}{3}(i_a\boldsymbol{a}+i_b\boldsymbol{b}+i_c\boldsymbol{c})$成立</p>
+<p>由于$\boldsymbol{a}+\boldsymbol{b}+\boldsymbol{c}&#x3D;0$,$i_a+const,i_b+const,i_c+const$都是满足条件的值，这样就有无数组解，其中const是任意实数，因此还需要一条方程约束</p>
+<p>这里先给出方程，再证明为什么给出了这条方程，就能够完全确定$i_a,i_b,i_c$,方程如下</p>
+<p>$$<br>\begin{equation}<br>    i_0&#x3D;\frac{1}{3}(i_a+i_b+i_c)<br>\end{equation}<br>$$</p>
+<p>证明如下，上面说了，$i_\alpha,i_\beta$给定之后，综合矢量就完全确定了，作综合矢量关于$a,b,c$三轴的投影，并记为$i_a’,i_b’,i_c’$</p>
+<p>$$<br>\begin{align}<br>    i_a’&amp;&#x3D;\boldsymbol{i}\cdot \boldsymbol{a} \\<br>    &amp;&#x3D;\frac{2}{3}(i_a-\frac{1}{2}i_b-\frac{1}{2}i_c)<br>\end{align}<br>$$</p>
+<p>b，c相同理可得</p>
+<p>$$<br>i_b’&#x3D;\frac{2}{3}(i_b-\frac{1}{2}i_c-\frac{1}{2}i_a)<br>$$<br>$$<br>i_c’&#x3D;\frac{2}{3}(i_c-\frac{1}{2}i_a-\frac{1}{2}i_b)<br>$$</p>
+<p>可以发现$i_a&#x3D;i_a’+i_0,i_b&#x3D;i_b’+i_0,i_c&#x3D;i_c’+i_0$</p>
+<p>这就是说，只要再给定$i_0$，就可以完全推得$i_a,i_b,i_c$</p>
+<p>这个过程用矩阵表示如下</p>
+<p>$$<br>\begin{bmatrix}<br>    i_\alpha \\<br>    i_\beta \\<br>    i_0<br>\end{bmatrix}&#x3D;\frac{2}{3}<br>\begin{bmatrix}<br>    1 &amp; -\frac{1}{2} &amp; -\frac{1}{2} \\<br>    0 &amp; \frac{\sqrt{3}}{2} &amp; -\frac{\sqrt{3}}{2} \\<br>    \frac{1}{2} &amp; \frac{1}{2} &amp; \frac{1}{2}<br>\end{bmatrix}<br>\begin{bmatrix}<br>    i_a \\<br>    i_b \\<br>    i_c<br>\end{bmatrix}<br>$$</p>
+<p>定义</p>
+<p>$$<br>\begin{equation}<br>\boldsymbol{C}&#x3D;\frac{2}{3}<br>\begin{bmatrix}<br>    1 &amp; -\frac{1}{2} &amp; -\frac{1}{2} \\<br>    0 &amp; \frac{\sqrt{3}}{2} &amp; -\frac{\sqrt{3}}{2} \\<br>    \frac{1}{2} &amp; \frac{1}{2} &amp; \frac{1}{2}<br>\end{bmatrix}<br>\end{equation}<br>$$</p>
+<p>这里的$\boldsymbol{C}$就是变换矩阵，可以算得$|\boldsymbol{C}|\not &#x3D;{0}$，故$\boldsymbol{C}$存在逆矩阵</p>
+<p>逆矩阵可以通过纯粹的数学运算得出，也可以通过上述的物理意义得到</p>
+<p>$$<br>\begin{equation}<br>\boldsymbol{C}^{-1}&#x3D;<br>\begin{bmatrix}<br>    1 &amp; 0 &amp; 1 \\<br>    -\frac{1}{2} &amp; \frac{\sqrt{3}}{2} &amp; 1 \\<br>    -\frac{1}{2} &amp; -\frac{\sqrt{3}}{2} &amp; 1<br>\end{bmatrix}<br>\end{equation}<br>$$</p>
+<p>这样$abc-\alpha\beta 0$的正逆变换就都得到了</p>
+<h4 id="abc-dq0"><a href="#abc-dq0" class="headerlink" title="$abc-dq0$"></a>$abc-dq0$</h4><p>d,q轴的定义是以转子转速$\omega$旋转的坐标系，设$\theta$是d轴与q轴的夹角，如img4所示</p>
+<img src="/images/坐标变换/img4.png" alt="img4" width=50% height="50%">
+
+<p>这里的坐标变换与$\alpha\beta 0$的坐标变换完全类似，可以根据物理含义直接给出</p>
+<p>$$<br>\boldsymbol{C}&#x3D;\frac{2}{3}<br>\begin{bmatrix}<br>    \cos\theta &amp; \cos(\theta-\frac{2}{3}\pi) &amp; \cos(\theta+\frac{2}{3}\pi) \\<br>    -\sin\theta &amp; -\sin(\theta-\frac{2}{3}\pi) &amp; -\sin(\theta+\frac{2}{3}\pi) \\<br>    \frac{1}{2} &amp; \frac{1}{2} &amp; \frac{1}{2}<br>\end{bmatrix}<br>$$<br>$$<br>\boldsymbol{C}^{-1}&#x3D;<br>\begin{bmatrix}<br>    \cos\theta &amp; -\sin\theta &amp; 1 \\<br>    \cos(\theta-\frac{2}{3}\pi) &amp; -\sin(\theta-\frac{2}{3}\pi) &amp; 1 \\<br>    \cos(\theta+\frac{2}{3}\pi) &amp; -\sin(\theta+\frac{2}{3}\pi) &amp; 1<br>\end{bmatrix}<br>$$</p>
+<h4 id="abc-d-cq-c0"><a href="#abc-d-cq-c0" class="headerlink" title="$abc-d_cq_c0$"></a>$abc-d_cq_c0$</h4><p>$d_c,q_c$轴是以同步速旋转的坐标系，在方程上与$abc-dq0$是完全一样的，只不过$\frac{d\theta}{dt}&#x3D;\omega_c$为同步速而已</p>
+<!--
+## 恒功率变换
+
+对于恒功率变换，同样的，我们需要确定k的大小，恒功率变换的原则是变换前后功率相等，瞬态过程的关系式与恒相幅值变换是完全一样的，我们直接通过稳态过程求解k
+
+### 稳态过程
+
+设电压幅值为$U_m$，电流幅值为$I_m$，电流电压之间的相位差为$\phi$，则可以知道变换前的功率为
+
+$$
+P=3*\frac{U_m}{\sqrt{2}}*
+$$
+-->
+]]></content>
+      <categories>
+        <category>电机控制</category>
+      </categories>
+      <tags>
+        <tag>坐标变换</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>电机建模</title>
     <url>/2024/11/13/%E7%94%B5%E6%9C%BA%E5%BB%BA%E6%A8%A1/</url>
     <content><![CDATA[<h2 id="电机建模能用来干什么"><a href="#电机建模能用来干什么" class="headerlink" title="电机建模能用来干什么"></a>电机建模能用来干什么</h2><ul>
@@ -711,6 +711,85 @@ $$
       <tags>
         <tag>电机建模</tag>
         <tag>一般化电机</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>鼠笼式异步电机</title>
+    <url>/2025/11/13/%E9%BC%A0%E7%AC%BC%E5%BC%8F%E5%BC%82%E6%AD%A5%E7%94%B5%E6%9C%BA/</url>
+    <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>本篇文章主要在于推导建立鼠笼式异步电机数学模型，并通过数学模型引申出【矢量控制】、【直接转矩控制】、【模型预测控制】等一系列高性能控制方法。<a href="https://larkzy.github.io/2024/11/13/%E7%94%B5%E6%9C%BA%E5%BB%BA%E6%A8%A1/">【电机建模】</a>和<a href="https://larkzy.github.io/2025/03/11/%E5%9D%90%E6%A0%87%E5%8F%98%E6%8D%A2/#more">【坐标变换】</a>是这篇文章的基础。</p>
+<h2 id="在转子d-q-0坐标系，定子a-b-c坐标系中的数学模型"><a href="#在转子d-q-0坐标系，定子a-b-c坐标系中的数学模型" class="headerlink" title="在转子d-q-0坐标系，定子a-b-c坐标系中的数学模型"></a>在转子d-q-0坐标系，定子a-b-c坐标系中的数学模型</h2><p>首先，规定正方向为电动机原则下的正方向，如Fig1所示</p>
+<img src="images/鼠笼式异步电机/Fig1.jpg" alt=Fig1 width=50% height=50%>
+
+<center>Fig1</center>
+
+<h3 id="电压方程"><a href="#电压方程" class="headerlink" title="电压方程"></a>电压方程</h3><p>由于这些线圈都是静止线圈，可以写出电压方程</p>
+<p>$$<br>\begin{cases}<br>    u_a&#x3D;p\Psi_a+R_si_a \\<br>    u_b&#x3D;p\Psi_b+R_si_b \\<br>    u_c&#x3D;p\Psi_c+R_si_c \\<br>    0&#x3D;p\Psi_D+R_Di_D \\<br>    0&#x3D;p\Psi_Q+R_Qi_Q<br>\end{cases}<br>$$</p>
+<p>如果设</p>
+<p>$$<br>U&#x3D;<br>\begin{bmatrix}<br>    u_a \\<br>    u_b \\<br>    u_c \\<br>    0 \\<br>    0<br>\end{bmatrix}&#x3D;<br>\begin{bmatrix}<br>    U_{abc} \\<br>    U_{DQ}<br>\end{bmatrix},I&#x3D;<br>\begin{bmatrix}<br>    i_a \\<br>    i_b \\<br>    i_c \\<br>    i_D \\<br>    i_Q<br>\end{bmatrix}&#x3D;<br>\begin{bmatrix}<br>    I_{abc} \\<br>    I_{DQ}<br>\end{bmatrix},\Psi&#x3D;<br>\begin{bmatrix}<br>    \Psi_a \\<br>    \Psi_b \\<br>    \Psi_c \\<br>    \Psi_D \\<br>    \Psi_Q<br>\end{bmatrix}&#x3D;<br>\begin{bmatrix}<br>    \Psi_{abc} \\<br>    \Psi_{DQ}<br>\end{bmatrix}<br>$$</p>
+<p>$$<br>R&#x3D;<br>\begin{bmatrix}<br>    R_s &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\<br>    0 &amp; R_s &amp; 0 &amp; 0 &amp; 0 \\<br>    0 &amp; 0 &amp; R_s &amp; 0 &amp; 0 \\<br>    0 &amp; 0 &amp; 0 &amp; R_D &amp; 0 \\<br>    0 &amp; 0 &amp; 0 &amp; 0 &amp; R_Q<br>\end{bmatrix}<br>$$</p>
+<p>则有，</p>
+<p>$$<br>\begin{equation}<br>    U&#x3D;p\Psi+RI<br>\end{equation}<br>$$</p>
+<h3 id="磁链方程"><a href="#磁链方程" class="headerlink" title="磁链方程"></a>磁链方程</h3><p>$$<br>\begin{bmatrix}<br>    \Psi_a \\<br>    \Psi_b \\<br>    \Psi_c \\<br>    \Psi_D \\<br>    \Psi_Q<br>\end{bmatrix}&#x3D;<br>\begin{bmatrix}<br>    L_{aa} &amp; M_{ab} &amp; M_{ac} &amp; M_{aD} &amp; M_{aQ} \\<br>    M_{ba} &amp; L_{bb} &amp; M_{bc} &amp; M_{bD} &amp; M_{bQ} \\<br>    M_{ca} &amp; M_{cb} &amp; L_{cc} &amp; M_{cD} &amp; M_{cQ} \\<br>    M_{Da} &amp; M_{Db} &amp; M_{Dc} &amp; L_{DD} &amp; 0 \\<br>    M_{Qa} &amp; M_{Qb} &amp; M_{Qc} &amp; 0 &amp; L_{QQ}<br>\end{bmatrix}<br>\begin{bmatrix}<br>    i_a \\<br>    i_b \\<br>    i_c \\<br>    i_D \\<br>    i_Q<br>\end{bmatrix}<br>$$</p>
+<h3 id="电感矩阵"><a href="#电感矩阵" class="headerlink" title="电感矩阵"></a>电感矩阵</h3><p>至此，已经得到了电机的电压方程和磁链方程，对其进行分析，可以发现，从表面上看，电压方程中不含$\omega$项，这显然是有问题的，这代表不管电机转多快，电压方程始终不受影响，那么哪里出了问题？</p>
+<p>原因在于电感矩阵，电感的数值是会随着$\theta$的变动而改变的，因此在对$\Psi$进行微分时，不能简单的将电感矩阵提出来，而有如下的式子。</p>
+<p>$$<br>\begin{align}<br>    U&amp;&#x3D;p\Psi+RI \\<br>     &amp;&#x3D;p(LI)+RI \\<br>     &amp;&#x3D;pL \cdot I+L \cdot pI + RI \\<br>     &amp;&#x3D;\omega \frac{\partial L}{\partial \theta}I + L \cdot pI + RI<br>\end{align}<br>$$</p>
+<p>究其原因，这是由于$\theta$变化，导致自感互感变化，导致磁通变化而产生的感生电动势，这与伪静止线圈$\omega$项所表征的动生电动势在物理意义上有区别，需要区分。接下来推导电感矩阵。主要讲按照定子自感、转子自感、定子互感、转子互感、定转子间互感的顺序进行推导。</p>
+<h4 id="定子自感"><a href="#定子自感" class="headerlink" title="定子自感"></a>定子自感</h4><p>先从概念层次上进行理解，自感根据产生的磁链有没有经过气隙，可以分为主自感和漏自感，如下式所示</p>
+<p>$$<br>L_{aa}&#x3D;L_{aa\delta} + L_{aal}<br>$$</p>
+<p>其中$L_{aa\delta}$表示主自感，$L_{aal}$表示漏自感</p>
+<p>再从周期性上分析，a相绕组与d轴对齐时，自感最大，与q轴对齐时，自感最小。而一个电周期将会经历两次与d轴q轴对齐的情况，因此自感周期为$\pi$，可以对其进行傅里叶分解，得到如下式子</p>
+<p>$$<br>L_{aa} &#x3D; L_{aa0} + L_{aa2} \cos(2\theta) + L_{aa4} \cos(4\theta) + \cdots<br>$$</p>
+<p>省略高次项，只保留2次项，得到如下式子</p>
+<p>$$<br>L_{aa} &#x3D; L_{aa0} + L_{aa2} \cos(2\theta)<br>$$</p>
+<p>下面对其具体构成进行推导，假设线圈匝数为W，d轴磁通为$\lambda_d$，q轴磁通为$\lambda_q$，有</p>
+<p>$$<br>\begin{align}<br>    \Phi_{aa\delta} &amp;&#x3D; \Phi_{ad\delta} \cos\theta - \Phi_{aq\delta} \sin\theta \\<br>                    &amp;&#x3D; F_{ad\delta} \lambda_d \cos\theta - F_{aq\delta} \lambda_q \sin\theta \\<br>                    &amp;&#x3D; F_a \lambda_d {\cos}^2 \theta + F_a \lambda_q {\sin}^2 \theta \\<br>                    &amp;&#x3D; W (\lambda_d {\cos}^2 \theta + \lambda_q {\sin}^2 \theta) i_a<br>\end{align}<br>$$</p>
+<p>定义$L_{aad} &#x3D; W^2 \lambda_d$，$L_{aaq} &#x3D; W^2 \lambda_q$，则有</p>
+<p>$$<br>\begin{align}<br>    L_{aa\delta} &amp;&#x3D; L_{aad} {\cos}^2 \theta + L_{aaq} {\sin}^2 \theta \\<br>                 &amp;&#x3D; L_{aad} \frac{\cos 2\theta + 1}{2} + L_{aaq} \frac{1 - \cos 2\theta}{2} \\<br>                 &amp;&#x3D; \frac{1}{2}(L_{aad} + L_{aaq}) + \frac{1}{2}(L_{aad} - L_{aaq}) \cos 2\theta<br>\end{align}<br>$$</p>
+<p>从这条式子可以看出$L_{aad}$和$L_{aaq}$的物理含义，分别为转子转到d轴的主电感，和转子转到q轴的主电感。加入漏电感，有</p>
+<p>$$<br>L_{aa} &#x3D; L_{aal} + \frac{1}{2}(L_{aad} + L_{aaq}) + \frac{1}{2}(L_{aad} - L_{aaq}) \cos 2\theta<br>$$</p>
+<p>那么，</p>
+<p>$$<br>L_{aa0} &#x3D; L_{aal} + \frac{1}{2}(L_{aad} + L_{aaq}) \\<br>L_{aa2} &#x3D; \frac{1}{2}(L_{aad} - L_{aaq})<br>$$</p>
+<h4 id="转子自感"><a href="#转子自感" class="headerlink" title="转子自感"></a>转子自感</h4><p>由于转子所经历的磁路的磁导始终不变，因此转子自感为常数，表达如下</p>
+<p>$$<br>L_{DD} &#x3D; L_{DDl} + L_{DD\delta} \\<br>L_{QQ} &#x3D; L_{QQl} + L_{QQ\delta}<br>$$</p>
+<h4 id="定子互感"><a href="#定子互感" class="headerlink" title="定子互感"></a>定子互感</h4><p>同样先从概念上进行理解，根据磁链有没有经过气隙，可以分为主互感和漏互感，如下式所示</p>
+<p>$$<br>M_{ba} &#x3D; - M_{abl} + M_{ba\delta}<br>$$</p>
+<p>与自感同理，从周期性上看，定子互感周期也为$\pi$，可以将其表示如下</p>
+<p>$$<br>M_{ba} &#x3D; - M_{ab0} + M_{ab2} \cos 2(\theta + \frac{2}{3}\pi)<br>$$</p>
+<p>对$M_{ba}$进行计算，其他定子绕组间互感同理可得</p>
+<p>计算a相绕组产生的磁动势</p>
+<p>$$<br>F_a &#x3D; W_a \cdot i_a<br>$$</p>
+<p>将a相绕组磁动势分解到d轴和q轴方向，可以得到</p>
+<p>$$<br>F_{ad} &#x3D; F_a \cos \theta \\<br>F_{aq} &#x3D; - F_a \sin \theta<br>$$</p>
+<p>因此d轴和q轴磁通如下</p>
+<p>$$<br>\Phi_{ad\delta} &#x3D; F_a \cos \theta \lambda_d \\<br>\Phi_{aq\delta} &#x3D; - F_a \sin \theta \lambda_q<br>$$</p>
+<p>因此可以得到b轴磁通为</p>
+<p>$$<br>\begin{align}<br>    \Phi_{ba\delta}<br>    &amp;&#x3D; \Phi_{ad\delta} \cos (\theta - \frac{2}{3}\pi) - \Phi_{aq\delta} \sin (\theta - \frac{2}{3}\pi) \\<br>    &amp;&#x3D; F_a \cos \theta \cos (\theta - \frac{2}{3}\pi) \lambda_d + F_a \sin \theta \sin (\theta - \frac{2}{3}\pi) \lambda_q<br>\end{align}<br>$$</p>
+<p>因此</p>
+<p>$$<br>\Psi_{ba\delta} &#x3D; (\cos \theta \cos (\theta - \frac{2}{3}\pi) \lambda_d + \sin \theta \sin (\theta - \frac{2}{3}\pi) \lambda_q) W^2 i_a<br>$$</p>
+<p>可以得到</p>
+<p>$$<br>\begin{align}<br>    M_{ba\delta} &amp;&#x3D; L_{aad} \cos \theta \cos (\theta - \frac{2}{3}\pi) + L_{aaq} \sin \theta \sin (\theta - \frac{2}{3}\pi) \\<br>    &amp;&#x3D; - \frac{1}{4}(L_{aad} + L_{aaq}) + \frac{1}{2}(L_{aad} - L_{aaq}) \cos 2(\theta + \frac{2}{3}\pi)<br>\end{align}<br>$$</p>
+<p>那么，</p>
+<p>$$<br>\begin{align}<br>    M_{ba} &amp;&#x3D; - M_{abl} - \frac{1}{4}(L_{aad} + L_{aaq}) + \frac{1}{2}(L_{aad} - L_{aaq}) \cos 2(\theta + \frac{2}{3}\theta) \\<br>    &amp;&#x3D; - M_{ab0} + M_{ab2} \cos 2(\theta + \frac{2}{3}\pi)<br>\end{align}<br>$$</p>
+<h4 id="转子互感"><a href="#转子互感" class="headerlink" title="转子互感"></a>转子互感</h4><p>由于转子之间解耦，所以转子间互感为0</p>
+<h4 id="定转子间互感"><a href="#定转子间互感" class="headerlink" title="定转子间互感"></a>定转子间互感</h4><p>定转子间互感要分为d轴和q轴两类，推导方法类似，对于d轴</p>
+<p>$$<br>M_{aD} &#x3D; M_{aD1} \cos \theta<br>$$</p>
+<p>对于q轴</p>
+<p>$$<br>M_{aQ} &#x3D; - M_{aQ1} \sin \theta<br>$$</p>
+<p>定转子间互感变化的周期为$2\pi$</p>
+<h3 id="机械方程"><a href="#机械方程" class="headerlink" title="机械方程"></a>机械方程</h3><p>按照电动机原则规定正方向，可以列出如下方程式</p>
+<p>$$<br>\begin{cases}<br>    T_e &#x3D; T_l + B \Omega + J \frac{d\Omega}{dt} &#x3D; T_l + B \frac{\omega}{p} + \frac{J}{p}\frac{d\omega}{dt} \\<br>    \frac{d\theta}{dt} &#x3D; \omega<br>\end{cases}<br>$$</p>
+<p>下面给出电磁转矩的表达式，使用虚位移法。写出电机的能量，为</p>
+<p>$$<br>W &#x3D; \frac{1}{2} I^T L I<br>$$</p>
+<p>这里的I，L为电流矩阵和电感矩阵</p>
+<p>那么，电磁转矩为</p>
+<p>$$<br>T_e &#x3D; \frac{\partial W}{\partial \gamma} &#x3D; p \frac{\partial W}{\partial \theta} &#x3D; \frac{p}{2} I^T \frac{\partial L}{\partial \theta} I<br>$$</p>
+]]></content>
+      <categories>
+        <category>电机控制</category>
+      </categories>
+      <tags>
+        <tag>电机建模</tag>
+        <tag>异步电机</tag>
       </tags>
   </entry>
 </search>

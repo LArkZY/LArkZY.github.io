@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.png">
+  <link rel="mask-icon" href="/images/favicon.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha256-5eIC48iZUHmSlSUz9XtjRyK2mzQkHScZY1WdMaoz74E=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"larkzy.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.21.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="简介本篇文章主要在于推导建立鼠笼式异步电机数学模型，并通过数学模型引申出【矢量控制】、【直接转矩控制】、【模型预测控制】等一系列高性能控制方法。【电机建模】和【坐标变换】是这篇文章的基础。 在转子d-q-0坐标系，定子a-b-c坐标系中的数学模型首先，规定正方向为电动机原则下的正方向，如Fig1所示   Fig1  电压方程由于这些线圈都是静止线圈，可以写出电压方程 $$\begin{cases}">
+<meta property="og:type" content="article">
+<meta property="og:title" content="鼠笼式异步电机">
+<meta property="og:url" content="http://larkzy.github.io/2025/11/13/%E9%BC%A0%E7%AC%BC%E5%BC%8F%E5%BC%82%E6%AD%A5%E7%94%B5%E6%9C%BA/index.html">
+<meta property="og:site_name" content="Lac&#39;s blog">
+<meta property="og:description" content="简介本篇文章主要在于推导建立鼠笼式异步电机数学模型，并通过数学模型引申出【矢量控制】、【直接转矩控制】、【模型预测控制】等一系列高性能控制方法。【电机建模】和【坐标变换】是这篇文章的基础。 在转子d-q-0坐标系，定子a-b-c坐标系中的数学模型首先，规定正方向为电动机原则下的正方向，如Fig1所示   Fig1  电压方程由于这些线圈都是静止线圈，可以写出电压方程 $$\begin{cases}">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://larkzy.github.io/2025/11/13/%E9%BC%A0%E7%AC%BC%E5%BC%8F%E5%BC%82%E6%AD%A5%E7%94%B5%E6%9C%BA/images/%E9%BC%A0%E7%AC%BC%E5%BC%8F%E5%BC%82%E6%AD%A5%E7%94%B5%E6%9C%BA/Fig1.jpg">
+<meta property="article:published_time" content="2025-11-13T09:10:59.000Z">
+<meta property="article:modified_time" content="2025-11-17T12:33:07.098Z">
+<meta property="article:author" content="Lark">
+<meta property="article:tag" content="电机建模">
+<meta property="article:tag" content="异步电机">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://larkzy.github.io/2025/11/13/%E9%BC%A0%E7%AC%BC%E5%BC%8F%E5%BC%82%E6%AD%A5%E7%94%B5%E6%9C%BA/images/%E9%BC%A0%E7%AC%BC%E5%BC%8F%E5%BC%82%E6%AD%A5%E7%94%B5%E6%9C%BA/Fig1.jpg">
+
+
+<link rel="canonical" href="http://larkzy.github.io/2025/11/13/%E9%BC%A0%E7%AC%BC%E5%BC%8F%E5%BC%82%E6%AD%A5%E7%94%B5%E6%9C%BA/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://larkzy.github.io/2025/11/13/%E9%BC%A0%E7%AC%BC%E5%BC%8F%E5%BC%82%E6%AD%A5%E7%94%B5%E6%9C%BA/","path":"2025/11/13/鼠笼式异步电机/","title":"鼠笼式异步电机"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>鼠笼式异步电机 | Lac's blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Lac's blog</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%80%E4%BB%8B"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9C%A8%E8%BD%AC%E5%AD%90d-q-0%E5%9D%90%E6%A0%87%E7%B3%BB%EF%BC%8C%E5%AE%9A%E5%AD%90a-b-c%E5%9D%90%E6%A0%87%E7%B3%BB%E4%B8%AD%E7%9A%84%E6%95%B0%E5%AD%A6%E6%A8%A1%E5%9E%8B"><span class="nav-number">2.</span> <span class="nav-text">在转子d-q-0坐标系，定子a-b-c坐标系中的数学模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%B5%E5%8E%8B%E6%96%B9%E7%A8%8B"><span class="nav-number">2.1.</span> <span class="nav-text">电压方程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A3%81%E9%93%BE%E6%96%B9%E7%A8%8B"><span class="nav-number">2.2.</span> <span class="nav-text">磁链方程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%B5%E6%84%9F%E7%9F%A9%E9%98%B5"><span class="nav-number">2.3.</span> <span class="nav-text">电感矩阵</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9A%E5%AD%90%E8%87%AA%E6%84%9F"><span class="nav-number">2.3.1.</span> <span class="nav-text">定子自感</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BD%AC%E5%AD%90%E8%87%AA%E6%84%9F"><span class="nav-number">2.3.2.</span> <span class="nav-text">转子自感</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9A%E5%AD%90%E4%BA%92%E6%84%9F"><span class="nav-number">2.3.3.</span> <span class="nav-text">定子互感</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BD%AC%E5%AD%90%E4%BA%92%E6%84%9F"><span class="nav-number">2.3.4.</span> <span class="nav-text">转子互感</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9A%E8%BD%AC%E5%AD%90%E9%97%B4%E4%BA%92%E6%84%9F"><span class="nav-number">2.3.5.</span> <span class="nav-text">定转子间互感</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%BA%E6%A2%B0%E6%96%B9%E7%A8%8B"><span class="nav-number">2.4.</span> <span class="nav-text">机械方程</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Lark</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/larkzy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;larkzy" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:larkzy03@gmail.com" title="E-Mail → mailto:larkzy03@gmail.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://500px.com.cn/lark0305/graphic" title="500px → https:&#x2F;&#x2F;500px.com.cn&#x2F;lark0305&#x2F;graphic" rel="noopener me" target="_blank"><i class="fa fa-camera fa-fw"></i>500px</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://larkzy.github.io/2025/11/13/%E9%BC%A0%E7%AC%BC%E5%BC%8F%E5%BC%82%E6%AD%A5%E7%94%B5%E6%9C%BA/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lark">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lac's blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="鼠笼式异步电机 | Lac's blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          鼠笼式异步电机
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-11-13 17:10:59" itemprop="dateCreated datePublished" datetime="2025-11-13T17:10:59+08:00">2025-11-13</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-11-17 20:33:07" itemprop="dateModified" datetime="2025-11-17T20:33:07+08:00">2025-11-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%94%B5%E6%9C%BA%E6%8E%A7%E5%88%B6/" itemprop="url" rel="index"><span itemprop="name">电机控制</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>本篇文章主要在于推导建立鼠笼式异步电机数学模型，并通过数学模型引申出【矢量控制】、【直接转矩控制】、【模型预测控制】等一系列高性能控制方法。<a href="https://larkzy.github.io/2024/11/13/%E7%94%B5%E6%9C%BA%E5%BB%BA%E6%A8%A1/">【电机建模】</a>和<a href="https://larkzy.github.io/2025/03/11/%E5%9D%90%E6%A0%87%E5%8F%98%E6%8D%A2/#more">【坐标变换】</a>是这篇文章的基础。</p>
+<h2 id="在转子d-q-0坐标系，定子a-b-c坐标系中的数学模型"><a href="#在转子d-q-0坐标系，定子a-b-c坐标系中的数学模型" class="headerlink" title="在转子d-q-0坐标系，定子a-b-c坐标系中的数学模型"></a>在转子d-q-0坐标系，定子a-b-c坐标系中的数学模型</h2><p>首先，规定正方向为电动机原则下的正方向，如Fig1所示</p>
+<img src="images/鼠笼式异步电机/Fig1.jpg" alt=Fig1 width=50% height=50%>
+
+<center>Fig1</center>
+
+<h3 id="电压方程"><a href="#电压方程" class="headerlink" title="电压方程"></a>电压方程</h3><p>由于这些线圈都是静止线圈，可以写出电压方程</p>
+<p>$$<br>\begin{cases}<br>    u_a&#x3D;p\Psi_a+R_si_a \\<br>    u_b&#x3D;p\Psi_b+R_si_b \\<br>    u_c&#x3D;p\Psi_c+R_si_c \\<br>    0&#x3D;p\Psi_D+R_Di_D \\<br>    0&#x3D;p\Psi_Q+R_Qi_Q<br>\end{cases}<br>$$</p>
+<p>如果设</p>
+<p>$$<br>U&#x3D;<br>\begin{bmatrix}<br>    u_a \\<br>    u_b \\<br>    u_c \\<br>    0 \\<br>    0<br>\end{bmatrix}&#x3D;<br>\begin{bmatrix}<br>    U_{abc} \\<br>    U_{DQ}<br>\end{bmatrix},I&#x3D;<br>\begin{bmatrix}<br>    i_a \\<br>    i_b \\<br>    i_c \\<br>    i_D \\<br>    i_Q<br>\end{bmatrix}&#x3D;<br>\begin{bmatrix}<br>    I_{abc} \\<br>    I_{DQ}<br>\end{bmatrix},\Psi&#x3D;<br>\begin{bmatrix}<br>    \Psi_a \\<br>    \Psi_b \\<br>    \Psi_c \\<br>    \Psi_D \\<br>    \Psi_Q<br>\end{bmatrix}&#x3D;<br>\begin{bmatrix}<br>    \Psi_{abc} \\<br>    \Psi_{DQ}<br>\end{bmatrix}<br>$$</p>
+<p>$$<br>R&#x3D;<br>\begin{bmatrix}<br>    R_s &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\<br>    0 &amp; R_s &amp; 0 &amp; 0 &amp; 0 \\<br>    0 &amp; 0 &amp; R_s &amp; 0 &amp; 0 \\<br>    0 &amp; 0 &amp; 0 &amp; R_D &amp; 0 \\<br>    0 &amp; 0 &amp; 0 &amp; 0 &amp; R_Q<br>\end{bmatrix}<br>$$</p>
+<p>则有，</p>
+<p>$$<br>\begin{equation}<br>    U&#x3D;p\Psi+RI<br>\end{equation}<br>$$</p>
+<h3 id="磁链方程"><a href="#磁链方程" class="headerlink" title="磁链方程"></a>磁链方程</h3><p>$$<br>\begin{bmatrix}<br>    \Psi_a \\<br>    \Psi_b \\<br>    \Psi_c \\<br>    \Psi_D \\<br>    \Psi_Q<br>\end{bmatrix}&#x3D;<br>\begin{bmatrix}<br>    L_{aa} &amp; M_{ab} &amp; M_{ac} &amp; M_{aD} &amp; M_{aQ} \\<br>    M_{ba} &amp; L_{bb} &amp; M_{bc} &amp; M_{bD} &amp; M_{bQ} \\<br>    M_{ca} &amp; M_{cb} &amp; L_{cc} &amp; M_{cD} &amp; M_{cQ} \\<br>    M_{Da} &amp; M_{Db} &amp; M_{Dc} &amp; L_{DD} &amp; 0 \\<br>    M_{Qa} &amp; M_{Qb} &amp; M_{Qc} &amp; 0 &amp; L_{QQ}<br>\end{bmatrix}<br>\begin{bmatrix}<br>    i_a \\<br>    i_b \\<br>    i_c \\<br>    i_D \\<br>    i_Q<br>\end{bmatrix}<br>$$</p>
+<h3 id="电感矩阵"><a href="#电感矩阵" class="headerlink" title="电感矩阵"></a>电感矩阵</h3><p>至此，已经得到了电机的电压方程和磁链方程，对其进行分析，可以发现，从表面上看，电压方程中不含$\omega$项，这显然是有问题的，这代表不管电机转多快，电压方程始终不受影响，那么哪里出了问题？</p>
+<p>原因在于电感矩阵，电感的数值是会随着$\theta$的变动而改变的，因此在对$\Psi$进行微分时，不能简单的将电感矩阵提出来，而有如下的式子。</p>
+<p>$$<br>\begin{align}<br>    U&amp;&#x3D;p\Psi+RI \\<br>     &amp;&#x3D;p(LI)+RI \\<br>     &amp;&#x3D;pL \cdot I+L \cdot pI + RI \\<br>     &amp;&#x3D;\omega \frac{\partial L}{\partial \theta}I + L \cdot pI + RI<br>\end{align}<br>$$</p>
+<p>究其原因，这是由于$\theta$变化，导致自感互感变化，导致磁通变化而产生的感生电动势，这与伪静止线圈$\omega$项所表征的动生电动势在物理意义上有区别，需要区分。接下来推导电感矩阵。主要讲按照定子自感、转子自感、定子互感、转子互感、定转子间互感的顺序进行推导。</p>
+<h4 id="定子自感"><a href="#定子自感" class="headerlink" title="定子自感"></a>定子自感</h4><p>先从概念层次上进行理解，自感根据产生的磁链有没有经过气隙，可以分为主自感和漏自感，如下式所示</p>
+<p>$$<br>L_{aa}&#x3D;L_{aa\delta} + L_{aal}<br>$$</p>
+<p>其中$L_{aa\delta}$表示主自感，$L_{aal}$表示漏自感</p>
+<p>再从周期性上分析，a相绕组与d轴对齐时，自感最大，与q轴对齐时，自感最小。而一个电周期将会经历两次与d轴q轴对齐的情况，因此自感周期为$\pi$，可以对其进行傅里叶分解，得到如下式子</p>
+<p>$$<br>L_{aa} &#x3D; L_{aa0} + L_{aa2} \cos(2\theta) + L_{aa4} \cos(4\theta) + \cdots<br>$$</p>
+<p>省略高次项，只保留2次项，得到如下式子</p>
+<p>$$<br>L_{aa} &#x3D; L_{aa0} + L_{aa2} \cos(2\theta)<br>$$</p>
+<p>下面对其具体构成进行推导，假设线圈匝数为W，d轴磁通为$\lambda_d$，q轴磁通为$\lambda_q$，有</p>
+<p>$$<br>\begin{align}<br>    \Phi_{aa\delta} &amp;&#x3D; \Phi_{ad\delta} \cos\theta - \Phi_{aq\delta} \sin\theta \\<br>                    &amp;&#x3D; F_{ad\delta} \lambda_d \cos\theta - F_{aq\delta} \lambda_q \sin\theta \\<br>                    &amp;&#x3D; F_a \lambda_d {\cos}^2 \theta + F_a \lambda_q {\sin}^2 \theta \\<br>                    &amp;&#x3D; W (\lambda_d {\cos}^2 \theta + \lambda_q {\sin}^2 \theta) i_a<br>\end{align}<br>$$</p>
+<p>定义$L_{aad} &#x3D; W^2 \lambda_d$，$L_{aaq} &#x3D; W^2 \lambda_q$，则有</p>
+<p>$$<br>\begin{align}<br>    L_{aa\delta} &amp;&#x3D; L_{aad} {\cos}^2 \theta + L_{aaq} {\sin}^2 \theta \\<br>                 &amp;&#x3D; L_{aad} \frac{\cos 2\theta + 1}{2} + L_{aaq} \frac{1 - \cos 2\theta}{2} \\<br>                 &amp;&#x3D; \frac{1}{2}(L_{aad} + L_{aaq}) + \frac{1}{2}(L_{aad} - L_{aaq}) \cos 2\theta<br>\end{align}<br>$$</p>
+<p>从这条式子可以看出$L_{aad}$和$L_{aaq}$的物理含义，分别为转子转到d轴的主电感，和转子转到q轴的主电感。加入漏电感，有</p>
+<p>$$<br>L_{aa} &#x3D; L_{aal} + \frac{1}{2}(L_{aad} + L_{aaq}) + \frac{1}{2}(L_{aad} - L_{aaq}) \cos 2\theta<br>$$</p>
+<p>那么，</p>
+<p>$$<br>L_{aa0} &#x3D; L_{aal} + \frac{1}{2}(L_{aad} + L_{aaq}) \\<br>L_{aa2} &#x3D; \frac{1}{2}(L_{aad} - L_{aaq})<br>$$</p>
+<h4 id="转子自感"><a href="#转子自感" class="headerlink" title="转子自感"></a>转子自感</h4><p>由于转子所经历的磁路的磁导始终不变，因此转子自感为常数，表达如下</p>
+<p>$$<br>L_{DD} &#x3D; L_{DDl} + L_{DD\delta} \\<br>L_{QQ} &#x3D; L_{QQl} + L_{QQ\delta}<br>$$</p>
+<h4 id="定子互感"><a href="#定子互感" class="headerlink" title="定子互感"></a>定子互感</h4><p>同样先从概念上进行理解，根据磁链有没有经过气隙，可以分为主互感和漏互感，如下式所示</p>
+<p>$$<br>M_{ba} &#x3D; - M_{abl} + M_{ba\delta}<br>$$</p>
+<p>与自感同理，从周期性上看，定子互感周期也为$\pi$，可以将其表示如下</p>
+<p>$$<br>M_{ba} &#x3D; - M_{ab0} + M_{ab2} \cos 2(\theta + \frac{2}{3}\pi)<br>$$</p>
+<p>对$M_{ba}$进行计算，其他定子绕组间互感同理可得</p>
+<p>计算a相绕组产生的磁动势</p>
+<p>$$<br>F_a &#x3D; W_a \cdot i_a<br>$$</p>
+<p>将a相绕组磁动势分解到d轴和q轴方向，可以得到</p>
+<p>$$<br>F_{ad} &#x3D; F_a \cos \theta \\<br>F_{aq} &#x3D; - F_a \sin \theta<br>$$</p>
+<p>因此d轴和q轴磁通如下</p>
+<p>$$<br>\Phi_{ad\delta} &#x3D; F_a \cos \theta \lambda_d \\<br>\Phi_{aq\delta} &#x3D; - F_a \sin \theta \lambda_q<br>$$</p>
+<p>因此可以得到b轴磁通为</p>
+<p>$$<br>\begin{align}<br>    \Phi_{ba\delta}<br>    &amp;&#x3D; \Phi_{ad\delta} \cos (\theta - \frac{2}{3}\pi) - \Phi_{aq\delta} \sin (\theta - \frac{2}{3}\pi) \\<br>    &amp;&#x3D; F_a \cos \theta \cos (\theta - \frac{2}{3}\pi) \lambda_d + F_a \sin \theta \sin (\theta - \frac{2}{3}\pi) \lambda_q<br>\end{align}<br>$$</p>
+<p>因此</p>
+<p>$$<br>\Psi_{ba\delta} &#x3D; (\cos \theta \cos (\theta - \frac{2}{3}\pi) \lambda_d + \sin \theta \sin (\theta - \frac{2}{3}\pi) \lambda_q) W^2 i_a<br>$$</p>
+<p>可以得到</p>
+<p>$$<br>\begin{align}<br>    M_{ba\delta} &amp;&#x3D; L_{aad} \cos \theta \cos (\theta - \frac{2}{3}\pi) + L_{aaq} \sin \theta \sin (\theta - \frac{2}{3}\pi) \\<br>    &amp;&#x3D; - \frac{1}{4}(L_{aad} + L_{aaq}) + \frac{1}{2}(L_{aad} - L_{aaq}) \cos 2(\theta + \frac{2}{3}\pi)<br>\end{align}<br>$$</p>
+<p>那么，</p>
+<p>$$<br>\begin{align}<br>    M_{ba} &amp;&#x3D; - M_{abl} - \frac{1}{4}(L_{aad} + L_{aaq}) + \frac{1}{2}(L_{aad} - L_{aaq}) \cos 2(\theta + \frac{2}{3}\theta) \\<br>    &amp;&#x3D; - M_{ab0} + M_{ab2} \cos 2(\theta + \frac{2}{3}\pi)<br>\end{align}<br>$$</p>
+<h4 id="转子互感"><a href="#转子互感" class="headerlink" title="转子互感"></a>转子互感</h4><p>由于转子之间解耦，所以转子间互感为0</p>
+<h4 id="定转子间互感"><a href="#定转子间互感" class="headerlink" title="定转子间互感"></a>定转子间互感</h4><p>定转子间互感要分为d轴和q轴两类，推导方法类似，对于d轴</p>
+<p>$$<br>M_{aD} &#x3D; M_{aD1} \cos \theta<br>$$</p>
+<p>对于q轴</p>
+<p>$$<br>M_{aQ} &#x3D; - M_{aQ1} \sin \theta<br>$$</p>
+<p>定转子间互感变化的周期为$2\pi$</p>
+<h3 id="机械方程"><a href="#机械方程" class="headerlink" title="机械方程"></a>机械方程</h3><p>按照电动机原则规定正方向，可以列出如下方程式</p>
+<p>$$<br>\begin{cases}<br>    T_e &#x3D; T_l + B \Omega + J \frac{d\Omega}{dt} &#x3D; T_l + B \frac{\omega}{p} + \frac{J}{p}\frac{d\omega}{dt} \\<br>    \frac{d\theta}{dt} &#x3D; \omega<br>\end{cases}<br>$$</p>
+<p>下面给出电磁转矩的表达式，使用虚位移法。写出电机的能量，为</p>
+<p>$$<br>W &#x3D; \frac{1}{2} I^T L I<br>$$</p>
+<p>这里的I，L为电流矩阵和电感矩阵</p>
+<p>那么，电磁转矩为</p>
+<p>$$<br>T_e &#x3D; \frac{\partial W}{\partial \gamma} &#x3D; p \frac{\partial W}{\partial \theta} &#x3D; \frac{p}{2} I^T \frac{\partial L}{\partial \theta} I<br>$$</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E7%94%B5%E6%9C%BA%E5%BB%BA%E6%A8%A1/" rel="tag"># 电机建模</a>
+              <a href="/tags/%E5%BC%82%E6%AD%A5%E7%94%B5%E6%9C%BA/" rel="tag"># 异步电机</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/06/12/CS%E8%87%AA%E5%AD%A6/" rel="prev" title="CS自学">
+                  <i class="fa fa-angle-left"></i> CS自学
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments utterances-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Lark</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+<script class="next-config" data-name="utterances" type="application/json">{"enable":true,"repo":"LArkZY/LArkZY.github.io","issue_term":"title","theme":"preferred-color-scheme"}</script>
+<script src="/js/third-party/comments/utterances.js"></script>
+
+</body>
+</html>

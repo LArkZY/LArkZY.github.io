@@ -146,7 +146,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">6</span>
+          <span class="site-state-item-count">7</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -157,7 +157,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-count">9</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -185,6 +185,106 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://larkzy.github.io/2025/11/13/%E9%BC%A0%E7%AC%BC%E5%BC%8F%E5%BC%82%E6%AD%A5%E7%94%B5%E6%9C%BA/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Lark">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lac's blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Lac's blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2025/11/13/%E9%BC%A0%E7%AC%BC%E5%BC%8F%E5%BC%82%E6%AD%A5%E7%94%B5%E6%9C%BA/" class="post-title-link" itemprop="url">鼠笼式异步电机</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-11-13 17:10:59" itemprop="dateCreated datePublished" datetime="2025-11-13T17:10:59+08:00">2025-11-13</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-11-17 20:33:07" itemprop="dateModified" datetime="2025-11-17T20:33:07+08:00">2025-11-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%94%B5%E6%9C%BA%E6%8E%A7%E5%88%B6/" itemprop="url" rel="index"><span itemprop="name">电机控制</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>本篇文章主要在于推导建立鼠笼式异步电机数学模型，并通过数学模型引申出【矢量控制】、【直接转矩控制】、【模型预测控制】等一系列高性能控制方法。<a href="https://larkzy.github.io/2024/11/13/%E7%94%B5%E6%9C%BA%E5%BB%BA%E6%A8%A1/">【电机建模】</a>和<a href="https://larkzy.github.io/2025/03/11/%E5%9D%90%E6%A0%87%E5%8F%98%E6%8D%A2/#more">【坐标变换】</a>是这篇文章的基础。</p>
+<h2 id="在转子d-q-0坐标系，定子a-b-c坐标系中的数学模型"><a href="#在转子d-q-0坐标系，定子a-b-c坐标系中的数学模型" class="headerlink" title="在转子d-q-0坐标系，定子a-b-c坐标系中的数学模型"></a>在转子d-q-0坐标系，定子a-b-c坐标系中的数学模型</h2><p>首先，规定正方向为电动机原则下的正方向，如Fig1所示</p>
+<img src="images/鼠笼式异步电机/Fig1.jpg" alt="Fig1" width="50%" height="50%">
+
+<center>Fig1</center>
+
+<h3 id="电压方程"><a href="#电压方程" class="headerlink" title="电压方程"></a>电压方程</h3><p>由于这些线圈都是静止线圈，可以写出电压方程</p>
+<p>$$<br>\begin{cases}<br>    u_a&#x3D;p\Psi_a+R_si_a \\<br>    u_b&#x3D;p\Psi_b+R_si_b \\<br>    u_c&#x3D;p\Psi_c+R_si_c \\<br>    0&#x3D;p\Psi_D+R_Di_D \\<br>    0&#x3D;p\Psi_Q+R_Qi_Q<br>\end{cases}<br>$$</p>
+<p>如果设</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2025/11/13/%E9%BC%A0%E7%AC%BC%E5%BC%8F%E5%BC%82%E6%AD%A5%E7%94%B5%E6%9C%BA/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
